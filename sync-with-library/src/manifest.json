@@ -1,0 +1,70 @@
+{
+  "commands" : [
+    {
+      "script" : "Main.js",
+      "name" : "Merge symbols with the same names",
+      "handlers": {
+        "run": "MergeDuplicateSymbols",
+        "actions": {
+          "Shutdown": "onShutdown"
+        }
+      },
+      "identifier" : "mergeduplicatesymbols",
+      "shortcut": "ctrl shift 1",
+      "icon" : "icon-sr.png"
+    },
+    {
+      "script" : "Main.js",
+      "name" : "Merge layer styles with the same name",
+      "handlers": {
+        "run": "MergeDuplicateLayerStyles",
+        "actions": {
+          "Shutdown": "onShutdown"
+        }
+      },
+      "identifier" : "mergeduplicatelayerstyles",
+      "shortcut": "ctrl shift 2",
+      "icon" : "icon-sr.png"
+    },
+    {
+      "script" : "Main.js",
+      "name" : "Merge text styles with the same name",
+      "handlers": {
+        "run": "MergeDuplicateTextStyles",
+        "actions": {
+          "Shutdown": "onShutdown"
+        }
+      },
+      "identifier" : "mergeduplicatetextstyles",
+      "shortcut": "ctrl shift 3",
+      "icon" : "icon-sr.png"
+    },
+    {
+      "script": "Main.js",
+      "name": "Settings",
+      "identifier": "editsettings",
+      "handlers": {
+        "run": "EditSettings",
+        "actions": {
+          "Shutdown": "onShutdown"
+        }
+      }
+    }
+  ],
+  "menu" : {
+    "title" : "Sync with library ...",
+    "items" : [
+      "mergeduplicatesymbols",
+      "mergeduplicatelayerstyles",
+      "mergeduplicatetextstyles",
+      "editsettings"
+    ]
+  },
+  "identifier" : "com.oodesign.mergeduplicatetextstyles",
+  "name" : "Sync with library",
+	"icon" : "icon.png",
+  "description": "Merge symbols or styles, replacing all instances and keeping overrides.",
+  "author": "oodesign",
+  "homepage": "http://bit.ly/mergesymbolsinsketch",
+  "compatibleVersion": 50
+}
