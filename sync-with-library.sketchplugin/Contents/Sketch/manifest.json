@@ -1,0 +1,82 @@
+{
+  "commands": [
+    {
+      "script": "Main.js",
+      "name": "Sync Symbols",
+      "handlers": {
+        "run": "MergeDuplicateSymbols",
+        "actions": {
+          "Shutdown": "onShutdown"
+        }
+      },
+      "identifier": "mergeduplicatesymbols",
+      "shortcut": "ctrl shift 1",
+      "icon": "icon-sr.png"
+    },
+    {
+      "script": "Main.js",
+      "name": "Sync Layer Styles",
+      "handlers": {
+        "run": "MergeDuplicateLayerStyles",
+        "actions": {
+          "Shutdown": "onShutdown"
+        }
+      },
+      "identifier": "mergeduplicatelayerstyles",
+      "shortcut": "ctrl shift 2",
+      "icon": "icon-sr.png"
+    },
+    {
+      "script": "Main.js",
+      "name": "Sync Text Styles",
+      "handlers": {
+        "run": "MergeDuplicateTextStyles",
+        "actions": {
+          "Shutdown": "onShutdown"
+        }
+      },
+      "identifier": "mergeduplicatetextstyles",
+      "shortcut": "ctrl shift 3",
+      "icon": "icon-sr.png"
+    },
+    {
+      "script": "Main.js",
+      "name": "Settings",
+      "identifier": "editsettings",
+      "handlers": {
+        "run": "EditSettings",
+        "actions": {
+          "Shutdown": "onShutdown"
+        }
+      }
+    },
+    {
+      "script": "Help.js",
+      "name": "Report issue or an idea",
+      "identifier": "report_issue",
+      "handlers": {
+        "run": "report_issue"
+      }
+    }
+  ],
+  "menu": {
+    "title": "Sync with Library ...",
+    "items": [
+      "mergeduplicatesymbols",
+      "mergeduplicatelayerstyles",
+      "mergeduplicatetextstyles",
+      "report_issue",
+      "editsettings"
+    ]
+  },
+  "identifier": "com.oodesign.mergeduplicatetextstyles",
+  "name": "Sync with Library",
+  "icon": "icon.png",
+  "description": "Merge symbols or styles, replacing all instances and keeping overrides.",
+  "author": "oodesign",
+  "homepage": "http://bit.ly/mergesymbolsinsketch",
+  "compatibleVersion": 50,
+  "version": "3.0.0",
+  "disableCocoaScriptPreprocessor": true,
+  "appcast": "https://raw.githubusercontent.com/oodesign/sync-with-library/master/.appcast.xml"
+}
