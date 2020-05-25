@@ -5,7 +5,7 @@
 Sync with Library is a Sketch plugin to easily replace local symbols and layer&text styles with library ones.<br/><br/>
 
 It will scan your document and active libraries and find any symbol or style with the same name as your local ones, and let you decide which ones you want to replace and which you want to keep.
-<br/><br/>
+<br/>
 
 ## Sync with Library is a subset of Merge Duplicates
 <a href="http://www.mergeduplicates.com">Merge Duplicates</a> is a plugin to get rid of duplicate and inconsistent symbols and styles in a breeze. If you like Sync With Library you'll love Merge Duplicates 🥰
