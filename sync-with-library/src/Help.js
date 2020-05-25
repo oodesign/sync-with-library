@@ -1,10 +1,6 @@
-function documentation() {
-  NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString("http://www.mergeduplicates.com/"));
-}
-
 function report_issue() {
-  NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString("https://github.com/oodesign/merge-duplicate-symbols/issues"));
+  NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString("https://github.com/oodesign/sync-with-library/issues"));
 }
 
-module.exports = { documentation,report_issue };
+module.exports = { report_issue };
 

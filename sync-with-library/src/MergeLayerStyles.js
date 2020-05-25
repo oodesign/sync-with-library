@@ -206,7 +206,7 @@ function getDuplicateLayerStyles(context, allStyles) {
 
 export function MergeDuplicateLayerStyles(context) {
 
-  Helpers.clog("----- Merge duplicate layer styles -----");
+  Helpers.clog("----- Sync layer styles -----");
 
   const options = {
     identifier: webviewMDLSIdentifier,
@@ -227,7 +227,7 @@ export function MergeDuplicateLayerStyles(context) {
     browserWindow.loadURL(require('../resources/mergeduplicatelayerstyles.html'));
   }
   else {
-    context.document.showMessage("Looks like there are no layer styles with the same name.");
+    context.document.showMessage("Looks like there are no layer styles to sync.");
     onShutdown(webviewMDLSIdentifier);
   }
 
@@ -298,7 +298,7 @@ export function MergeDuplicateLayerStyles(context) {
     onShutdown(webviewMDLSIdentifier);
     if (duplicatesSolved <= 0) {
       Helpers.clog("No styles were merged");
-      context.document.showMessage("No styles were merged");
+      context.document.showMessage("No styles were replaced.");
     }
     else {
       Helpers.clog("Wpdated " + affectedLayers[0] + " text layers and " + affectedLayers[1] + " overrides.");

@@ -229,7 +229,7 @@ function MergeSymbols(symbolToMerge, symbolToKeep) {
 
 export function MergeDuplicateSymbols(context) {
 
-  Helpers.clog("----- Merge duplicate symbols (with the same name) -----");
+  Helpers.clog("----- Sync symbols (with the same name) -----");
 
   const options = {
     identifier: webviewIdentifier,
@@ -339,8 +339,8 @@ export function MergeDuplicateSymbols(context) {
       context.document.showMessage("Hey ho! You just removed " + mergeResults[0] + " symbols" + replacedStuff + " Amazing!");
     }
     else {
-      Helpers.clog("Completed merge. No symbols were merged.");
-      context.document.showMessage("No symbols were merged.");
+      Helpers.clog("Completed merge. No symbols were replaced.");
+      context.document.showMessage("No symbols were replaced.");
     }
   });
 

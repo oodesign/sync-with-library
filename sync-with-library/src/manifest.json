@@ -49,6 +49,14 @@
           "Shutdown": "onShutdown"
         }
       }
+    },
+    {
+      "script" : "Help.js",
+      "name" : "Report issue or an idea",
+      "identifier": "report_issue",
+      "handlers" : {
+        "run" : "report_issue"
+      }
     }
   ],
   "menu" : {
@@ -57,6 +65,7 @@
       "mergeduplicatesymbols",
       "mergeduplicatelayerstyles",
       "mergeduplicatetextstyles",
+      "report_issue",
       "editsettings"
     ]
   },

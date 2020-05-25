@@ -213,7 +213,7 @@ function getDuplicateTextStyles(context, allStyles) {
 
 export function MergeDuplicateTextStyles(context) {
 
-  Helpers.clog("----- Merge duplicate text styles -----");
+  Helpers.clog("----- Sync text styles -----");
 
   const options = {
     identifier: webviewMDTSIdentifier,
@@ -236,7 +236,7 @@ export function MergeDuplicateTextStyles(context) {
     browserWindow.loadURL(require('../resources/mergeduplicatetextstyles.html'));
   }
   else {
-    context.document.showMessage("Looks like there are no text styles with the same name.");
+    context.document.showMessage("Looks like there are no text styles to sync.");
     onShutdown(webviewMDTSIdentifier);
   }
 
@@ -309,7 +309,7 @@ export function MergeDuplicateTextStyles(context) {
     onShutdown(webviewMDTSIdentifier);
     if (duplicatesSolved <= 0) {
       Helpers.clog("No styles were merged");
-      context.document.showMessage("No styles were merged");
+      context.document.showMessage("No styles were replaced.");
     }
     else {
       Helpers.clog("Updated " + affectedLayers[0] + " text layers and " + affectedLayers[1] + " overrides.");
