@@ -69,11 +69,11 @@
       "editsettings"
     ]
   },
-  "identifier" : "com.oodesign.mergeduplicatetextstyles",
+  "identifier" : "com.oodesign.syncwithlibrary",
   "name" : "Sync with Library",
 	"icon" : "icon.png",
-  "description": "Merge symbols or styles, replacing all instances and keeping overrides.",
+  "description": "Easily replace local symbols and layer & text styles with library ones.",
   "author": "oodesign",
-  "homepage": "http://bit.ly/mergesymbolsinsketch",
+  "homepage": "http://gum.co/syncwithlibrary",
   "compatibleVersion": 50
 }
