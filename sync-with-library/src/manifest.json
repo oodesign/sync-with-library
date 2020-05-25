@@ -2,7 +2,7 @@
   "commands" : [
     {
       "script" : "Main.js",
-      "name" : "Merge symbols with the same names",
+      "name" : "Sync Symbols",
       "handlers": {
         "run": "MergeDuplicateSymbols",
         "actions": {
@@ -15,7 +15,7 @@
     },
     {
       "script" : "Main.js",
-      "name" : "Merge layer styles with the same name",
+      "name" : "Sync Layer Styles",
       "handlers": {
         "run": "MergeDuplicateLayerStyles",
         "actions": {
@@ -28,7 +28,7 @@
     },
     {
       "script" : "Main.js",
-      "name" : "Merge text styles with the same name",
+      "name" : "Sync Text Styles",
       "handlers": {
         "run": "MergeDuplicateTextStyles",
         "actions": {
@@ -52,7 +52,7 @@
     }
   ],
   "menu" : {
-    "title" : "Sync with library ...",
+    "title" : "Sync with Library ...",
     "items" : [
       "mergeduplicatesymbols",
       "mergeduplicatelayerstyles",
@@ -61,7 +61,7 @@
     ]
   },
   "identifier" : "com.oodesign.mergeduplicatetextstyles",
-  "name" : "Sync with library",
+  "name" : "Sync with Library",
 	"icon" : "icon.png",
   "description": "Merge symbols or styles, replacing all instances and keeping overrides.",
   "author": "oodesign",

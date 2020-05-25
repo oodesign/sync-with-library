@@ -6,7 +6,6 @@ document.addEventListener('contextmenu', (e) => {
 
 window.AssignSettings = (logs, libraries) => {
   document.getElementById('checkLogs').checked = logs;
-  document.getElementById('checkEnableLibraries').checked = libraries;
   UpdateSettings();
 };
 
@@ -28,5 +27,5 @@ document.getElementById('btnCancel').addEventListener("click", () => {
 });
 
 document.getElementById('btnAccept').addEventListener("click", () => {
-  window.postMessage('AcceptSettings', document.getElementById('checkLogs').checked, document.getElementById('checkEnableLibraries').checked);
+  window.postMessage('AcceptSettings', document.getElementById('checkLogs').checked);
 });

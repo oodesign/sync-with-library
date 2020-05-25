@@ -230,7 +230,7 @@ export function MergeDuplicateTextStyles(context) {
   var mergeSession = [];
 
 
-  CalculateDuplicates(Helpers.getLibrariesEnabled());
+  CalculateDuplicates();
 
   if (onlyDuplicatedTextStyles.length > 0) {
     browserWindow.loadURL(require('../resources/mergeduplicatetextstyles.html'));
@@ -240,10 +240,10 @@ export function MergeDuplicateTextStyles(context) {
     onShutdown(webviewMDTSIdentifier);
   }
 
-  function CalculateDuplicates(includeLibraries) {
-    Helpers.clog("Finding duplicate text styles. Including libraries:" + includeLibraries);
+  function CalculateDuplicates() {
+    Helpers.clog("Finding duplicate text styles.");
 
-    onlyDuplicatedTextStyles = Helpers.getDuplicateTextStyles(context, includeLibraries);
+    onlyDuplicatedTextStyles = Helpers.getDuplicateTextStyles(context);
     if (onlyDuplicatedTextStyles.length > 0) {
 
       Helpers.GetSpecificTextStyleData(context, onlyDuplicatedTextStyles, 0);
@@ -276,13 +276,6 @@ export function MergeDuplicateTextStyles(context) {
     onShutdown(webviewMDTSIdentifier);
   });
 
-
-
-  webContents.on('RecalculateDuplicates', (includeLibraries) => {
-    Helpers.clog("Recalculating duplicates");
-    CalculateDuplicates(includeLibraries);
-    webContents.executeJavaScript(`DrawStylesList(${JSON.stringify(mergeSession)})`).catch(console.error);
-  });
 
   webContents.on('GetSelectedStyleData', (index) => {
     Helpers.GetSpecificTextStyleData(context, onlyDuplicatedTextStyles, index);

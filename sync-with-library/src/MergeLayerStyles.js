@@ -221,7 +221,7 @@ export function MergeDuplicateLayerStyles(context) {
 
   var onlyDuplicatedLayerStyles;
   var mergeSession = [];
-  CalculateDuplicates(Helpers.getLibrariesEnabled());
+  CalculateDuplicates(true);
 
   if (onlyDuplicatedLayerStyles.length > 0) {
     browserWindow.loadURL(require('../resources/mergeduplicatelayerstyles.html'));
@@ -231,9 +231,9 @@ export function MergeDuplicateLayerStyles(context) {
     onShutdown(webviewMDLSIdentifier);
   }
 
-  function CalculateDuplicates(includeLibraries) {
-    Helpers.clog("Finding duplicate layer styles. Including libraries:" + includeLibraries);
-    onlyDuplicatedLayerStyles = Helpers.getDuplicateLayerStyles(context, includeLibraries);
+  function CalculateDuplicates() {
+    Helpers.clog("Finding duplicate layer styles.");
+    onlyDuplicatedLayerStyles = Helpers.getDuplicateLayerStyles(context);
     if (onlyDuplicatedLayerStyles.length > 0) {
       Helpers.GetSpecificLayerStyleData(context, onlyDuplicatedLayerStyles, 0);
       mergeSession = [];
@@ -254,7 +254,7 @@ export function MergeDuplicateLayerStyles(context) {
 
   webContents.on('did-finish-load', () => {
     Helpers.clog("Webview loaded");
-    webContents.executeJavaScript(`DrawStylesList(${JSON.stringify(mergeSession)}, ${Helpers.getLibrariesEnabled()})`).catch(console.error);
+    webContents.executeJavaScript(`DrawStylesList(${JSON.stringify(mergeSession)})`).catch(console.error);
   })
 
   webContents.on('nativeLog', s => {
@@ -263,12 +263,6 @@ export function MergeDuplicateLayerStyles(context) {
 
   webContents.on('Cancel', () => {
     onShutdown(webviewMDLSIdentifier);
-  });
-
-  webContents.on('RecalculateDuplicates', (includeLibraries) => {
-    Helpers.clog("Recalculating duplicates");
-    CalculateDuplicates(includeLibraries);
-    webContents.executeJavaScript(`DrawStylesList(${JSON.stringify(mergeSession)})`).catch(console.error);
   });
 
   webContents.on('GetSelectedStyleData', (index) => {

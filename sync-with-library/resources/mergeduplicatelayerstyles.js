@@ -5,15 +5,10 @@ document.addEventListener('contextmenu', (e) => {
 var globalMergeSession;
 var globalStyleDisplayed = 0;
 var isLoadingStyleData = false;
-var includeLibrariesSetting = false;
 
 window.DrawStylesList = (mergeSession, includeLibraries) => {
   window.postMessage("nativeLog", "WV - Drawing duplicate styles list");
   globalMergeSession = mergeSession;
-  includeLibrariesSetting = includeLibraries;
-
-  if(includeLibraries!=null)
-    document.getElementById('chkIncludeLibraries').checked = includeLibrariesSetting;
 
   if (globalStyleDisplayed >= globalMergeSession.length)
     globalStyleDisplayed = 0;
@@ -44,8 +39,6 @@ window.DrawStylesList = (mergeSession, includeLibraries) => {
   window.postMessage("nativeLog", "WV - Drawing left panel style list");
   lstDuplicateStyles.innerHTML = inner;
   btnMerge.disabled = (checkedCounter == 0);
-
-  document.getElementById('lblIncludeLibraries').innerHTML = (checkedCounter != 0) ? "Include all enabled libraries layer styles (you may lose the current selection)" : "Include all enabled libraries layer styles";
 
   DrawStyleList(globalStyleDisplayed);
 }
@@ -170,10 +163,6 @@ window.cancelAssignation = () => {
   window.postMessage('Cancel');
 }
 
-document.getElementById('chkIncludeLibraries').addEventListener("click", () => {
-  window.postMessage("nativeLog", "WV - Include libraries changed");
-  window.postMessage('RecalculateDuplicates', document.getElementById('chkIncludeLibraries').checked);
-});
 
 document.getElementById('btnCancel').addEventListener("click", () => {
   window.postMessage("nativeLog", "WV - Cancel");

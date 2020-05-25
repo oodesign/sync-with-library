@@ -52,23 +52,16 @@
     <div class="rowAuto bottomBar">
       <div class="horizontalLayout actionsRow">
         <div class="colAvailable">
-          <div class="roundCheckbox">
-            <input type="checkbox" id="chkIncludeLibraries" checked />
-            <label for="chkIncludeLibraries">
-              <span id="lblIncludeLibraries" class="longLabel">Include all enabled libraries text styles</span>
-            </label>
-          </div>
         </div>
         <div class="colAuto">
           <button id="btnCancel" class="btnSecondary">Cancel</button>
         </div>
         <div class="colAuto">
-          <button id="btnMerge" class="btnPrimary" disabled>Merge Styles</button>
+          <button id="btnMerge" class="btnPrimary" disabled>Replace Styles</button>
         </div>
       </div>
     </div>
-    <div class="draggableArea alignFullCenter" data-app-region="drag"><span id="windowTitle">Merge duplicate text
-        styles</span></div>
+    <div class="draggableArea alignFullCenter" data-app-region="drag"><span id="windowTitle">Sync with Library - Text styles</span></div>
   </div>
   <!-- notice the "../" here. It's because webview.js will be compiled in a different folder -->
   <script src="../resources_mergeduplicatetextstyles.js"></script>

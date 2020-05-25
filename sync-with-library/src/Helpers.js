@@ -1,4 +1,6 @@
+var DeltaE = require('delta-e');
 var fs = require('@skpm/fs');
+var D3 = require('d3-color');
 
 var settingsFile;
 var logsEnabled = false;
@@ -965,7 +967,7 @@ function getDuplicateSymbols(context, selection, includeAllSymbolsFromExternalLi
         }
       }
       if (!containsLibrarySymbols) {
-        clog("Removing '"+key+"' cause it had no library symbols");
+        clog("Removing '" + key + "' cause it had no library symbols");
         var index = allSymbols.indexOf(nameDictionary[key]);
         if (index > -1) allSymbols.splice(index, 1);
         nameDictionary[key] = null;
@@ -1093,11 +1095,10 @@ function getTextThumbnail(style) {
   return base64;
 }
 
-function getDuplicateLayerStyles(context, includeAllStylesFromExternalLibraries) {
+function getDuplicateLayerStyles(context) {
 
   var allStyles = [];
   var nameDictionary = {};
-
 
   context.document.documentData().layerStyles().objects().forEach(function (localLayerStyle) {
 
@@ -1136,8 +1137,6 @@ function getDuplicateLayerStyles(context, includeAllStylesFromExternalLibraries)
       nameDictionary[localLayerStyle.name()].duplicates.push(layerStyleObject);
     }
   });
-
-
 
 
   context.document.documentData().foreignLayerStyles().forEach(foreignStyle => {
@@ -1209,41 +1208,39 @@ function getDuplicateLayerStyles(context, includeAllStylesFromExternalLibraries)
 
   // console.time("getDuplicateExternalSymbols");
 
-  if (includeAllStylesFromExternalLibraries) {
-    var libraries = NSApp.delegate().librariesController().libraries();
-    libraries.forEach(function (lib) {
-      if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
+  var libraries = NSApp.delegate().librariesController().libraries();
+  libraries.forEach(function (lib) {
+    if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
 
-        lib.document().layerStyles().objects().forEach(function (libraryStyle) {
+      lib.document().layerStyles().objects().forEach(function (libraryStyle) {
 
-          var indexOfForeign = indexOfForeignStyle2(allStyles, libraryStyle);
-          if ((indexOfForeign != null) && (indexOfForeign != -1)) {
-            if (indexOfForeign[1] == 0)
-              allStyles.splice([indexOfForeign[0]], 1);
-            else
-              allStyles[indexOfForeign[0]].duplicates.splice(indexOfForeign[1], 1);
-          }
+        var indexOfForeign = indexOfForeignStyle2(allStyles, libraryStyle);
+        if ((indexOfForeign != null) && (indexOfForeign != -1)) {
+          if (indexOfForeign[1] == 0)
+            allStyles.splice([indexOfForeign[0]], 1);
+          else
+            allStyles[indexOfForeign[0]].duplicates.splice(indexOfForeign[1], 1);
+        }
 
-          if (nameDictionary[libraryStyle.name()] != null) {
-            nameDictionary[libraryStyle.name()].duplicates.push({
-              "layerStyle": libraryStyle,
-              "name": "" + libraryStyle.name(),
-              "libraryName": libraryPrefix + lib.name(),
-              "foreign": true,
-              "library": lib,
-              "isSelected": false,
-              "isChosen": false,
-              "description": getLayerStyleDescription(libraryStyle),
-              "thumbnail": "",//getOvalThumbnail(libraryStyle),
-              "contrastMode": shouldEnableContrastMode(getLayerStyleColor(libraryStyle)),
-              "duplicates": [],
-              "isSelected": false
-            });
-          }
-        });
-      }
-    });
-  }
+        if (nameDictionary[libraryStyle.name()] != null) {
+          nameDictionary[libraryStyle.name()].duplicates.push({
+            "layerStyle": libraryStyle,
+            "name": "" + libraryStyle.name(),
+            "libraryName": libraryPrefix + lib.name(),
+            "foreign": true,
+            "library": lib,
+            "isSelected": false,
+            "isChosen": false,
+            "description": getLayerStyleDescription(libraryStyle),
+            "thumbnail": "",//getOvalThumbnail(libraryStyle),
+            "contrastMode": shouldEnableContrastMode(getLayerStyleColor(libraryStyle)),
+            "duplicates": [],
+            "isSelected": false
+          });
+        }
+      });
+    }
+  });
 
   // console.timeEnd("getDuplicateExternalSymbols");
 
@@ -1253,6 +1250,20 @@ function getDuplicateLayerStyles(context, includeAllStylesFromExternalLibraries)
       if (index > -1) allStyles.splice(index, 1);
       nameDictionary[key] = null;
     }
+    else {
+      var containsLibraryStyles = false;
+      for (var i = 0; i < nameDictionary[key].duplicates.length; i++) {
+        if (nameDictionary[key].duplicates[i].foreign) {
+          containsLibraryStyles = true;
+        }
+      }
+      if (!containsLibraryStyles) {
+        clog("Removing '" + key + "' cause it had no library styles");
+        var index = allStyles.indexOf(nameDictionary[key]);
+        if (index > -1) allStyles.splice(index, 1);
+        nameDictionary[key] = null;
+      }
+    }
   });
 
   return allStyles;
@@ -1260,7 +1271,7 @@ function getDuplicateLayerStyles(context, includeAllStylesFromExternalLibraries)
 }
 
 
-function getDuplicateTextStyles(context, includeAllStylesFromExternalLibraries) {
+function getDuplicateTextStyles(context) {
 
   var allStyles = [];
   var nameDictionary = {};
@@ -1384,7 +1395,6 @@ function getDuplicateTextStyles(context, includeAllStylesFromExternalLibraries) 
 
   // console.time("getDuplicateExternalSymbols");
 
-  if (includeAllStylesFromExternalLibraries) {
     var libraries = NSApp.delegate().librariesController().libraries();
     libraries.forEach(function (lib) {
       if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
@@ -1421,7 +1431,6 @@ function getDuplicateTextStyles(context, includeAllStylesFromExternalLibraries) 
         });
       }
     });
-  }
 
   // console.timeEnd("getDuplicateExternalSymbols");
 
@@ -1430,6 +1439,20 @@ function getDuplicateTextStyles(context, includeAllStylesFromExternalLibraries) 
       var index = allStyles.indexOf(nameDictionary[key]);
       if (index > -1) allStyles.splice(index, 1);
       nameDictionary[key] = null;
+    }
+    else {
+      var containsLibraryStyles = false;
+      for (var i = 0; i < nameDictionary[key].duplicates.length; i++) {
+        if (nameDictionary[key].duplicates[i].foreign) {
+          containsLibraryStyles = true;
+        }
+      }
+      if (!containsLibraryStyles) {
+        clog("Removing '" + key + "' cause it had no library styles");
+        var index = allStyles.indexOf(nameDictionary[key]);
+        if (index > -1) allStyles.splice(index, 1);
+        nameDictionary[key] = null;
+      }
     }
   });
 
