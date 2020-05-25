@@ -13,6 +13,8 @@ It will scan your document and active libraries and find any symbol or style wit
 
 ## How do I get Sync with Library?
 
-Sync with Library is a <b>pay what you want</b> plugin, and it's licensed per device. 
-You can download it from GitHub, or using Sketch Runner or Sketchpacks. To get your license, please head up to <a href="http://gum.co/syncwithlibrary">Gumroad</a>.
+Sync with Library is a <b>pay what you want</b> plugin, and it's licensed per device. <br/>
+You can download it from <a href="https://github.com/oodesign/sync-with-library/releases/">GitHub</a>, or using Sketch Runner or Sketchpacks. <br/><br/>
+
+To get your license, please head up to <a href="http://gum.co/syncwithlibrary">Gumroad</a>.
 
