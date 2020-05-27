@@ -1,1 +1,7574 @@
-var globalThis=this,global=this;function __skpm_run(key,context){globalThis.context=context;try{var exports=function(e){var t={};function n(r){if(t[r])return t[r].exports;var i=t[r]={i:r,l:!1,exports:{}};return e[r].call(i.exports,i,i.exports,n),i.l=!0,i.exports}return n.m=e,n.c=t,n.d=function(e,t,r){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(n.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var i in e)n.d(r,i,function(t){return e[t]}.bind(null,i));return r},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=9)}([function(e,t,n){var r=n(6),i=n(11),a=n(12),o=n(13),l=n(14),s=n(15),c=n(16),u=n(7),d=n(17);function h(e){var t=(e=e||{}).identifier||NSUUID.UUID().UUIDString(),n=NSThread.mainThread().threadDictionary(),f=h.fromId(t);if(f)return f;var m=new r;if(m.id=t,e.modal&&!e.parent)throw new Error("A modal needs to have a parent.");var y=coscript.createFiber(),S=e.width||800,p=e.height||600,g=NSScreen.screens().firstObject().frame(),b=NSMakeRect(void 0!==e.x?e.x:Math.round((NSWidth(g)-S)/2),void 0!==e.y?NSHeight(g)-e.y:Math.round((NSHeight(g)-p)/2),S,p);e.titleBarStyle&&"default"!==e.titleBarStyle&&(e.frame=!1);var v="textured"!==e.windowType,w=NSTitledWindowMask;!1!==e.minimizable&&(w|=NSMiniaturizableWindowMask),!1!==e.closable&&(w|=NSClosableWindowMask),!1!==e.resizable&&(w|=NSResizableWindowMask),v&&!e.transparent&&!1!==e.frame||(w|=NSTexturedBackgroundWindowMask);var x=NSPanel.alloc().initWithContentRect_styleMask_backing_defer(b,w,NSBackingStoreBuffered,!0),N=WKWebViewConfiguration.alloc().init(),M=WKWebView.alloc().initWithFrame_configuration(CGRectMake(0,0,e.width||800,e.height||600),N);if(s(M),M.setAutoresizingMask(NSViewWidthSizable|NSViewHeightSizable),i(m,x,M),a(m,x,M),d(m,x,M,e),"desktop"===e.windowType&&(x.setLevel(kCGDesktopWindowLevel-1),x.setCollectionBehavior(NSWindowCollectionBehaviorCanJoinAllSpaces|NSWindowCollectionBehaviorStationary|NSWindowCollectionBehaviorIgnoresCycle)),void 0===e.minWidth&&void 0===e.minHeight||m.setMinimumSize(e.minWidth||0,e.minHeight||0),void 0===e.maxWidth&&void 0===e.maxHeight||m.setMaximumSize(e.maxWidth||1e4,e.maxHeight||1e4),e.transparent||!1===e.frame){x.titlebarAppearsTransparent=!0,x.titleVisibility=NSWindowTitleHidden,x.setOpaque(0),x.isMovableByWindowBackground=!0;var D=NSToolbar.alloc().initWithIdentifier("titlebarStylingToolbar");D.setShowsBaselineSeparator(!1),x.setToolbar(D)}if("hiddenInset"===e.titleBarStyle){var _=NSToolbar.alloc().initWithIdentifier("titlebarStylingToolbar");_.setShowsBaselineSeparator(!1),x.setToolbar(_)}!1!==e.frame&&e.useContentSize||m.setSize(S,p),e.center&&m.center(),e.alwaysOnTop&&m.setAlwaysOnTop(!0),e.fullscreen&&m.setFullScreen(!0),m.setFullScreenable(!!e.fullscreenable);let C=e.title;!1===e.frame?C=void 0:void 0===C&&"undefined"!=typeof __command&&__command.pluginBundle()&&(C=__command.pluginBundle().name()),C&&m.setTitle(C);var E=e.backgroundColor;e.transparent&&(E=NSColor.clearColor()),!E&&!1===e.frame&&e.vibrancy&&(E=NSColor.clearColor()),m._setBackgroundColor(E||NSColor.windowBackgroundColor()),!1===e.hasShadow&&m.setHasShadow(!1),void 0!==e.opacity&&m.setOpacity(e.opacity),e.webPreferences=e.webPreferences||{},M.configuration().preferences().setValue_forKey(!1!==e.webPreferences.devTools,"developerExtrasEnabled"),M.configuration().preferences().setValue_forKey(!1!==e.webPreferences.javascript,"javaScriptEnabled"),M.configuration().preferences().setValue_forKey(!!e.webPreferences.plugins,"plugInsEnabled"),M.configuration().preferences().setValue_forKey(e.webPreferences.minimumFontSize||0,"minimumFontSize"),e.webPreferences.zoomFactor&&M.setMagnification(e.webPreferences.zoomFactor);var O=x.contentView();return!1!==e.frame?(M.setFrame(O.bounds()),O.addSubview(M)):(O.setAutoresizingMask(NSViewWidthSizable|NSViewHeightSizable),o(O,O.superview()),M.setFrame(O.bounds()),O.addSubview(M),x.standardWindowButton(NSWindowFullScreenButton)&&x.standardWindowButton(NSWindowFullScreenButton).setHidden(!0),e.titleBarStyle&&"default"!==e.titleBarStyle||(x.standardWindowButton(NSWindowZoomButton).setHidden(!0),x.standardWindowButton(NSWindowMiniaturizeButton).setHidden(!0),x.standardWindowButton(NSWindowCloseButton).setHidden(!0),x.standardWindowButton(NSWindowZoomButton).setEnabled(!1))),e.vibrancy&&m.setVibrancy(e.vibrancy),m.setMaximizable(!1!==e.maximizable),x.setHidesOnDeactivate(!1!==e.hidesOnDeactivate),e.remembersWindowFrame&&(x.setFrameAutosaveName(t),x.setFrameUsingName_force(x.frameAutosaveName(),!1)),e.acceptsFirstMouse&&m.on("focus",(function(e){e.type()===NSEventTypeLeftMouseDown&&m.webContents.executeJavaScript(l(M,e)).catch(()=>{})})),u.injectScript(M),c.injectScript(M),c.setupHandler(m),!1!==e.show&&m.show(),m.on("closed",(function(){m._destroyed=!0,n.removeObjectForKey(t);var e=n[t+".themeObserver"];e&&(NSApplication.sharedApplication().removeObserver_forKeyPath(e,"effectiveAppearance"),n.removeObjectForKey(t+".themeObserver")),y.cleanup()})),n[t]=x,y.onCleanup((function(){m._destroyed||m.destroy()})),m}h.fromId=function(e){var t=NSThread.mainThread().threadDictionary();if(t[e])return h.fromPanel(t[e],e)},h.fromPanel=function(e,t){var n=new r;if(n.id=t,!e||!e.contentView)throw new Error("needs to pass an NSPanel");for(var o=null,l=e.contentView().subviews(),s=0;s<l.length;s+=1)o||l[s].isKindOfClass(WKInspectorWKWebView)||!l[s].isKindOfClass(WKWebView)||(o=l[s]);if(!o)throw new Error("The panel needs to have a webview");return i(n,e,o),a(n,e,o),n},e.exports=h},function(e,t,n){var r=NSThread.mainThread().threadDictionary();e.exports.getWebview=function(e){return n(0).fromId(e)},e.exports.isWebviewPresent=function(e){return!!r[e]},e.exports.sendToWebview=function(t,n){if(e.exports.isWebviewPresent(t)){for(var i=null,a=r[t].contentView().subviews(),o=0;o<a.length;o+=1)i||a[o].isKindOfClass(WKInspectorWKWebView)||!a[o].isKindOfClass(WKWebView)||(i=a[o]);if(!i||!i.evaluateJavaScript_completionHandler)throw new Error("Webview "+t+" not found");i.evaluateJavaScript_completionHandler(n,null)}}},function(e,t,n){function r(e){return(r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}var i,a=n(20),o=n(24),l=n(35),s=!1,c=!0,u={app:"app",no:"no",over:"over",noCon:"nocon"},d="   💎 This Sketch file",h=["init","alloc","/usr/bin/curl","setLaunchPath","setArguments","pipe","setStandardOutput","setStandardError","launch","waitUntilExit","terminationStatus","readDataToEndOfFile","fileHandleForReading","initWithData_encoding","success","app","purchase","uses","quantity","over","no","noCon"];function f(e,t){var n=NSTask[h[1]]()[h[0]]();n[h[3]](h[2]),n[h[4]](e);var i=NSPipe[h[5]](),a=NSPipe[h[5]]();n[h[6]](i),n[h[7]](a),n[h[8]](),n[h[9]]();var o=n[h[10]](),l=a[h[12]]()[h[11]]();NSString[h[1]]()[h[13]](l,NSUTF8StringEncoding);if(0==o){var s=i[h[12]]()[h[11]](),c=function(e){try{var t=JSON.parse(e);if(t&&"object"===r(t)&&null!==t)return t}catch(n){}return!1}(NSString[h[1]]()[h[13]](s,NSUTF8StringEncoding));return c[h[14]]?t&&null!=c[h[16]]&&c[h[17]]>c[h[16]][h[18]]?u[h[19]]:u[h[15]]:u[h[20]]}return u[h[21]]}var m=["path","mainPluginsFolderURL","/syncwithlibrary.json","startTime","licenseKey","-d","product_permalink=syncwithlibrary","license_key=","","increment_uses_count=","https://api.gumroad.com/v2/licenses/verify"];function y(e,t){return f([m[5],m[6],m[5],m[7]+e+m[8],m[5],m[9]+t.toString()+m[8],m[10]],t)}function S(e,t){NSString.stringWithFormat("%@",e);var n=NSString.stringWithFormat("%@",t);o.writeFileSync(n,JSON.stringify(e),{encoding:"utf8"})}function p(e){return JSON.parse(o.readFileSync(e,{encoding:"utf8"}))}var g=function(e,t){return JSON.parse(o.readFileSync(e,{encoding:"utf8"}))};function b(e){var t,r=n(5).getTheme(),i=l.lab("#"+e);t="dark"===r?l.lab("#212124"):l.lab("#F9F9F9");var o={L:i.l,A:i.a,B:i.b},s={L:t.l,A:t.a,B:t.b},c=a.getDeltaE76(o,s);return parseFloat(c)<30}function v(e,t){var n=!1,r=t.toString().split("[")[1];if(null==r&&(r=t.toString().split("[")[0]),null==r&&(r=t.toString()),null!=r){var i=r.replace("]","");e.toString().indexOf(i)>-1&&(n=!0)}var a=e.toString().split("[")[1];if(null==a&&(a=e.toString().split("[")[0]),null==a&&(a=e.toString()),null!=a){var o=a.replace("]","");t.toString().indexOf(o)>-1&&(n=!0)}return n}function w(e,t){for(var n=0;n<e.length;n++){if(null!=e[n].remoteShareID&&v(e[n].remoteShareID,t.remoteShareID()))return n;if(null!=e[n].duplicates)for(var r=0;r<e[n].duplicates.length;r++){if(null!=e[n].duplicates[r].remoteShareID)if(v(e[n].duplicates[r].remoteShareID,t.remoteShareID()))return[n,r]}}return-1}function x(e,t){for(var n=0;n<e.length;n++)if(null!=e[n].duplicates)for(var r=0;r<e[n].duplicates.length;r++){if(null!=e[n].duplicates[r].remoteShareID)if(v(e[n].duplicates[r].remoteShareID,t.objectID()))return[n,r]}return-1}function N(e){switch(e){case 0:return"Left";case 1:return"Right";case 2:return"Center";case 3:return"Justified";default:return"Natural"}}function M(){return"dark"===n(5).getTheme()?CGColorCreateGenericRGB(70/255,70/255,70/255,1):CGColorCreateGenericRGB(.8,.8,.8,1)}function D(e,t){return e.name<t.name?-1:e.name>t.name?1:0}function _(e,t){return e.name<t.name?-1:e.name>t.name?1:0}function C(e,t){for(var n=0;n<e.length;n++)if(null!=e[n].originalStyle&&0==e[n].originalStyle.remoteShareID().localeCompare(t.objectID()))return!0;return!1}function E(e,t,n,r,i,a,o,l,s,c,u){var d=[];return t.forEach((function(t){try{if(e!=t.textStyle){var n=!1;try{n=e.style().textStyle().attributes().NSFont.familyName()==t.textStyle.style().textStyle().attributes().NSFont.familyName()}catch(v){J("Finding similar text styles - Couldn't disclose font")}var h=!1;try{h=NSFontManager.sharedFontManager().weightOfFont_(e.style().textStyle().attributes().NSFont)==NSFontManager.sharedFontManager().weightOfFont_(t.textStyle.style().textStyle().attributes().NSFont)}catch(v){J("Finding similar text styles - Couldn't disclose weight")}var f=!1;try{f=e.style().textStyle().attributes().NSFont.pointSize()==t.textStyle.style().textStyle().attributes().NSFont.pointSize()}catch(v){J("Finding similar text styles - Couldn't disclose size")}var m=!1;try{m=e.style().textStyle().attributes().MSAttributedStringColorAttribute.hexValue()==t.textStyle.style().textStyle().attributes().MSAttributedStringColorAttribute.hexValue()}catch(v){J("Finding similar text styles - Couldn't disclose color")}var y=!1;try{y=e.style().textStyle().attributes().NSParagraphStyle.paragraphSpacing()==t.textStyle.style().textStyle().attributes().NSParagraphStyle.paragraphSpacing()}catch(v){J("Finding similar text styles - Couldn't disclose paragraph spacing")}var S=!1;try{S=e.style().textStyle().attributes().NSParagraphStyle.minimumLineHeight()==t.textStyle.style().textStyle().attributes().NSParagraphStyle.minimumLineHeight()}catch(v){J("Finding similar text styles - Couldn't disclose line height")}var p=!1;try{p=e.style().textStyle().attributes().NSParagraphStyle.alignment()==t.textStyle.style().textStyle().attributes().NSParagraphStyle.alignment()}catch(v){J("Finding similar text styles - Couldn't disclose alignment")}var g=!1;try{g=e.style().textStyle().attributes().NSKern.toString()==t.textStyle.style().textStyle().attributes().NSKern.toString()}catch(w){g=e.style().textStyle().attributes().NSKern==t.textStyle.style().textStyle().attributes().NSKern}var b=!0;r&&(b=b&&n),i&&(b=b&&h),a&&(b=b&&f),o&&(b=b&&m),l&&(b=b&&y),s&&(b=b&&S),c&&(b=b&&p),u&&(b=b&&g),b&&d.push(t)}}catch(v){J("There was an issue finding similar text styles")}})),d}function O(e,t,n,r,i,a,o,l){var s=[];return t.forEach((function(t){try{if(e!=t.layerStyle){var n=!1;null!=e.style().firstEnabledFill()&&null!=t.layerStyle.style().firstEnabledFill()&&(n=e.style().firstEnabledFill().color().immutableModelObject().hexValue().toString()==t.layerStyle.style().firstEnabledFill().color().immutableModelObject().hexValue().toString());var c=!1;null!=e.style().firstEnabledBorder()&&null!=t.layerStyle.style().firstEnabledBorder()&&(c=e.style().firstEnabledBorder().color().immutableModelObject().hexValue().toString()==t.layerStyle.style().firstEnabledBorder().color().immutableModelObject().hexValue().toString());var u=!1;null!=e.style().firstEnabledBorder()&&null!=t.layerStyle.style().firstEnabledBorder()&&(u=e.style().firstEnabledBorder().thickness()==t.layerStyle.style().firstEnabledBorder().thickness());var d=!1;null!=e.style().firstEnabledShadow()&&null!=t.layerStyle.style().firstEnabledShadow()&&(d=e.style().firstEnabledShadow().color().immutableModelObject().hexValue().toString()==t.layerStyle.style().firstEnabledShadow().color().immutableModelObject().hexValue().toString());var h=!1;null!=e.style().firstEnabledShadow()&&null!=t.layerStyle.style().firstEnabledShadow()&&(h=e.style().firstEnabledShadow().offsetX()==t.layerStyle.style().firstEnabledShadow().offsetX()&&e.style().firstEnabledShadow().offsetY()==t.layerStyle.style().firstEnabledShadow().offsetY()&&e.style().firstEnabledShadow().blurRadius()==t.layerStyle.style().firstEnabledShadow().blurRadius()&&e.style().firstEnabledShadow().spread()==t.layerStyle.style().firstEnabledShadow().spread());var f=!0;r&&(f=f&&n),i&&(f=f&&c),a&&(f=f&&u),o&&(f=f&&d),l&&(f=f&&h),f&&s.push(t)}}catch(m){J("There was an issue finding similar layer styles")}})),s}function F(e,t,n){for(var r=[],i=e.document.documentData().layerTextStyles().objects(),a=0;a<i.count();a++){var o=i.objectAtIndex(a),l=o.style().textStyle().attributes();null!=n?0==n.localeCompare(o.name())&&r.push({attributes:l,textStyle:o,name:""+o.name(),libraryName:d,foreign:!1,isSelected:!1,isChosen:!1,description:T(l),thumbnail:B(o),contrastMode:b(j(o))}):r.push({attributes:l,textStyle:o,name:""+o.name(),libraryName:d,foreign:!1,isSelected:!1,isChosen:!1,description:T(l),thumbnail:B(o),contrastMode:b(j(o))})}(e.document.documentData().foreignTextStyles().forEach((function(e){var t=e.localObject().style().textStyle().attributes(),i=w(r,e),a=U(e.libraryID());-1==i?null!=n?0==n.localeCompare(e.localObject().name())&&r.push({originalStyle:e,attributes:t,textStyle:e.localObject(),name:""+e.localObject().name(),libraryName:"🔸 "+(null!=a?a.name():"This library is not available"),foreign:!0,localShareID:e.localShareID(),remoteShareID:e.remoteShareID(),correlativeStyles:[],isSelected:!1,isChosen:!1,description:T(t),thumbnail:B(e.localObject()),contrastMode:b(j(e.localObject()))}):r.push({originalStyle:e,attributes:t,textStyle:e.localObject(),name:""+e.localObject().name(),libraryName:"🔸 "+(null!=a?a.name():"This library is not available"),foreign:!0,localShareID:e.localShareID(),remoteShareID:e.remoteShareID(),correlativeStyles:[],isSelected:!1,isChosen:!1,description:T(t),thumbnail:B(e.localObject()),contrastMode:b(j(e.localObject()))}):r[i].correlativeStyles.push(e)})),t)&&NSApp.delegate().librariesController().availableLibraries().forEach((function(t){t&&t.libraryID()&&t.enabled()&&e.document.documentData()&&0!=e.document.documentData().objectID().toString().localeCompare(t.libraryID().toString())&&t.document().layerTextStyles().objects().forEach((function(e){if(!C(r,e))if(null!=n){if(0==n.localeCompare(e.name())){var i=e.style().textStyle().attributes();r.push({textStyle:e,attributes:i,name:""+e.name(),libraryName:"🔸 "+t.name(),foreign:!0,library:t,isSelected:!1,isChosen:!1,description:T(i),thumbnail:B(e),contrastMode:b(j(e))})}}else{i=e.style().textStyle().attributes();r.push({textStyle:e,attributes:i,name:""+e.name(),libraryName:"🔸 "+t.name(),foreign:!0,library:t,isSelected:!1,isChosen:!1,description:T(i),thumbnail:B(e),contrastMode:b(j(e))})}}))}));return r=r.sort(D)}function I(e){for(var t=e.name(),n="",r=0;r<t.length();r++)n+=t.charAt(r);return n}function k(e,t){for(var n,r=NSMutableArray.array(),i=e.document.pages().objectEnumerator();n=i.nextObject();)for(var a,o=NSPredicate.predicateWithFormat("className == 'MSSymbolInstance' && symbolMaster == %@",t),l=n.children().filteredArrayUsingPredicate(o).objectEnumerator();a=l.nextObject();)r.addObject(a);return r}function P(e,t){for(var n,r=NSMutableArray.array(),i=e.document.pages().objectEnumerator();n=i.nextObject();)for(var a,o=NSPredicate.predicateWithFormat("className == %@ && overrides != nil","MSSymbolInstance"),l=n.children().filteredArrayUsingPredicate(o).objectEnumerator();a=l.nextObject();){var s=a.overrides();R(a,s,r,t,0)}return r}function R(e,t,n,r,i){for(var a in t){var o=t[a].symbolID;null==o?R(e,t[a],n,r,i+1):("function"==typeof o&&(o=o()),0==o.localeCompare(r.symbolID())&&n.addObject(e))}return o}function T(e){var t="",n=String(e.NSFont),r=n.substring(1,n.indexOf("pt."))+"pt";try{t=r+" - "+N(e.NSParagraphStyle.alignment())}catch(i){J("Get text style description - Couldn't disclose alignment"),t=r}return t}function A(e){var t="";return null!=e.style().firstEnabledFill()&&(t+="Fill: #"+e.style().firstEnabledFill().color().immutableModelObject().hexValue().toString()),null!=e.style().firstEnabledFill()&&null!=e.style().firstEnabledBorder()&&(t+=" - "),null!=e.style().firstEnabledBorder()&&(t+="Border: #"+e.style().firstEnabledBorder().color().immutableModelObject().hexValue().toString()),t}function W(e){return null!=e.style().firstEnabledFill()?e.style().firstEnabledFill().color().immutableModelObject().hexValue().toString():null!=e.style().firstEnabledBorder()?e.style().firstEnabledBorder().color().immutableModelObject().hexValue().toString():void 0}function j(e){return e.style().textStyle().attributes().MSAttributedStringColorAttribute?e.style().textStyle().attributes().MSAttributedStringColorAttribute.hexValue().toString():"000000"}function L(e){var t=MSOvalShape.alloc().init();t.frame=MSRect.rectWithRect(NSMakeRect(0,0,100,100)),t.style=e.style(),context.document.currentPage().addLayer(t);var n=H(t,300,300);return t.removeFromParent(),n}function B(e){var t=MSTextLayer.new();t.stringValue="The quick brown fox",t.style=e.style(),context.document.currentPage().addLayer(t);var n=H(t,600,100);return t.removeFromParent(),n}function U(e){for(var t=NSApp.delegate().librariesController().libraries(),n=0;n<t.length;n++){var r=t[n];if(r&&r.libraryID()&&0==r.libraryID().toString().localeCompare(e))return r}return null}function V(e,t,n){for(var r=[],i=e.document.documentData().layerStyles().objects(),a=0;a<i.count();a++){var o=i.objectAtIndex(a);null!=n?0==n.localeCompare(o.name())&&r.push({layerStyle:o,name:""+o.name(),libraryName:d,foreign:!1,isSelected:!1,isChosen:!1,description:A(o),thumbnail:L(o),contrastMode:b(W(o))}):r.push({layerStyle:o,name:""+o.name(),libraryName:d,foreign:!1,isSelected:!1,isChosen:!1,description:A(o),thumbnail:L(o),contrastMode:b(W(o))})}(e.document.documentData().foreignLayerStyles().forEach((function(e){var t=w(r,e),i=U(e.libraryID());-1==t?null!=n?0==n.localeCompare(e.localObject().name())&&r.push({originalStyle:e,layerStyle:e.localObject(),name:""+e.localObject().name(),libraryName:"🔸 "+(null!=i?i.name():"This library is not available"),foreign:!0,localShareID:e.localShareID(),remoteShareID:e.remoteShareID(),correlativeStyles:[],isSelected:!1,isChosen:!1,description:A(e.localObject()),thumbnail:L(e.localObject()),contrastMode:b(W(e.localObject()))}):r.push({originalStyle:e,layerStyle:e.localObject(),name:""+e.localObject().name(),libraryName:"🔸 "+(null!=i?i.name():"This library is not available"),foreign:!0,localShareID:e.localShareID(),remoteShareID:e.remoteShareID(),correlativeStyles:[],isSelected:!1,isChosen:!1,description:A(e.localObject()),thumbnail:L(e.localObject()),contrastMode:b(W(e.localObject()))}):r[t].correlativeStyles.push(e)})),t)&&NSApp.delegate().librariesController().libraries().forEach((function(t){t&&t.libraryID()&&t.enabled()&&e.document.documentData()&&0!=e.document.documentData().objectID().toString().localeCompare(t.libraryID().toString())&&t.document().layerStyles().objects().forEach((function(e){C(r,e)||(null!=n?0==n.localeCompare(e.name())&&r.push({layerStyle:e,name:""+e.name(),libraryName:"🔸 "+t.name(),foreign:!0,library:t,isSelected:!1,isChosen:!1,description:A(e),thumbnail:L(e),contrastMode:b(W(e))}):r.push({layerStyle:e,name:""+e.name(),libraryName:"🔸 "+t.name(),foreign:!0,library:t,isSelected:!1,isChosen:!1,description:A(e),thumbnail:L(e),contrastMode:b(W(e))}))}))}));return r=(r=r.sort(D)).sort(D)}function z(e){var t=e.CGImageForProposedRect_context_hints(null,nil,nil),n=NSBitmapImageRep.alloc().initWithCGImage(t);return n.setSize(e.size()),function(e){var t=e;return NSString.stringWithFormat("data:%@;base64,%@","image/png",t.base64EncodedStringWithOptions(0))}(n.representationUsingType_properties(NSPNGFileType,nil))}function H(e,t,n){return""+z(function(e,t,n){var r=MSExportRequest.exportRequestsFromExportableLayer_inRect_useIDForName_(e,e.absoluteInfluenceRect(),!1).firstObject();r.format="png";var i=t/r.rect().size.width,a=n/r.rect().size.height;r.scale=i<a?i:a;var o=NSColorSpace.sRGBColorSpace(),l=MSExporter.exporterForRequest_colorSpace_(r,o).bitmapImageRep(),s=NSImage.alloc().init().autorelease();return s.addRepresentation(l),s}(e,t,n))}function J(e){s&&console.log(e)}var K=["path","mainPluginsFolderURL","/syncwithlibrary.json","logs","librariesEnabledByDefault","log"];e.exports={GetTextBasedOnCount:function(e){return 1!=e?" styles ":" style "},getBase64:H,brightnessByColor:function(e){var t,n=0==(e=""+e).indexOf("#"),r=0==e.indexOf("rgb");if(n&&(t=e.substr(1).match(7==e.length?/(\S{2})/g:/(\S{1})/g)))var i=parseInt(t[0],16),a=parseInt(t[1],16),o=parseInt(t[2],16);if(r&&(t=e.match(/(\d+){3}/g)))i=t[0],a=t[1],o=t[2];if(void 0!==i)return(299*i+587*a+114*o)/1e3},getColorDependingOnBrightness:function(e){return null!=e?"dark"===n(5).getTheme()?e>100&&e<130?MSColor.colorWithRed_green_blue_alpha(.35,.35,.35,1):MSColor.colorWithRed_green_blue_alpha(1,1,1,0):e>230?MSColor.colorWithRed_green_blue_alpha(.8,.8,.8,1):MSColor.colorWithRed_green_blue_alpha(1,1,1,0):MSColor.colorWithRed_green_blue_alpha(1,1,1,0)},isString:function(e){try{return 1==e.isKindOfClass(NSString)}catch(t){return!1}},getAlignment:N,getSymbolInstances:k,containsTextStyle:function(e,t){return e.filter((function(e){return e.textStyle==t})).length>=1},containsLayerStyle:function(e,t){return e.filter((function(e){return e.layerStyle==t})).length>=1},createView:function(e){return NSView.alloc().initWithFrame(e)},getAllTextLayers:function(e){var t=NSMutableArray.array();return e.document.pages().forEach((function(e){for(var n,r=NSPredicate.predicateWithFormat("className == 'MSTextLayer'"),i=e.children().filteredArrayUsingPredicate(r).objectEnumerator();n=i.nextObject();)t.addObject(n)})),t},getAllLayers:function(e){var t=NSMutableArray.array();return e.document.pages().forEach((function(e){for(var n,r=e.children().objectEnumerator();n=r.nextObject();)t.addObject(n)})),t},createSeparator:function(e){var t=NSView.alloc().initWithFrame(e);return t.setWantsLayer(1),t.layer().setBackgroundColor(M()),t},getColorDependingOnTheme:M,compareStyleArrays:D,alreadyInList:C,getIndexOf:function(e,t){for(var n=0;n<t.length;n++)if(0==t[n].localeCompare(e))return n;return-1},FindAllSimilarTextStyles:function(e,t,n,r,i,a,o,l,s,c){for(var u=[],h=[],f=F(e,t,null),m=0;m<f.length;m++)if(J("Finding similar styles to '"+f[m].name+"'"),0==f[m].libraryName.localeCompare(d)&&-1==h.indexOf(f[m])){var y=E(f[m].textStyle,f,0,n,r,i,a,o,l,s,c);h.push(f[m]),y.forEach((function(e){h.push(e)})),y.unshift(f[m]),y.length>1&&u.push({referenceStyle:f[m],similarStyles:y,selectedIndex:-1,isUnchecked:!1})}return u},FindSimilarTextStyles:E,FindAllSimilarLayerStyles:function(e,t,n,r,i,a,o){for(var l=[],s=[],c=V(e,t,null),u=0;u<c.length;u++)if(J("Finding similar styles to '"+c[u].name+"'"),0==c[u].libraryName.localeCompare(d)&&-1==s.indexOf(c[u])){var h=O(c[u].layerStyle,c,0,n,r,i,a,o);s.push(c[u]),h.forEach((function(e){s.push(e)})),h.unshift(c[u]),h.length>1&&l.push({referenceStyle:c[u],similarStyles:h,selectedIndex:-1,isUnchecked:!1})}return l},FindSimilarLayerStyles:O,getDefinedLayerStyles:V,getDefinedTextStyles:F,indexOfForeignStyle:w,IsInTrial:function(){try{var e=g(MSPluginManager[m[1]]()[m[0]]()+m[2]);return null!=e&&null!=e[m[3]]?e[m[3]]:null}catch(t){return null}},ExiGuthrie:function(){try{var e=g(MSPluginManager[m[1]]()[m[0]]()+m[2]);return null!=e&&null!=e[m[4]]&&y(e[m[4]],!1)}catch(t){return!1}},Guthrie:y,valStatus:u,writeTextToFile:S,commands:{mergeduplicatesymbols:"mergeduplicatesymbols",mergeselectedsymbols:"mergeselectedsymbols",mergeselectedtextstyles:"mergeselectedtextstyles",mergesimilartextstyles:"mergesimilartextstyles",mergeduplicatetextstyles:"mergeduplicatetextstyles",mergesimilarlayerstyles:"mergesimilarlayerstyles",mergeselectedlayerstyles:"mergeselectedlayerstyles",mergeduplicatelayerstyles:"mergeduplicatelayerstyles",editsettings:"editsettings"},getDuplicateSymbols:function(e,t,n){var r=[],i={},a=[];t.forEach((function(t){var n=I(t),o=function(e,t){for(var n=0;n<e.document.documentData().foreignSymbols().length;n++)if(e.document.documentData().foreignSymbols()[n].symbolMaster()==t)return!0;return!1}(e,t),l=o?U(t.foreignObject().libraryID()):null,s=d;o&&(s="🔸 ",s+=null!=l?l.name():"This library is not available");var c={name:""+t.name(),symbol:t,isForeign:o,thumbnail:"",symbolInstances:null,numInstances:0,symbolOverrides:null,numOverrides:0,libraryName:s,duplicates:[],isSelected:!1};if(c.duplicates.push({name:""+t.name(),symbol:t,isForeign:o,thumbnail:"",symbolInstances:null,numInstances:0,symbolOverrides:null,numOverrides:0,libraryName:s,duplicates:null,isSelected:!1}),o)a.push(""+t.foreignObject().remoteShareID());else try{a.push(""+t.symbolID())}catch(u){J("Trying to merge a component that is not a symbol."),J(t)}null==i[n]?(r.push(c),i[n]=c):i[n].duplicates.push(c)}));var o=NSApp.delegate().librariesController().libraries();return o.forEach((function(t){t&&t.libraryID()&&t.enabled()&&e.document.documentData()&&0!=e.document.documentData().objectID().toString().localeCompare(t.libraryID().toString())&&t.document().allSymbols().length})),o.forEach((function(t){t&&t.libraryID()&&t.enabled()&&e.document.documentData()&&0!=e.document.documentData().objectID().toString().localeCompare(t.libraryID().toString())&&t.document().allSymbols().forEach((function(e){var n=I(e);a.indexOf(""+e.symbolID())>=0||null==i[n]||(i[n].duplicates.push({name:""+e.name(),symbol:e,isForeign:!0,libraryName:"🔸 "+t.name(),duplicates:[],externalLibrary:t,isSelected:!1}))}))})),Object.keys(i).forEach((function(e){if(i[e].duplicates.length<=1){(t=r.indexOf(i[e]))>-1&&r.splice(t,1),i[e]=null}else{for(var t,n=!1,a=0;a<i[e].duplicates.length;a++)i[e].duplicates[a].isForeign&&(n=!0);if(!n)J("Removing '"+e+"' cause it had no library symbols"),(t=r.indexOf(i[e]))>-1&&r.splice(t,1),i[e]=null}})),r.sort(_)},importForeignSymbol:function(e,t){var n=MSShareableObjectReference.referenceForShareableObject_inLibrary(e,t);return AppController.sharedInstance().librariesController().importShareableObjectReference_intoDocument(n,data)},GetSpecificSymbolData:function(e,t,n){var r=0,i=0;J("Processing symbol metadata for: "+t[n].name);for(var a=0;a<t[n].duplicates.length;a++){var o=k(e,t[n].duplicates[a].symbol),l=P(e,t[n].duplicates[a].symbol),s=300/t[n].duplicates[a].symbol.frame().height()*t[n].duplicates[a].symbol.frame().width();t[n].duplicates[a].thumbnail=H(t[n].duplicates[a].symbol,s,300),t[n].duplicates[a].symbolInstances=o,t[n].duplicates[a].numInstances=o.length,t[n].duplicates[a].symbolOverrides=l,t[n].duplicates[a].numOverrides=l.length,r+=o.length,i+=l.length}J("-- Found "+r+" instances, "+i+" overrides, and created "+t[n].duplicates.length+" thumbnails")},getDuplicateLayerStyles:function(e){var t=[],n={};return e.document.documentData().layerStyles().objects().forEach((function(e){var r={layerStyle:e,name:""+e.name(),libraryName:d,foreign:!1,isSelected:!1,isChosen:!1,description:A(e),thumbnail:"",duplicates:[],isSelected:!1,contrastMode:b(W(e))};r.duplicates.push({layerStyle:e,name:""+e.name(),libraryName:d,foreign:!1,isSelected:!1,isChosen:!1,description:A(e),thumbnail:"",duplicates:null,isSelected:!1,contrastMode:b(W(e))}),null==n[e.name()]?(t.push(r),n[e.name()]=r):n[e.name()].duplicates.push(r)})),e.document.documentData().foreignLayerStyles().forEach((function(e){var r=w(t,e),i=U(e.libraryID());if(-1==r){var a={originalStyle:e,layerStyle:e.localObject(),name:""+e.localObject().name(),libraryName:"🔸 "+(null!=i?i.name():"This library is not available"),foreign:!0,localShareID:e.localShareID(),remoteShareID:e.remoteShareID(),correlativeStyles:[],isSelected:!1,isChosen:!1,description:A(e.localObject()),thumbnail:"",contrastMode:b(W(e.localObject())),duplicates:[],isSelected:!1};a.duplicates.push({originalStyle:e,layerStyle:e.localObject(),name:""+e.localObject().name(),libraryName:"🔸 "+(null!=i?i.name():"This library is not available"),foreign:!0,localShareID:e.localShareID(),remoteShareID:e.remoteShareID(),correlativeStyles:[],isTakenOver:!1,isSelected:!1,isChosen:!1,description:A(e.localObject()),thumbnail:"",contrastMode:b(W(e.localObject())),duplicates:null,isSelected:!1}),null==n[e.localObject().name()]?(t.push(a),n[e.localObject().name()]=a):n[e.localObject().name()].duplicates.push(a)}else"number"==typeof r?t[r].correlativeStyles.push(e):t[r[0]].duplicates[r[1]].correlativeStyles.push(e)})),NSApp.delegate().librariesController().libraries().forEach((function(r){r&&r.libraryID()&&r.enabled()&&e.document.documentData()&&0!=e.document.documentData().objectID().toString().localeCompare(r.libraryID().toString())&&r.document().layerStyles().objects().forEach((function(e){var i=x(t,e);null!=i&&-1!=i&&(0==i[1]?t.splice([i[0]],1):t[i[0]].duplicates.splice(i[1],1)),null!=n[e.name()]&&n[e.name()].duplicates.push({layerStyle:e,name:""+e.name(),libraryName:"🔸 "+r.name(),foreign:!0,library:r,isSelected:!1,isChosen:!1,description:A(e),thumbnail:"",contrastMode:b(W(e)),duplicates:[],isSelected:!1})}))})),Object.keys(n).forEach((function(e){if(n[e].duplicates.length<=1){(r=t.indexOf(n[e]))>-1&&t.splice(r,1),n[e]=null}else{for(var r,i=!1,a=0;a<n[e].duplicates.length;a++)n[e].duplicates[a].foreign&&(i=!0);if(!i)J("Removing '"+e+"' cause it had no library styles"),(r=t.indexOf(n[e]))>-1&&t.splice(r,1),n[e]=null}})),t},GetSpecificLayerStyleData:function(e,t,n){J("Processing text style metadata for: "+t[n].name);for(var r=0;r<t[n].duplicates.length;r++)t[n].duplicates[r].thumbnail=L(t[n].duplicates[r].layerStyle)},getDuplicateTextStyles:function(e){var t=[],n={};return e.document.documentData().layerTextStyles().objects().forEach((function(e){var r=e.style().textStyle().attributes(),i={attributes:r,textStyle:e,name:""+e.name(),libraryName:d,foreign:!1,isSelected:!1,isChosen:!1,description:T(r),thumbnail:"",contrastMode:b(j(e)),duplicates:[],isSelected:!1};i.duplicates.push({attributes:r,textStyle:e,name:""+e.name(),libraryName:d,foreign:!1,isSelected:!1,isChosen:!1,description:T(r),thumbnail:"",contrastMode:b(j(e)),duplicates:null,isSelected:!1}),null==n[e.name()]?(t.push(i),n[e.name()]=i):n[e.name()].duplicates.push(i)})),e.document.documentData().foreignTextStyles().forEach((function(e){var r=w(t,e),i=U(e.libraryID()),a=e.localObject().style().textStyle().attributes();if(-1==r){var o={originalStyle:e,attributes:a,textStyle:e.localObject(),name:""+e.localObject().name(),libraryName:"🔸 "+(null!=i?i.name():"This library is not available"),foreign:!0,localShareID:e.localShareID(),remoteShareID:e.remoteShareID(),correlativeStyles:[],isSelected:!1,isChosen:!1,description:T(a),thumbnail:"",contrastMode:b(j(e.localObject())),duplicates:[],isSelected:!1};o.duplicates.push({originalStyle:e,attributes:a,textStyle:e.localObject(),name:""+e.localObject().name(),libraryName:"🔸 "+(null!=i?i.name():"This library is not available"),foreign:!0,localShareID:e.localShareID(),remoteShareID:e.remoteShareID(),correlativeStyles:[],isSelected:!1,isChosen:!1,description:T(a),thumbnail:"",contrastMode:b(j(e.localObject())),duplicates:null,isSelected:!1}),null==n[e.localObject().name()]?(t.push(o),n[e.localObject().name()]=o):n[e.localObject().name()].duplicates.push(o)}else"number"==typeof r?t[r].correlativeStyles.push(e):t[r[0]].duplicates[r[1]].correlativeStyles.push(e)})),NSApp.delegate().librariesController().libraries().forEach((function(r){r&&r.libraryID()&&r.enabled()&&e.document.documentData()&&0!=e.document.documentData().objectID().toString().localeCompare(r.libraryID().toString())&&r.document().layerTextStyles().objects().forEach((function(e){var i=x(t,e),a=e.style().textStyle().attributes();null!=i&&-1!=i&&(0==i[1]?t.splice([i[0]],1):t[i[0]].duplicates.splice(i[1],1)),null!=n[e.name()]&&n[e.name()].duplicates.push({textStyle:e,attributes:a,name:""+e.name(),libraryName:"🔸 "+r.name(),foreign:!0,library:r,isSelected:!1,isChosen:!1,description:T(a),thumbnail:"",contrastMode:b(j(e)),duplicates:[],isSelected:!1})}))})),Object.keys(n).forEach((function(e){if(n[e].duplicates.length<=1){(r=t.indexOf(n[e]))>-1&&t.splice(r,1),n[e]=null}else{for(var r,i=!1,a=0;a<n[e].duplicates.length;a++)n[e].duplicates[a].foreign&&(i=!0);if(!i)J("Removing '"+e+"' cause it had no library styles"),(r=t.indexOf(n[e]))>-1&&t.splice(r,1),n[e]=null}})),t},GetSpecificTextStyleData:function(e,t,n){J("Processing text style metadata for: "+t[n].name);for(var r=0;r<t[n].duplicates.length;r++)t[n].duplicates[r].thumbnail=B(t[n].duplicates[r].textStyle)},shouldEnableContrastMode:b,countAllSymbols:function(e,t){var n=[0,0];return n[0]=e.document.documentData().allSymbols().length,t&&NSApp.delegate().librariesController().libraries().forEach((function(t){t&&t.libraryID()&&t.enabled()&&e.document.documentData()&&0!=e.document.documentData().objectID().toString().localeCompare(t.libraryID().toString())&&(n[1]+=t.document().allSymbols().length)})),n},sortArray:function(e,t){},EditSettings:EditSettings,writeTextToFile:S,readFromFile:p,LoadSettings:function(){try{null!=(i=p(MSPluginManager[K[1]]()[K[0]]()+K[2]))&&null!=i[K[3]]&&(s=i[K[3]]),null!=i&&null!=i[K[4]]&&(c=i[K[4]])}catch(e){return console[K[5]](e),null}},clog:J,getLogsEnabled:function(){return s},getSettings:function(){return i},getLibrariesEnabled:function(){return c}}},,function(e,t){e.exports={JS_BRIDGE:"__skpm_sketchBridge",JS_BRIDGE_RESULT_SUCCESS:"__skpm_sketchBridge_success",JS_BRIDGE_RESULT_ERROR:"__skpm_sketchBridge_error",START_MOVING_WINDOW:"__skpm_startMovingWindow",EXECUTE_JAVASCRIPT:"__skpm_executeJS",EXECUTE_JAVASCRIPT_SUCCESS:"__skpm_executeJS_success_",EXECUTE_JAVASCRIPT_ERROR:"__skpm_executeJS_error_"}},function(e,t){e.exports=require("sketch/ui")},function(e,t){e.exports=require("events")},function(e,t,n){(function(t){var r=n(4);e.exports=function(n,i){return function a(o,l,s){"function"==typeof l&&(s=l,l=!1);var c=coscript.createFiber();return n.navigationDelegate().state&&0==n.navigationDelegate().state.wasReady?new t((function(e,t){i.once("ready-to-show",(function(){a(o,l,s).then(e).catch(t),c.cleanup()}))})):new t((function(t,a){var l=Math.random();i.webContents.on(r.EXECUTE_JAVASCRIPT_SUCCESS+l,(function(e){try{s&&s(null,e),t(e)}catch(n){a(n)}c.cleanup()})),i.webContents.on(r.EXECUTE_JAVASCRIPT_ERROR+l,(function(e){try{s?(s(e),t()):a(e)}catch(n){a(n)}c.cleanup()})),n.evaluateJavaScript_completionHandler(e.exports.wrapScript(o,l),null)}))}},e.exports.wrapScript=function(e,t){return"window."+r.EXECUTE_JAVASCRIPT+"("+t+", "+JSON.stringify(e)+")"},e.exports.injectScript=function(e){var t="window."+r.EXECUTE_JAVASCRIPT+' = function(id, script) {  try {    var res = eval(script);    if (res && typeof res.then === "function" && typeof res.catch === "function") {      res.then(function (res2) {        window.postMessage("'+r.EXECUTE_JAVASCRIPT_SUCCESS+'" + id, res2);      })      .catch(function (err) {        window.postMessage("'+r.EXECUTE_JAVASCRIPT_ERROR+'" + id, err);      })    } else {      window.postMessage("'+r.EXECUTE_JAVASCRIPT_SUCCESS+'" + id, res);    }  } catch (err) {    window.postMessage("'+r.EXECUTE_JAVASCRIPT_ERROR+'" + id, err);  }}',n=WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(t,0,!0);e.configuration().userContentController().addUserScript(n)}}).call(this,n(8))},function(e,t){function n(){}function r(e){if(!(this instanceof r))throw new TypeError("Promises must be constructed via new");if("function"!=typeof e)throw new TypeError("not a function");this._state=0,this._handled=!1,this._value=void 0,this._deferreds=[],c(e,this)}function i(e,t){for(;3===e._state;)e=e._value;0!==e._state?(e._handled=!0,r._immediateFn((function(){var n=1===e._state?t.onFulfilled:t.onRejected;if(null!==n){var r;try{r=n(e._value)}catch(i){return void o(t.promise,i)}a(t.promise,r)}else(1===e._state?a:o)(t.promise,e._value)}))):e._deferreds.push(t)}function a(e,t){try{if(t===e)throw new TypeError("A promise cannot be resolved with itself.");if(t&&("object"==typeof t||"function"==typeof t)){var n=t.then;if(t instanceof r)return e._state=3,e._value=t,void l(e);if("function"==typeof n)return void c(n.bind(t),e)}e._state=1,e._value=t,l(e)}catch(i){o(e,i)}}function o(e,t){e._state=2,e._value=t,l(e)}function l(e){2===e._state&&0===e._deferreds.length&&r._immediateFn((function(){e._handled||r._unhandledRejectionFn(e._value,e)}));for(var t=0,n=e._deferreds.length;t<n;t++)i(e,e._deferreds[t]);e._deferreds=null}function s(e,t,n){this.onFulfilled="function"==typeof e?e:null,this.onRejected="function"==typeof t?t:null,this.promise=n}function c(e,t){var n=!1;try{e((function(e){n?r._multipleResolvesFn("resolve",t,e):(n=!0,a(t,e))}),(function(e){n?r._multipleResolvesFn("reject",t,e):(n=!0,o(t,e))}))}catch(i){if(n)return void r._multipleResolvesFn("reject",t,i);n=!0,o(t,i)}}r.prototype.catch=function(e){return this.then(null,e)},r.prototype.then=function(e,t){var r=new this.constructor(n);return i(this,new s(e,t,r)),r},r.prototype.finally=function(e){var t=this.constructor;return this.then((function(n){return t.resolve(e()).then((function(){return n}))}),(function(n){return t.resolve(e()).then((function(){return t.reject(n)}))}))},r.all=function(e){return new r((function(t,n){if(!Array.isArray(e))return n(new TypeError("Promise.all accepts an array"));var r=Array.prototype.slice.call(e);if(0===r.length)return t([]);var i=r.length;function a(e,o){try{if(o&&("object"==typeof o||"function"==typeof o)){var l=o.then;if("function"==typeof l)return void l.call(o,(function(t){a(e,t)}),n)}r[e]=o,0==--i&&t(r)}catch(s){n(s)}}for(var o=0;o<r.length;o++)a(o,r[o])}))},r.resolve=function(e){return e&&"object"==typeof e&&e.constructor===r?e:new r((function(t){t(e)}))},r.reject=function(e){return new r((function(t,n){n(e)}))},r.race=function(e){return new r((function(t,n){if(!Array.isArray(e))return n(new TypeError("Promise.race accepts an array"));for(var i=0,a=e.length;i<a;i++)r.resolve(e[i]).then(t,n)}))},r._immediateFn=setImmediate,r._unhandledRejectionFn=function(e,t){"undefined"!=typeof process&&process.listenerCount&&(process.listenerCount("unhandledRejection")||process.listenerCount("uncaughtException"))?(process.emit("unhandledRejection",e,t),process.emit("uncaughtException",e,"unhandledRejection")):"undefined"!=typeof console&&console&&console.warn("Possible Unhandled Promise Rejection:",e)},r._multipleResolvesFn=function(e,t,n){"undefined"!=typeof process&&process.emit&&process.emit("multipleResolves",e,t,n)},e.exports=r},function(e,t,n){"use strict";n.r(t),n.d(t,"MergeDuplicateSymbols",(function(){return S})),n.d(t,"MergeDuplicateTextStyles",(function(){return p})),n.d(t,"MergeDuplicateLayerStyles",(function(){return g})),n.d(t,"EditSettings",(function(){return b})),n.d(t,"triggerMethod",(function(){return x})),n.d(t,"showRegistration",(function(){return N})),n.d(t,"onShutdown",(function(){return M}));var r,i=n(0),a=n.n(i),o=n(1),l=(n(5),n(10)),s=n(28),c=n(30),u=n(32),d=n(2),h=0,f=!1,m=!1,y=!1;function S(e){r=d.commands.mergeduplicatesymbols,w(e)}function p(e){r=d.commands.mergeduplicatetextstyles,w(e)}function g(e){r=d.commands.mergeduplicatelayerstyles,w(e)}function b(e){r=d.commands.editsettings,w(e)}var v=["app","valStatus","noCon","over","now","abs","floor"];function w(e){var t=d.ExiGuthrie();if(t==d[v[1]][v[0]]||t==d[v[1]][v[2]])x(e);else if(t==d[v[1]][v[3]])y=!0,N(e);else{var n=d.IsInTrial(),r=new Date(parseInt(n));if(null!=n){var i=r-Date[v[4]](),a=Math[v[6]](Math[v[5]](i/864e5));(h=7-a)>0?f=!0:m=!0,N(e)}else N(e)}}function x(e){switch(d.LoadSettings(),r){case d.commands.mergeduplicatesymbols:l.MergeDuplicateSymbols(e);break;case d.commands.mergeduplicatetextstyles:c.MergeDuplicateTextStyles(e);break;case d.commands.mergeduplicatelayerstyles:s.MergeDuplicateLayerStyles(e);break;case d.commands.editsettings:u.EditSettings(e)}}function N(e){var t={identifier:"sync-with-library.webviewReg",width:1200,height:700,show:!1,titleBarStyle:"hidden"},r=new a.a(t),i=r.webContents,o=["ready-to-show","error","catch","SetTrialMode(","stringify",")","executeJavaScript","SetExpiredMode()","SetOverMode()","show","once","did-finish-load","on","RegisterKey","app","valStatus","","path","mainPluginsFolderURL","/syncwithlibrary.json","writeTextToFile","ShowRegistrationComplete()","over","SetOverModeInReg()","ShowRegistrationFail()","StartTrial","now","ShowTrialStarted()","ContinueTrial","LetsStartTrial","LetsStart"];r[o[10]](o[0],(function(){f&&i[o[6]]("".concat(o[3]).concat(JSON[o[4]](h)).concat(o[5]))[o[2]](console[o[1]]),m&&i[o[6]]("".concat(o[7]))[o[2]](console[o[1]]),y&&i[o[6]]("".concat(o[8]))[o[2]](console[o[1]]),r[o[9]]()})),i[o[12]](o[11],(function(){f&&i[o[6]]("".concat(o[3]).concat(JSON[o[4]](h)).concat(o[5]))[o[2]](console[o[1]]),m&&i[o[6]]("".concat(o[7]))[o[2]](console[o[1]]),y&&i[o[6]]("".concat(o[8]))[o[2]](console[o[1]])})),i[o[12]](o[13],(function(e){var t=d.Guthrie(e,!0);if(t==d[o[15]][o[14]]){var n={licenseKey:o[16]+e};d[o[20]](n,MSPluginManager[o[18]]()[o[17]]()+o[19]),i[o[6]]("".concat(o[21]))[o[2]](console[o[1]])}else t==d[o[15]][o[22]]?(i[o[6]]("".concat(o[8]))[o[2]](console[o[1]]),i[o[6]]("".concat(o[23]))[o[2]](console[o[1]])):i[o[6]]("".concat(o[24]))[o[2]](console[o[1]])})),i[o[12]](o[25],(function(e){var t={startTime:o[16]+Date[o[26]]()};d[o[20]](t,MSPluginManager[o[18]]()[o[17]]()+o[19]),i[o[6]]("".concat(o[27]))[o[2]](console[o[1]])})),i[o[12]](o[28],(function(){M("sync-with-library.webviewReg"),x(e)})),i[o[12]](o[29],(function(){f=!0,h=7,M("sync-with-library.webviewReg"),x(e)})),i[o[12]](o[30],(function(){f=!1,M("sync-with-library.webviewReg"),x(e)})),i.on("nativeLog",(function(e){d.cog(e)})),i.on("OpenPluginWeb",(function(e){NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString("http://gum.co/syncwithlibrary"))})),i.on("Cancel",(function(){M("sync-with-library.webviewReg")})),r.loadURL(n(34))}function M(e){var t=Object(o.getWebview)(e);t&&t.close()}},function(e,t,n){"use strict";n.r(t),n.d(t,"MergeDuplicateSymbols",(function(){return s})),n.d(t,"onShutdown",(function(){return c}));var r=n(0),i=n.n(r),a=n(1),o=n(2);function l(e,t){var n,r=[],i=0,a=0,o=0;if(null==e.duplicates[t].externalLibrary)n=e.duplicates[t].symbol;else{var l=MSShareableObjectReference.referenceForShareableObject_inLibrary(e.duplicates[t].symbol,e.duplicates[t].externalLibrary),s=AppController.sharedInstance().librariesController().importShareableObjectReference_intoDocument(l,context.document.documentData());n=s.symbolMaster()}for(var c=0;c<e.duplicates.length;c++)c!=t&&r.indexOf(e.duplicates[c].symbol.symbolID())<0&&r.push(e.duplicates[c].symbol.symbolID());for(c=0;c<e.duplicates.length;c++)if(c!=t){e.duplicates[c].isForeign||o++;var u=e.duplicates[c].symbolInstances,d=e.duplicates[c].symbolOverrides,h=!1;if(e.duplicates[c].isForeign&&null==e.duplicates[c].externalLibrary&&(e.duplicates[c].symbol.foreignObject().unlinkFromRemote(),h=!0),null==e.duplicates[t].externalLibrary)for(var f=0;f<u.length;f++)u[f].changeInstanceToSymbol(n),i++;else for(f=0;f<u.length;f++)u[f].changeInstanceToSymbol(s.symbolMaster()),i++;for(f=0;f<d.length;f++){for(var m=[],y=NSMutableDictionary.dictionaryWithDictionary(d[f].overrides()),S=y.allKeys(),p=0;p<S.count();p++){var g=S.objectAtIndex(p),b=y[g].toString().replace(/[^\x20-\x7E]+/g,"");if(null!=y[g]&&/\S/.test(b)){if(null!=y[g].allKeys)for(var v=y[g].allKeys(),w=0;w<v.count();w++){v.objectAtIndex(w);for(var x=!1,N=0;N<r.length;N++)null!=y[g].symbolID&&y[g].symbolID.indexOf(r[N])>-1&&(x=!0);x&&m.indexOf(g)<0&&m.push(g)}}else;}d[f].overridePoints().forEach((function(e){if(e.toString().indexOf("symbolID")>-1){var t=!1;for(N=0;N<m.length;N++)e.toString().indexOf(m[N])>-1&&(t=!0);t&&(d[f].setValue_forOverridePoint_(n.symbolID(),e),a++)}}))}e.duplicates[c].isForeign?(h&&e.duplicates[c].symbol.removeFromParent(),context.document.documentData().foreignSymbols().removeObject(e.duplicates[c].symbol)):e.duplicates[c].symbol.removeFromParent()}return[o,i,a]}function s(e){o.clog("----- Sync symbols (with the same name) -----");var t,r={identifier:"sync-with-library.webview",width:1200,height:700,remembersWindowFrame:!0,show:!1,titleBarStyle:"hidden"},a=new i.a(r),s=a.webContents,u=[],d=o.countAllSymbols(e,!0);o.clog("Local symbols: "+d[0]+". Library symbols:"+d[1]+"."),a.loadURL(n(27)),o.clog("Webview called"),a.once("ready-to-show",(function(){a.show()})),s.on("did-finish-load",(function(){o.clog("Webview loaded"),s.executeJavaScript("LaunchMerge(".concat(JSON.stringify(d[0]),",").concat(JSON.stringify(d[1]),")")).catch(console.error)})),s.on("nativeLog",(function(e){o.clog(e)})),s.on("Cancel",(function(){c("sync-with-library.webview")})),s.on("GetSelectedSymbolData",(function(n){o.GetSpecificSymbolData(e,t,n),s.executeJavaScript("ReDrawAfterGettingData(".concat(JSON.stringify(t[n]),",").concat(n,")")).catch(console.error)})),s.on("RecalculateDuplicates",(function(){!function(){if(o.clog("Processing duplicates."),t=o.getDuplicateSymbols(e,e.document.documentData().allSymbols(),!0,!1),o.clog("-- Found "+t.length+" duplicates"),t.length>0){o.GetSpecificSymbolData(e,t,0),u=[];for(var n=0;n<t.length;n++)u.push({symbolWithDuplicates:t[n],selectedIndex:-1,isUnchecked:!1,isProcessed:0==n})}o.clog("End of processing duplicates")}(),o.clog("Drawing duplicates to webview"),s.executeJavaScript("DrawDuplicateSymbols(".concat(JSON.stringify(u),")")).catch(console.error)})),s.on("ExecuteMerge",(function(t){var n=0,r=[0,0,0];o.clog("Executing Merge");for(var i=0;i<t.length;i++)if(o.clog("-- Merging "+u[i].symbolWithDuplicates.name),!t[i].isUnchecked&&t[i].selectedIndex>=0){u[i].selectedIndex=t[i].selectedIndex;for(var a=0;a<u[i].symbolWithDuplicates.duplicates.length;a++)0;var s=l(u[i].symbolWithDuplicates,u[i].selectedIndex);r[0]+=s[0],r[1]+=s[1],r[2]+=s[2],n++}c("sync-with-library.webview");var d="";d=r[1]>0&&r[2]?", replaced "+r[1]+" instances, and updated "+r[2]+" overrides.":r[1]>0?" and replaced "+r[1]+" instances.":r[2]>0?" and updated "+r[2]+" overrides.":".",n>0?(o.clog("Completed merge. Removed "+r[0]+" symbols"+d),e.document.showMessage("Hey ho! You just removed "+r[0]+" symbols"+d+" Amazing!")):(o.clog("Completed merge. No symbols were replaced."),e.document.showMessage("No symbols were replaced."))}))}function c(e){var t=Object(a.getWebview)(e);t&&t.close()}},function(e,t){e.exports=function(e,t,n){function r(n){e.isVisible()&&(n?(NSApplication.sharedApplication().activateIgnoringOtherApps(!0),t.makeKeyAndOrderFront(null)):(t.orderBack(null),NSApp.mainWindow().makeKeyAndOrderFront(null)))}e._panel=t,e._webview=n,e._destroyed=!1,e.destroy=function(){return t.close()},e.close=function(){if(t.delegate().utils&&t.delegate().utils.parentWindow){var n=!0;return e.emit("close",{get defaultPrevented(){return!n},preventDefault:function(){n=!1}}),void(n&&t.delegate().utils.parentWindow.endSheet(t))}e.isClosable()&&t.performClose(null)},e.focus=r.bind(this,!0),e.blur=r.bind(this,!1),e.isFocused=function(){return t.isKeyWindow()},e.isDestroyed=function(){return e._destroyed},e.show=function(){return NSApp.activateIgnoringOtherApps(!0),t.delegate().utils&&t.delegate().utils.parentWindow?t.delegate().utils.parentWindow.beginSheet_completionHandler(t,__mocha__.createBlock_function("v16@?0q8",(function(){e.emit("closed")}))):t.makeKeyAndOrderFront(null)},e.showInactive=function(){return t.orderFrontRegardless()},e.hide=function(){return t.orderOut(null)},e.isVisible=function(){return t.isVisible()},e.isModal=function(){return!1},e.maximize=function(){e.isMaximized()||t.zoom(null)},e.unmaximize=function(){e.isMaximized()&&t.zoom(null)},e.isMaximized=function(){if(0!=(t.styleMask()&NSResizableWindowMask))return t.isZoomed();var e=NSScreen.mainScreen().visibleFrame(),n=t.frame();return e.origin.x==n.origin.x&&e.origin.y==n.origin.y&&e.size.width==n.size.width&&e.size.height==n.size.height},e.minimize=function(){return t.miniaturize(null)},e.restore=function(){return t.deminiaturize(null)},e.isMinimized=function(){return t.isMiniaturized()},e.setFullScreen=function(n){n!==e.isFullscreen()&&t.toggleFullScreen(null)},e.isFullscreen=function(){return t.styleMask()&NSFullScreenWindowMask},e.setAspectRatio=function(e){e>0?t.setAspectRatio(NSMakeSize(e,1)):t.setResizeIncrements(NSMakeSize(1,1))},e.setBounds=function(n,r){if(!n)return;if(e.isFullscreen())return;const i=Object.assign(e.getBounds(),n);var a=NSMakeRect(i.x,0,i.width,i.height),o=NSScreen.screens().firstObject();a.origin.y=NSHeight(o.frame())-i.y,t.setFrame_display_animate(a,!0,r)},e.getBounds=function(){const e=t.frame();var n=NSScreen.screens().firstObject().frame();return{x:e.origin.x,y:Math.round(NSHeight(n)-e.origin.y),width:e.size.width,height:e.size.height}},e.setContentBounds=function(t,n){e.setBounds(t,n)},e.getContentBounds=function(){return e.getBounds()},e.setSize=function(t,n,r){return e.setBounds({width:t,height:n},r)},e.getSize=function(){var t=e.getBounds();return[t.width,t.height]},e.setContentSize=function(t,n,r){return e.setContentBounds({width:t,height:n},r)},e.getContentSize=function(){var t=e.getContentBounds();return[t.width,t.height]},e.setMinimumSize=function(e,n){const r=CGSizeMake(e,n);t.setContentMinSize(r)},e.getMinimumSize=function(){const e=t.contentMinSize();return[e.width,e.height]},e.setMaximumSize=function(e,n){const r=CGSizeMake(e,n);t.setContentMaxSize(r)},e.getMaximumSize=function(){const e=t.contentMaxSize();return[e.width,e.height]},e.setResizable=function(t){return e._setStyleMask(t,NSResizableWindowMask)},e.isResizable=function(){return t.styleMask()&NSResizableWindowMask},e.setMovable=function(e){return t.setMovable(e)},e.isMovable=function(){return t.isMovable()},e.setMinimizable=function(t){return e._setStyleMask(t,NSMiniaturizableWindowMask)},e.isMinimizable=function(){return t.styleMask()&NSMiniaturizableWindowMask},e.setMaximizable=function(e){t.standardWindowButton(NSWindowZoomButton)&&t.standardWindowButton(NSWindowZoomButton).setEnabled(e)},e.isMaximizable=function(){return t.standardWindowButton(NSWindowZoomButton)&&t.standardWindowButton(NSWindowZoomButton).isEnabled()},e.setFullScreenable=function(t){e._setCollectionBehavior(t,NSWindowCollectionBehaviorFullScreenPrimary),e._setCollectionBehavior(!t,NSWindowCollectionBehaviorFullScreenAuxiliary)},e.isFullScreenable=function(){return t.collectionBehavior()&NSWindowCollectionBehaviorFullScreenPrimary},e.setClosable=function(t){e._setStyleMask(t,NSClosableWindowMask)},e.isClosable=function(){return t.styleMask()&NSClosableWindowMask},e.setAlwaysOnTop=function(e,n,r){var i=NSNormalWindowLevel,a=CGWindowLevelForKey(kCGMaximumWindowLevelKey),o=CGWindowLevelForKey(kCGMinimumWindowLevelKey);e&&(i="normal"===n?NSNormalWindowLevel:"torn-off-menu"===n?NSTornOffMenuWindowLevel:"modal-panel"===n?NSModalPanelWindowLevel:"main-menu"===n?NSMainMenuWindowLevel:"status"===n?NSStatusWindowLevel:"pop-up-menu"===n?NSPopUpMenuWindowLevel:"screen-saver"===n?NSScreenSaverWindowLevel:"dock"===n?NSDockWindowLevel:NSFloatingWindowLevel);var l=i+(r||0);if(!(l>=o&&l<=a))throw new Error("relativeLevel must be between "+o+" and "+a);t.setLevel(l)},e.isAlwaysOnTop=function(){return t.level()!==NSNormalWindowLevel},e.moveTop=function(){return t.orderFrontRegardless()},e.center=function(){t.center()},e.setPosition=function(t,n,r){return e.setBounds({x:t,y:n},r)},e.getPosition=function(){var t=e.getBounds();return[t.x,t.y]},e.setTitle=function(e){t.setTitle(e)},e.getTitle=function(){return String(t.title())};var i=0;e.flashFrame=function(e){e?i=NSApp.requestUserAttention(NSInformationalRequest):(NSApp.cancelUserAttentionRequest(i),i=0)},e.getNativeWindowHandle=function(){return t},e.getNativeWebViewHandle=function(){return n},e.loadURL=function(e){if(/^(?!https?|file).*\.html?$/.test(e)&&"undefined"!=typeof __command&&__command.pluginBundle()&&(e="file://"+__command.pluginBundle().urlForResourceNamed(e).path()),/^file:\/\/.*\.html?$/.test(e))return e=(e=NSString.alloc().initWithString(e)).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()),void n.loadFileURL_allowingReadAccessToURL(NSURL.URLWithString(e),NSURL.URLWithString("file:///"));const t=NSURL.URLWithString(e),r=NSURLRequest.requestWithURL(t);n.loadRequest(r)},e.reload=function(){n.reload()},e.setHasShadow=function(e){return t.setHasShadow(e)},e.hasShadow=function(){return t.hasShadow()},e.setOpacity=function(e){return t.setAlphaValue(e)},e.getOpacity=function(){return t.alphaValue()},e.setVisibleOnAllWorkspaces=function(t){return e._setCollectionBehavior(t,NSWindowCollectionBehaviorCanJoinAllSpaces)},e.isVisibleOnAllWorkspaces=function(){return t.collectionBehavior()&NSWindowCollectionBehaviorCanJoinAllSpaces},e.setIgnoreMouseEvents=function(e){return t.setIgnoresMouseEvents(e)},e.setContentProtection=function(e){t.setSharingType(e?NSWindowSharingNone:NSWindowSharingReadOnly)},e.setAutoHideCursor=function(e){t.setDisableAutoHideCursor(e)},e.setVibrancy=function(n){var r=e._vibrantView;if(!n){if(null==r)return;return r.removeFromSuperview(),void t.setVibrantView(null)}if(null==r){var i=t.contentView();r=NSVisualEffectView.alloc().initWithFrame(i.bounds()),e._vibrantView=r,r.setAutoresizingMask(NSViewWidthSizable|NSViewHeightSizable),r.setBlendingMode(NSVisualEffectBlendingModeBehindWindow),r.setState(NSVisualEffectStateActive),r.setFrame(i.bounds()),i.addSubview_positioned_relativeTo(r,NSWindowBelow,null)}var a=NSVisualEffectMaterialLight;"appearance-based"===n?a=NSVisualEffectMaterialAppearanceBased:"light"===n?a=NSVisualEffectMaterialLight:"dark"===n?a=NSVisualEffectMaterialDark:"titlebar"===n?a=NSVisualEffectMaterialTitlebar:"selection"===n?a=NSVisualEffectMaterialSelection:"menu"===n?a=NSVisualEffectMaterialMenu:"popover"===n?a=NSVisualEffectMaterialPopover:"sidebar"===n?a=NSVisualEffectMaterialSidebar:"medium-light"===n?a=NSVisualEffectMaterialMediumLight:"ultra-dark"===n&&(a=NSVisualEffectMaterialUltraDark),r.setMaterial(a)},e._setBackgroundColor=function(e){var r=function(e){if(!e||"#"!==e[0]){if(e&&"function"==typeof e.isKindOfClass&&e.isKindOfClass(NSColor))return e;throw new Error("Incorrect color formating. It should be an hex color: #RRGGBBAA")}var t,n=e.substr(1);if(3===n.length?n+="F":6===n.length&&(n+="FF"),4===n.length)for(var r=0;r<4;r+=1)t+=n[r],t+=n[r];else{if(8!==n.length)return NSColor.whiteColor();t=n}var i=parseInt(t.slice(0,2),16),a=parseInt(t.slice(2,4),16),o=parseInt(t.slice(4,6),16),l=parseInt(t.slice(6,8),16);return NSColor.colorWithSRGBRed_green_blue_alpha(i,a,o,l)}(e);n.setValue_forKey(!1,"drawsBackground"),t.backgroundColor=r},e._invalidate=function(){t.flushWindow(),t.contentView().setNeedsDisplay(!0)},e._setStyleMask=function(n,r){var i=e.isMaximizable();n?t.setStyleMask(t.styleMask()|r):t.setStyleMask(t.styleMask()&~r),e.setMaximizable(i)},e._setCollectionBehavior=function(n,r){var i=e.isMaximizable();n?t.setCollectionBehavior(t.collectionBehavior()|r):t.setCollectionBehavior(t.collectionBehavior()&~r),e.setMaximizable(i)},e._showWindowButton=function(e){var n=t.standardWindowButton(e);n.superview().addSubview_positioned_relative(n,NSWindowAbove,null)}}},function(e,t,n){var r=n(6),i=n(7);e.exports=function(e,t,n){var a=new r;a.loadURL=e.loadURL,a.loadFile=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.downloadURL=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.getURL=function(){return String(n.url())},a.getTitle=function(){return String(n.title())},a.isDestroyed=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.focus=e.focus,a.isFocused=e.isFocused,a.isLoading=function(){return!!n.loading()},a.isLoadingMainFrame=function(){return!!n.loading()},a.isWaitingForResponse=function(){return!n.loading()},a.stop=function(){n.stopLoading()},a.reload=function(){n.reload()},a.reloadIgnoringCache=function(){n.reloadFromOrigin()},a.canGoBack=function(){return!!n.canGoBack()},a.canGoForward=function(){return!!n.canGoForward()},a.canGoToOffset=function(e){return!!n.backForwardList().itemAtIndex(e)},a.clearHistory=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.goBack=function(){n.goBack()},a.goForward=function(){n.goForward()},a.goToIndex=function(e){var t=n.backForwardList(),r=t.backList(),i=r.count();if(i>e)n.loadRequest(NSURLRequest.requestWithURL(r[e]));else{var a=t.forwardList();if(!(a.count()>e-i))throw new Error("Cannot go to index "+e);n.loadRequest(NSURLRequest.requestWithURL(a[e-i]))}},a.goToOffset=function(e){if(!a.canGoToOffset(e))throw new Error("Cannot go to offset "+e);n.loadRequest(NSURLRequest.requestWithURL(n.backForwardList().itemAtIndex(e)))},a.isCrashed=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.setUserAgent=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.getUserAgent=function(){const e=n.customUserAgent();return e?String(e):void 0},a.insertCSS=function(e){var t="var style = document.createElement('style'); style.innerHTML = "+e.replace(/"/,'\\"')+"; document.head.appendChild(style);",r=WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(t,0,!0);n.configuration().userContentController().addUserScript(r)},a.insertJS=function(e){var t=WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(e,0,!0);n.configuration().userContentController().addUserScript(t)},a.executeJavaScript=i(n,e),a.setIgnoreMenuShortcuts=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.setAudioMuted=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.isAudioMuted=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.setZoomFactor=function(e){n.setMagnification_centeredAtPoint(e,CGPointMake(0,0))},a.getZoomFactor=function(e){e(Number(n.magnification()))},a.setZoomLevel=function(e){a.setZoomFactor(Math.pow(1.2,e))},a.getZoomLevel=function(e){e(Math.log(Number(n.magnification()))/Math.log(1.2))},a.setVisualZoomLevelLimits=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.setLayoutZoomLevelLimits=function(){console.warn("Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)")},a.send=function(){const e="window.postMessage({isSketchMessage: true,origin: '"+String(__command.identifier())+"',args: "+JSON.stringify([].slice.call(arguments))+'}, "*")';n.evaluateJavaScript_completionHandler(e,null)},a.getNativeWebview=function(){return n},e.webContents=a}},function(e,t){function n(e,t,n,r){n.addConstraint(NSLayoutConstraint.constraintWithItem_attribute_relatedBy_toItem_attribute_multiplier_constant(t,e,NSLayoutRelationEqual,n,e,1,r))}e.exports=function(e,t,r){r=r||[],e.setTranslatesAutoresizingMaskIntoConstraints(!1),n(NSLayoutAttributeLeft,e,t,r[0]||0),n(NSLayoutAttributeTop,e,t,r[1]||0),n(NSLayoutAttributeRight,e,t,r[2]||0),n(NSLayoutAttributeBottom,e,t,r[3]||0)}},function(e,t){e.exports=function(e,t){var n=e.convertPoint_fromView(t.locationInWindow(),null);return"var el = document.elementFromPoint("+n.x+", "+n.y+'); if (el && el.tagName === "SELECT") {  var event = document.createEvent("MouseEvents");  event.initMouseEvent("mousedown", true, true, window);  el.dispatchEvent(event);} else if (el && ["text", "textarea", "date", "datetime-local", "email", "number", "month", "password", "search", "tel", "time", "url", "week" ].indexOf(el.type) >= 0 && el.focus) {el.focus();} else if (el) {el.dispatchEvent(new Event("click", {bubbles: true}))}'}},function(e,t,n){var r=n(4);e.exports=function(e){var t='window.originalPostMessage = window.postMessage;window.postMessage = function(actionName) {  if (!actionName) {    throw new Error(\'missing action name\')  }  var id = String(Math.random()).replace(".", "");    var args = [].slice.call(arguments);    args.unshift(id);  return new Promise(function (resolve, reject) {    window["'+r.JS_BRIDGE_RESULT_SUCCESS+'" + id] = resolve;    window["'+r.JS_BRIDGE_RESULT_ERROR+'" + id] = reject;    window.webkit.messageHandlers.'+r.JS_BRIDGE+".postMessage(JSON.stringify(args));  });}",n=WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(t,0,!0);e.configuration().userContentController().addUserScript(n)}},function(e,t,n){var r=n(4);e.exports.injectScript=function(e){var t='(function () {document.addEventListener(\'mousedown\', onMouseDown);function shouldDrag(target) {  if (!target || (target.dataset || {}).appRegion === "no-drag") { return false }  if ((target.dataset || {}).appRegion === "drag") { return true }  return shouldDrag(target.parentElement)};function onMouseDown(e) {  if (e.button !== 0 || !shouldDrag(e.target)) { return }  window.postMessage("'+r.START_MOVING_WINDOW+'");};})()',n=WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(t,0,!0);e.configuration().userContentController().addUserScript(n)},e.exports.setupHandler=function(e){var t=null,n=null,i=null;function a(){if(!n||1!==NSEvent.pressedMouseButtons())return clearInterval(i),t=null,void(n=null);var r=NSEvent.mouseLocation();e.setPosition(n.x+(r.x-t.x),n.y+(t.y-r.y),!1)}e.webContents.on(r.START_MOVING_WINDOW,(function(){t=NSEvent.mouseLocation();var r=e.getPosition();n={x:r[0],y:r[1]},i=setInterval(a,1e3/60)}))}},function(e,t,n){(function(t){var r,i,a,o,l=n(18),s=n(19),c=n(4);e.exports=function(e,n,u,d){o||(o=new l({utils:null,"observeValueForKeyPath:ofObject:change:context:":function(){this.utils.executeJavaScript("document.body.classList.remove('__skpm-"+("undefined"!=typeof MSTheme&&MSTheme.sharedTheme().isDark()?"light":"dark")+"'); document.body.classList.add('__skpm-"+("undefined"!=typeof MSTheme&&MSTheme.sharedTheme().isDark()?"dark":"light")+"')")}})),r||(r=new l({utils:null,panel:null,"windowDidResize:":function(){this.utils.emit("resize")},"windowDidMiniaturize:":function(){this.utils.emit("minimize")},"windowDidDeminiaturize:":function(){this.utils.emit("restore")},"windowDidEnterFullScreen:":function(){this.utils.emit("enter-full-screen")},"windowDidExitFullScreen:":function(){this.utils.emit("leave-full-screen")},"windowDidMove:":function(){this.utils.emit("move"),this.utils.emit("moved")},"windowShouldClose:":function(){var e=1;return this.utils.emit("close",{get defaultPrevented(){return!e},preventDefault:function(){e=0}}),e},"windowWillClose:":function(){this.utils.emit("closed")},"windowDidBecomeKey:":function(){this.utils.emit("focus",this.panel.currentEvent())},"windowDidResignKey:":function(){this.utils.emit("blur")}})),i||(i=new l({state:{wasReady:0},utils:null,"webView:didCommitNavigation:":function(e){this.utils.emit("will-navigate",{},String(String(e.URL())))},"webView:didStartProvisionalNavigation:":function(){this.utils.emit("did-start-navigation"),this.utils.emit("did-start-loading")},"webView:didReceiveServerRedirectForProvisionalNavigation:":function(){this.utils.emit("did-get-redirect-request")},"webView:didFailProvisionalNavigation:withError:":function(e,t,n){this.utils.emit("did-fail-load",n)},"webView:didFinishNavigation:":function(){0==this.state.wasReady&&(this.state.wasReady=1,this.utils.emitBrowserEvent("ready-to-show")),this.utils.emit("did-navigate"),this.utils.emit("did-frame-navigate"),this.utils.emit("did-stop-loading"),this.utils.emit("did-finish-load"),this.utils.emit("did-frame-finish-load")},"webViewWebContentProcessDidTerminate:":function(){this.utils.emit("dom-ready")}})),a||(a=new l({utils:null,"userContentController:didReceiveScriptMessage:":function(e,t){var n=this.utils.parseWebArguments(String(t.body()));n&&n[0]&&"string"==typeof n[0]&&(n[0]=String(n[0]),this.utils.emit.apply(this,n))}}));var h=o.new({utils:{executeJavaScript(e){u.evaluateJavaScript_completionHandler(e,null)}}}),f=WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly("document.addEventListener('DOMContentLoaded', function() { document.body.classList.add('__skpm-"+("undefined"!=typeof MSTheme&&MSTheme.sharedTheme().isDark()?"dark":"light")+"') }, false)",0,!0);u.configuration().userContentController().addUserScript(f),NSApplication.sharedApplication().addObserver_forKeyPath_options_context(h,"effectiveAppearance",NSKeyValueChangeNewKey,null),NSThread.mainThread().threadDictionary()[e.id+".themeObserver"]=h;var m=i.new({utils:{setTitle:e.setTitle.bind(e),emitBrowserEvent(){try{e.emit.apply(e,arguments)}catch(t){if("undefined"==typeof process||!process.listenerCount||!process.listenerCount("uncaughtException"))throw console.error(t),t;process.emit("uncaughtException",t,"uncaughtException")}},emit(){try{e.webContents.emit.apply(e.webContents,arguments)}catch(t){if("undefined"==typeof process||!process.listenerCount||!process.listenerCount("uncaughtException"))throw console.error(t),t;process.emit("uncaughtException",t,"uncaughtException")}}},state:{wasReady:0}});u.setNavigationDelegate(m);var y=a.new({utils:{emit(n,r){if(r){for(var i=[],a=2;a<arguments.length;a+=1)i.push(arguments[a]);var o=e.webContents.listeners(r);t.all(o.map((function(e){return t.resolve().then((function(){return e.apply(e,i)}))}))).then((function(e){u.evaluateJavaScript_completionHandler(c.JS_BRIDGE_RESULT_SUCCESS+n+"("+JSON.stringify(e)+")",null)})).catch((function(e){u.evaluateJavaScript_completionHandler(c.JS_BRIDGE_RESULT_ERROR+n+"("+JSON.stringify(e)+")",null)}))}else u.evaluateJavaScript_completionHandler(c.JS_BRIDGE_RESULT_SUCCESS+n+"()",null)},parseWebArguments:s}});u.configuration().userContentController().addScriptMessageHandler_name(y,c.JS_BRIDGE);var S,p={emit(){try{e.emit.apply(e,arguments)}catch(t){if("undefined"==typeof process||!process.listenerCount||!process.listenerCount("uncaughtException"))throw console.error(t),t;process.emit("uncaughtException",t,"uncaughtException")}}};d.modal&&((S="Document"===d.parent.type?d.parent.sketchObject:d.parent)&&"MSDocumentData"===String(S.class())&&(S=S.delegate()),p.parentWindow=S.windowForSheet());var g=r.new({utils:p,panel:n});n.setDelegate(g)}}).call(this,n(8))},function(module,exports){module.exports=function MochaDelegate(definition,superclass){var uniqueClassName="MochaJSDelegate_DynamicClass_"+NSUUID.UUID().UUIDString(),delegateClassDesc=MOClassDescription.allocateDescriptionForClassWithName_superclass_(uniqueClassName,superclass||NSObject),handlers={},ivars={};function setHandlerForSelector(selectorString,func){var handlerHasBeenSet=selectorString in handlers,selector=NSSelectorFromString(selectorString);if(handlers[selectorString]=func,!handlerHasBeenSet){for(var args=[],regex=/:/g;regex.exec(selectorString);)args.push("arg"+args.length);var dynamicFunction=eval("(function ("+args.join(", ")+") { return handlers[selectorString].apply(this, arguments); })");delegateClassDesc.addInstanceMethodWithSelector_function(selector,dynamicFunction)}}function setIvar(e,t){var n=e in handlers;if(ivars[e]=t,!n){delegateClassDesc.addInstanceVariableWithName_typeEncoding(e,"@");var r=MOPropertyDescription.new();r.name=e,r.typeEncoding="@",r.weak=!0,r.ivarName=e,delegateClassDesc.addProperty(r)}}this.getClass=function(){return NSClassFromString(uniqueClassName)},this.getClassInstance=function(e){var t=NSClassFromString(uniqueClassName).new();return Object.keys(ivars).forEach((function(e){t[e]=ivars[e]})),Object.keys(e||{}).forEach((function(n){t[n]=e[n]})),t},this.new=this.getClassInstance,"object"==typeof definition&&Object.keys(definition).forEach((function(e){"function"==typeof definition[e]?setHandlerForSelector(e,definition[e]):setIvar(e,definition[e])})),delegateClassDesc.registerClass()}},function(e,t){e.exports=function(e){var t=null;try{t=JSON.parse(e)}catch(n){}return t&&t.constructor&&t.constructor===Array&&0!=t.length?t:null}},function(e,t,n){"use strict";var r=n(21),i=n(22),a=n(23);function o(){}o.prototype.getDeltaE76=function(e,t){return new r(e,t).getDeltaE()},o.prototype.getDeltaE94=function(e,t){return new i(e,t).getDeltaE()},o.prototype.getDeltaE00=function(e,t){return new a(e,t).getDeltaE()},e.exports=new o},function(e,t,n){"use strict";function r(e,t){this.x1=e,this.x2=t}r.prototype.getDeltaE=function(){var e=this.x1,t=this.x2;return Math.sqrt(Math.pow(t.L-e.L,2)+Math.pow(t.A-e.A,2)+Math.pow(t.B-e.B,2))},e.exports=r},function(e,t,n){"use strict";function r(e,t,n){this.x1=e,this.x2=t,this.weights=n||{},this.weights.lightness=this.weights.lightness||1,this.weights.chroma=this.weights.chroma||1,this.weights.hue=this.weights.hue||1,1===this.weights.lightness?(this.weights.K1=.045,this.weights.K2=.015):(this.weights.K1=.048,this.weights.K2=.014)}r.prototype.getDeltaE=function(){var e=this.x1,t=this.x2,n=Math.sqrt,r=Math.pow;return n(r(this.calculateL(e,t),2)+r(this.calculateA(e,t),2)+r(this.calculateB(e,t),2))},r.prototype.calculateL=function(e,t){return(e.L-t.L)/this.weights.lightness},r.prototype.calculateA=function(e,t){var n=Math.sqrt,r=Math.pow,i=n(r(e.A,2)+r(e.B,2)),a=i-n(r(t.A,2)+r(t.B,2)),o=1+this.weights.K1*i;return a/(this.weights.chroma*o)},r.prototype.calculateB=function(e,t){var n=Math.sqrt,r=Math.pow,i=(s=n(r(e.A,2)+r(e.B,2)))-n(r(t.A,2)+r(t.B,2)),a=e.A-t.A,o=e.B-t.B,l=n(r(a,2)+r(o,2)-r(i,2)),s=n(r(e.A,2)+r(e.B,2));return l/(1+this.weights.K2*s)},e.exports=r},function(e,t,n){"use strict";function r(e,t,n){var r=Math.sqrt,i=Math.pow;this.x1=e,this.x2=t,this.weights=n||{},this.ksubL=this.weights.lightness||1,this.ksubC=this.weights.chroma||1,this.ksubH=this.weights.hue||1,this.deltaLPrime=t.L-e.L,this.LBar=(e.L+t.L)/2,this.C1=r(i(e.A,2)+i(e.B,2)),this.C2=r(i(t.A,2)+i(t.B,2)),this.CBar=(this.C1+this.C2)/2,this.aPrime1=e.A+e.A/2*(1-r(i(this.CBar,7)/(i(this.CBar,7)+i(25,7)))),this.aPrime2=t.A+t.A/2*(1-r(i(this.CBar,7)/(i(this.CBar,7)+i(25,7)))),this.CPrime1=r(i(this.aPrime1,2)+i(e.B,2)),this.CPrime2=r(i(this.aPrime2,2)+i(t.B,2)),this.CBarPrime=(this.CPrime1+this.CPrime2)/2,this.deltaCPrime=this.CPrime2-this.CPrime1,this.SsubL=1+.015*i(this.LBar-50,2)/r(20+i(this.LBar-50,2)),this.SsubC=1+.045*this.CBarPrime,this.hPrime1=0,this.hPrime2=0,this.deltahPrime=0,this.deltaHPrime=0,this.HBarPrime=0,this.T=0,this.SsubH=0,this.RsubT=0}r.prototype.getDeltaE=function(){var e=Math.sqrt,t=Math.sin,n=Math.pow;this.hPrime1=this.gethPrime1(),this.hPrime2=this.gethPrime2(),this.deltahPrime=this.getDeltahPrime(),this.deltaHPrime=2*e(this.CPrime1*this.CPrime2)*t(this.degreesToRadians(this.deltahPrime)/2),this.HBarPrime=this.getHBarPrime(),this.T=this.getT(),this.SsubH=1+.015*this.CBarPrime*this.T,this.RsubT=this.getRsubT();var r=this.deltaLPrime/(this.ksubL*this.SsubL),i=this.deltaCPrime/(this.ksubC*this.SsubC),a=this.deltaHPrime/(this.ksubH*this.SsubH);return e(n(r,2)+n(i,2)+n(a,2)+this.RsubT*i*a)},r.prototype.getRsubT=function(){var e=Math.sin,t=Math.sqrt,n=Math.pow,r=Math.exp;return-2*t(n(this.CBarPrime,7)/(n(this.CBarPrime,7)+n(25,7)))*e(this.degreesToRadians(60*r(-n((this.HBarPrime-275)/25,2))))},r.prototype.getT=function(){var e=Math.cos;return 1-.17*e(this.degreesToRadians(this.HBarPrime-30))+.24*e(this.degreesToRadians(2*this.HBarPrime))+.32*e(this.degreesToRadians(3*this.HBarPrime+6))-.2*e(this.degreesToRadians(4*this.HBarPrime-63))},r.prototype.getHBarPrime=function(){return(0,Math.abs)(this.hPrime1-this.hPrime2)>180?(this.hPrime1+this.hPrime2+360)/2:(this.hPrime1+this.hPrime2)/2},r.prototype.getDeltahPrime=function(){var e=Math.abs;return 0===this.C1||0===this.C2?0:e(this.hPrime1-this.hPrime2)<=180?this.hPrime2-this.hPrime1:this.hPrime2<=this.hPrime1?this.hPrime2-this.hPrime1+360:this.hPrime2-this.hPrime1-360},r.prototype.gethPrime1=function(){return this._gethPrimeFn(this.x1.B,this.aPrime1)},r.prototype.gethPrime2=function(){return this._gethPrimeFn(this.x2.B,this.aPrime2)},r.prototype._gethPrimeFn=function(e,t){var n;return 0===e&&0===t?0:(n=this.radiansToDegrees(Math.atan2(e,t)))>=0?n:n+360},r.prototype.radiansToDegrees=function(e){return e*(180/Math.PI)},r.prototype.degreesToRadians=function(e){return e*(Math.PI/180)},e.exports=r},function(e,t,n){var r=n(25).Buffer,i=n(26),a=i.parseStat,o=i.fsError,l=i.fsErrorForPath,s=i.encodingFromOptions,c=i.NOT_IMPLEMENTED;e.exports.constants={F_OK:0,R_OK:4,W_OK:2,X_OK:1},e.exports.access=c("access"),e.exports.accessSync=function(t,n){n|=0;var r=NSFileManager.defaultManager();switch(n){case 0:canAccess=e.exports.existsSync(t);break;case 1:canAccess=Boolean(Number(r.isExecutableFileAtPath(t)));break;case 2:canAccess=Boolean(Number(r.isWritableFileAtPath(t)));break;case 3:canAccess=Boolean(Number(r.isExecutableFileAtPath(t)))&&Boolean(Number(r.isWritableFileAtPath(t)));break;case 4:canAccess=Boolean(Number(r.isReadableFileAtPath(t)));break;case 5:canAccess=Boolean(Number(r.isReadableFileAtPath(t)))&&Boolean(Number(r.isExecutableFileAtPath(t)));break;case 6:canAccess=Boolean(Number(r.isReadableFileAtPath(t)))&&Boolean(Number(r.isWritableFileAtPath(t)));break;case 7:canAccess=Boolean(Number(r.isReadableFileAtPath(t)))&&Boolean(Number(r.isWritableFileAtPath(t)))&&Boolean(Number(r.isExecutableFileAtPath(t)))}if(!canAccess)throw new Error("Can't access "+String(t))},e.exports.appendFile=c("appendFile"),e.exports.appendFileSync=function(t,n,i){if(!e.exports.existsSync(t))return e.exports.writeFileSync(t,n,i);var a=NSFileHandle.fileHandleForWritingAtPath(t);a.seekToEndOfFile();var o=s(i,"utf8"),l=r.from(n,"NSData"===o||"buffer"===o?void 0:o).toNSData();a.writeData(l)},e.exports.chmod=c("chmod"),e.exports.chmodSync=function(e,t){var n=MOPointer.alloc().init();if(NSFileManager.defaultManager().setAttributes_ofItemAtPath_error({NSFilePosixPermissions:t},e,n),null!==n.value())throw l(e,void 0,n.value())},e.exports.chown=c("chown"),e.exports.chownSync=c("chownSync"),e.exports.close=c("close"),e.exports.closeSync=c("closeSync"),e.exports.copyFile=c("copyFile"),e.exports.copyFileSync=function(e,t,n){var r=MOPointer.alloc().init();if(NSFileManager.defaultManager().copyItemAtPath_toPath_error(e,t,r),null!==r.value())throw l(e,!1,r.value())},e.exports.createReadStream=c("createReadStream"),e.exports.createWriteStream=c("createWriteStream"),e.exports.exists=c("exists"),e.exports.existsSync=function(e){var t=NSFileManager.defaultManager();return Boolean(Number(t.fileExistsAtPath(e)))},e.exports.fchmod=c("fchmod"),e.exports.fchmodSync=c("fchmodSync"),e.exports.fchown=c("fchown"),e.exports.fchownSync=c("fchownSync"),e.exports.fdatasync=c("fdatasync"),e.exports.fdatasyncSync=c("fdatasyncSync"),e.exports.fstat=c("fstat"),e.exports.fstatSync=c("fstatSync"),e.exports.fsync=c("fsync"),e.exports.fsyncSync=c("fsyncSync"),e.exports.ftruncate=c("ftruncate"),e.exports.ftruncateSync=c("ftruncateSync"),e.exports.futimes=c("futimes"),e.exports.futimesSync=c("futimesSync"),e.exports.lchmod=c("lchmod"),e.exports.lchmodSync=c("lchmodSync"),e.exports.lchown=c("lchown"),e.exports.lchownSync=c("lchownSync"),e.exports.link=c("link"),e.exports.linkSync=function(e,t){var n=MOPointer.alloc().init();if(NSFileManager.defaultManager().linkItemAtPath_toPath_error(e,t,n),null!==n.value())throw l(e,void 0,n.value())},e.exports.lstat=c("lstat"),e.exports.lstatSync=function(e){var t=MOPointer.alloc().init(),n=NSFileManager.defaultManager().attributesOfItemAtPath_error(e,t);if(null!==t.value())throw l(e,void 0,t.value());return a(n)},e.exports.mkdir=c("mkdir"),e.exports.mkdirSync=function(e,t){var n=511,r=!1;t&&t.mode&&(n=t.mode),t&&t.recursive&&(r=t.recursive),"number"==typeof t&&(n=t);var i=MOPointer.alloc().init();if(NSFileManager.defaultManager().createDirectoryAtPath_withIntermediateDirectories_attributes_error(e,r,{NSFilePosixPermissions:n},i),null!==i.value())throw new Error(i.value())},e.exports.mkdtemp=c("mkdtemp"),e.exports.mkdtempSync=function(t){var n=t+function(){for(var e="",t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",n=0;n<6;n++)e+=t.charAt(Math.floor(Math.random()*t.length));return e}();return e.exports.mkdirSync(n),n},e.exports.open=c("open"),e.exports.openSync=c("openSync"),e.exports.read=c("read"),e.exports.readdir=c("readdir"),e.exports.readdirSync=function(e,t){for(var n=s(t,"utf8"),i=NSFileManager.defaultManager().subpathsAtPath(e),a=[],o=0;o<i.length;o++){var l=i[o];a.push("buffer"===n?r.from(l):String(l))}return a},e.exports.readFile=c("readFile"),e.exports.readFileSync=function(e,t){var n=s(t,"buffer"),i=NSFileManager.defaultManager().contentsAtPath(e);if(!i)throw l(e,!1);var a=r.from(i);return"buffer"===n?a:"NSData"===n?a.toNSData():a.toString(n)},e.exports.readlink=c("readlink"),e.exports.readlinkSync=function(e){var t=MOPointer.alloc().init(),n=NSFileManager.defaultManager().destinationOfSymbolicLinkAtPath_error(e,t);if(null!==t.value())throw l(e,void 0,t.value());return String(n)},e.exports.readSync=c("readSync"),e.exports.realpath=c("realpath"),e.exports.realpath.native=c("realpath.native"),e.exports.realpathSync=function(e){return String(NSString.stringWithString(e).stringByResolvingSymlinksInPath())},e.exports.realpathSync.native=c("realpathSync.native"),e.exports.rename=c("rename"),e.exports.renameSync=function(e,t){var n=MOPointer.alloc().init(),r=NSFileManager.defaultManager();r.moveItemAtPath_toPath_error(e,t,n);var i=n.value();if(null!==i){if("NSCocoaErrorDomain"!==String(i.domain())||516!==Number(i.code()))throw l(e,void 0,i);var a=MOPointer.alloc().init();if(r.replaceItemAtURL_withItemAtURL_backupItemName_options_resultingItemURL_error(NSURL.fileURLWithPath(t),NSURL.fileURLWithPath(e),null,NSFileManagerItemReplacementUsingNewMetadataOnly,null,a),null!==a.value())throw l(e,void 0,a.value())}},e.exports.rmdir=c("rmdir"),e.exports.rmdirSync=function(t){var n=MOPointer.alloc().init(),r=NSFileManager.defaultManager();if(!e.exports.lstatSync(t).isDirectory())throw o("ENOTDIR",{path:t,syscall:"rmdir"});if(r.removeItemAtPath_error(t,n),null!==n.value())throw l(t,!0,n.value(),"rmdir")},e.exports.stat=c("stat"),e.exports.statSync=function(t){return e.exports.lstatSync(e.exports.realpathSync(t))},e.exports.symlink=c("symlink"),e.exports.symlinkSync=function(e,t){var n=MOPointer.alloc().init();NSFileManager.defaultManager().createSymbolicLinkAtPath_withDestinationPath_error(t,e,n);if(null!==n.value())throw new Error(n.value())},e.exports.truncate=c("truncate"),e.exports.truncateSync=function(e,t){var n=NSFileHandle.fileHandleForUpdatingAtPath(sFilePath);n.truncateFileAtOffset(t||0),n.closeFile()},e.exports.unlink=c("unlink"),e.exports.unlinkSync=function(t){var n=MOPointer.alloc().init(),r=NSFileManager.defaultManager();if(e.exports.lstatSync(t).isDirectory())throw o("EPERM",{path:t,syscall:"unlink"});r.removeItemAtPath_error(t,n);if(null!==n.value())throw l(t,!1,n.value())},e.exports.unwatchFile=c("unwatchFile"),e.exports.utimes=c("utimes"),e.exports.utimesSync=function(e,t,n){var r=MOPointer.alloc().init();NSFileManager.defaultManager().setAttributes_ofItemAtPath_error({NSFileModificationDate:t},e,r);if(null!==r.value())throw l(e,void 0,r.value())},e.exports.watch=c("watch"),e.exports.watchFile=c("watchFile"),e.exports.write=c("write"),e.exports.writeFile=c("writeFile"),e.exports.writeFileSync=function(e,t,n){var i=s(n,"utf8");r.from(t,"NSData"===i||"buffer"===i?void 0:i).toNSData().writeToFile_atomically(e,!0)},e.exports.writeSync=c("writeSync")},function(e,t){e.exports=require("buffer")},function(e,t){e.exports.parseStat=function(e){return{dev:String(e.NSFileDeviceIdentifier),mode:e.NSFileType|e.NSFilePosixPermissions,nlink:Number(e.NSFileReferenceCount),uid:String(e.NSFileOwnerAccountID),gid:String(e.NSFileGroupOwnerAccountID),size:Number(e.NSFileSize),atimeMs:1e3*Number(e.NSFileModificationDate.timeIntervalSince1970()),mtimeMs:1e3*Number(e.NSFileModificationDate.timeIntervalSince1970()),ctimeMs:1e3*Number(e.NSFileModificationDate.timeIntervalSince1970()),birthtimeMs:1e3*Number(e.NSFileCreationDate.timeIntervalSince1970()),atime:new Date(1e3*Number(e.NSFileModificationDate.timeIntervalSince1970())+.5),mtime:new Date(1e3*Number(e.NSFileModificationDate.timeIntervalSince1970())+.5),ctime:new Date(1e3*Number(e.NSFileModificationDate.timeIntervalSince1970())+.5),birthtime:new Date(1e3*Number(e.NSFileCreationDate.timeIntervalSince1970())+.5),isBlockDevice:function(){return e.NSFileType===NSFileTypeBlockSpecial},isCharacterDevice:function(){return e.NSFileType===NSFileTypeCharacterSpecial},isDirectory:function(){return e.NSFileType===NSFileTypeDirectory},isFIFO:function(){return!1},isFile:function(){return e.NSFileType===NSFileTypeRegular},isSocket:function(){return e.NSFileType===NSFileTypeSocket},isSymbolicLink:function(){return e.NSFileType===NSFileTypeSymbolicLink}}};var n={EPERM:{message:"operation not permitted",errno:-1},ENOENT:{message:"no such file or directory",errno:-2},EACCES:{message:"permission denied",errno:-13},ENOTDIR:{message:"not a directory",errno:-20},EISDIR:{message:"illegal operation on a directory",errno:-21}};function r(e,t){var r=new Error(e+": "+n[e].message+", "+(t.syscall||"")+(t.path?" '"+t.path+"'":""));return Object.keys(t).forEach((function(e){r[e]=t[e]})),r.code=e,r.errno=n[e].errno,r}e.exports.fsError=r,e.exports.fsErrorForPath=function(t,n,i,a){var o=NSFileManager.defaultManager();if(!o.fileExistsAtPath(t))return r("ENOENT",{path:t,syscall:a||"open"});if(!o.isReadableFileAtPath(t))return r("EACCES",{path:t,syscall:a||"open"});if(void 0!==n){var l=e.exports.lstatSync(t).isDirectory();if(l&&!n)return r("EISDIR",{path:t,syscall:a||"read"});if(!l&&n)return r("ENOTDIR",{path:t,syscall:a||"read"})}return new Error(i||"Unknown error while manipulating "+t)},e.exports.encodingFromOptions=function(e,t){return e&&e.encoding?String(e.encoding):e?String(e):t},e.exports.NOT_IMPLEMENTED=function(e){return function(){throw new Error("fs."+e+" is not implemented yet. If you feel like implementing it, any contribution will be gladly accepted on https://github.com/skpm/fs")}}},function(e,t){e.exports="file://"+String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0]+".sketchplugin/Contents/Resources/_webpack_resources/ea6c4b2cad9e560d036455aa69fe1cf5.html"},function(e,t,n){"use strict";n.r(t),n.d(t,"MergeDuplicateLayerStyles",(function(){return c}));var r=n(0),i=n.n(r),a=(n(1),n(2)),o="merge-duplicatelayerstyles.webview",l=[];function s(e,t){var n=0,r=0;a.clog("Merging styles. Keep '"+l[t].name+"'");var i,o,s=a.getAllLayers(e),c=NSMutableArray.array();return l.forEach((function(e){if(e.layerStyle!=l[t].layerStyle){for(var n,r=function(e){return null!=e.originalStyle?NSPredicate.predicateWithFormat("(sharedStyle.objectID == %@) OR (sharedStyle.objectID == %@)",e.originalStyle.localShareID(),e.originalStyle.remoteShareID()):NSPredicate.predicateWithFormat("sharedStyle.objectID == %@",e.layerStyle.objectID())}(e),i=s.filteredArrayUsingPredicate(r),a=i.objectEnumerator();n=a.nextObject();)c.addObject(n);if(null!=e.correlativeStyles)for(var o=0;o<e.correlativeStyles.length;o++)for(var u,d=NSPredicate.predicateWithFormat("sharedStyle.objectID == %@",e.correlativeStyles[o].localObject().objectID()),h=(s.filteredArrayUsingPredicate(d),i.objectEnumerator());u=h.nextObject();)c.addObject(u)}})),l[t].foreign&&null!=l[t].library&&(i=MSShareableObjectReference.referenceForShareableObject_inLibrary(l[t].layerStyle,l[t].library),o=AppController.sharedInstance().librariesController().importShareableObjectReference_intoDocument(i,e.document.documentData())),c.forEach((function(e){l[t].foreign&&null!=l[t].library?e.setSharedStyle(o.localSharedStyle()):e.setSharedStyle(l[t].layerStyle),n++})),r+=function(e,t,n,r){var i=0,o=NSMutableArray.array();return n.document.documentData().allSymbols().forEach((function(e){for(var t,r=a.getSymbolInstances(n,e).objectEnumerator();t=r.nextObject();)o.addObject(t)})),o.forEach((function(o){o.overrides();o.availableOverrides().forEach((function(l){var s=[];!function e(t,n,r,i,o,l,s){0;null==t.children()?n.forEach((function(e){if(e.layerStyle!=n[r].layerStyle&&a.isString(t.currentValue())&&((t.currentValue().toString().indexOf(e.layerStyle.objectID())>-1||null!=e.originalStyle&&t.currentValue().toString().indexOf(e.originalStyle.localShareID())>-1||null!=e.originalStyle&&t.currentValue().toString().indexOf(e.originalStyle.remoteShareID())>-1)&&i.push(t),null!=e.correlativeStyles)){0;for(var o=0;o<e.correlativeStyles.length;o++)(t.currentValue().toString().indexOf(e.correlativeStyles[o].localObject().objectID())>-1||null!=e.originalStyle&&t.currentValue().toString().indexOf(e.correlativeStyles[o].localShareID())>-1||null!=e.originalStyle&&t.currentValue().toString().indexOf(e.correlativeStyles[o].remoteShareID())>-1)&&i.push(t)}})):t.children().forEach((function(t){e(t,n,r,i,o,l+1,s)}))}(l,e,t,s,o,0,n);for(var c=0;c<s.length;c++)e[t].foreign&&null!=e[t].library?o.setValue_forOverridePoint_(r.localSharedStyle().objectID(),s[c].overridePoint()):o.setValue_forOverridePoint_(e[t].layerStyle.objectID(),s[c].overridePoint()),i++}))})),i}(l,t,e,o),l.forEach((function(n){if(n.layerStyle!=l[t].layerStyle)if(n.foreign&&null==n.library){if(e.document.documentData().foreignLayerStyles().indexOf(n.originalStyle)>-1&&e.document.documentData().foreignLayerStyles().removeObject(n.originalStyle),null!=n.correlativeStyles)for(var r=0;r<n.correlativeStyles.length;r++)e.document.documentData().foreignLayerStyles().indexOf(n.correlativeStyles[r])>-1&&e.document.documentData().foreignLayerStyles().removeObject(n.correlativeStyles[r])}else e.document.documentData().layerStyles().removeSharedStyle(n.layerStyle)})),[n,r]}function c(e){a.clog("----- Sync layer styles -----");var t,r={identifier:o,width:1200,height:700,show:!1,remembersWindowFrame:!0,titleBarStyle:"hidden"},c=new i.a(r),u=c.webContents,d=[];!function(){if(a.clog("Finding duplicate layer styles."),(t=a.getDuplicateLayerStyles(e)).length>0){a.GetSpecificLayerStyleData(e,t,0),d=[];for(var n=0;n<t.length;n++)d.push({layerStyleWithDuplicates:t[n],selectedIndex:-1,isUnchecked:!1,isProcessed:0==n})}}(),t.length>0?c.loadURL(n(29)):(e.document.showMessage("Looks like there are no layer styles to sync."),onShutdown(o)),c.once("ready-to-show",(function(){c.show()})),u.on("did-finish-load",(function(){a.clog("Webview loaded"),u.executeJavaScript("DrawStylesList(".concat(JSON.stringify(d),")")).catch(console.error)})),u.on("nativeLog",(function(e){a.clog(e)})),u.on("Cancel",(function(){onShutdown(o)})),u.on("GetSelectedStyleData",(function(n){a.GetSpecificLayerStyleData(e,t,n),u.executeJavaScript("ReDrawAfterGettingData(".concat(JSON.stringify(d[n].layerStyleWithDuplicates),",").concat(n,")")).catch(console.error)})),u.on("ExecuteMerge",(function(t){a.clog("Executing Merge");for(var n=0,r=[0,0],i=0;i<t.length;i++)if(a.clog("-- Merging "+d[i].layerStyleWithDuplicates.name),!t[i].isUnchecked&&t[i].selectedIndex>=0){d[i].selectedIndex=t[i].selectedIndex,l=[];for(var c=0;c<d[i].layerStyleWithDuplicates.duplicates.length;c++)l.push(d[i].layerStyleWithDuplicates.duplicates[c]);var u=s(e,t[i].selectedIndex);r[0]+=u[0],r[1]+=u[1],n++}onShutdown(o),n<=0?(a.clog("No styles were merged"),e.document.showMessage("No styles were replaced.")):(a.clog("Wpdated "+r[0]+" text layers and "+r[1]+" overrides."),e.document.showMessage("Yo ho! We updated "+r[0]+" layers and "+r[1]+" overrides."))}))}},function(e,t){e.exports="file://"+String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0]+".sketchplugin/Contents/Resources/_webpack_resources/34c73fc71c785c25ae2ced72bc1dd3fb.html"},function(e,t,n){"use strict";n.r(t),n.d(t,"MergeDuplicateTextStyles",(function(){return s}));var r=n(0),i=n.n(r),a=(n(1),n(2)),o=[];function l(e,t){var n=0,r=0;a.clog("Merging styles. Keep '"+o[t].name+"'");var i,l,s=a.getAllTextLayers(e),c=NSMutableArray.array();return o.forEach((function(e){if(e.textStyle!=o[t].textStyle){for(var n,r=function(e){return null!=e.originalStyle?NSPredicate.predicateWithFormat("(sharedStyle.objectID == %@) OR (sharedStyle.objectID == %@)",e.originalStyle.localShareID(),e.originalStyle.remoteShareID()):NSPredicate.predicateWithFormat("sharedStyle.objectID == %@",e.textStyle.objectID())}(e),i=s.filteredArrayUsingPredicate(r),a=i.objectEnumerator();n=a.nextObject();)c.addObject(n);if(null!=e.correlativeStyles)for(var l=0;l<e.correlativeStyles.length;l++)for(var u,d=NSPredicate.predicateWithFormat("sharedStyle.objectID == %@",e.correlativeStyles[l].localObject().objectID()),h=(s.filteredArrayUsingPredicate(d),i.objectEnumerator());u=h.nextObject();)c.addObject(u)}})),o[t].foreign&&null!=o[t].library&&(i=MSShareableObjectReference.referenceForShareableObject_inLibrary(o[t].textStyle,o[t].library),l=AppController.sharedInstance().librariesController().importShareableObjectReference_intoDocument(i,e.document.documentData())),c.forEach((function(e){o[t].foreign&&null!=o[t].library?e.setSharedStyle(l.localSharedStyle()):e.setSharedStyle(o[t].textStyle),n++})),r+=function(e,t,n,r){var i=0,o=NSMutableArray.array();return n.document.documentData().allSymbols().forEach((function(e){for(var t,r=a.getSymbolInstances(n,e).objectEnumerator();t=r.nextObject();)o.addObject(t)})),o.forEach((function(o){o.overrides();o.availableOverrides().forEach((function(l){var s=[];!function e(t,n,r,i,o,l,s){null==t.children()?n.forEach((function(e){if(e.textStyle!=n[r].textStyle&&a.isString(t.currentValue())&&((t.currentValue().toString().indexOf(e.textStyle.objectID())>-1||null!=e.originalStyle&&t.currentValue().toString().indexOf(e.originalStyle.localShareID())>-1||null!=e.originalStyle&&t.currentValue().toString().indexOf(e.originalStyle.remoteShareID())>-1)&&i.push(t),null!=e.correlativeStyles))for(var o=0;o<e.correlativeStyles.length;o++)(t.currentValue().toString().indexOf(e.correlativeStyles[o].localObject().objectID())>-1||null!=e.originalStyle&&t.currentValue().toString().indexOf(e.correlativeStyles[o].localShareID())>-1||null!=e.originalStyle&&t.currentValue().toString().indexOf(e.correlativeStyles[o].remoteShareID())>-1)&&i.push(t)})):t.children().forEach((function(t){e(t,n,r,i,o,l+1,s)}))}(l,e,t,s,o,0,n);for(var c=0;c<s.length;c++)e[t].foreign&&null!=e[t].library?o.setValue_forOverridePoint_(r.localSharedStyle().objectID(),s[c].overridePoint()):o.setValue_forOverridePoint_(e[t].textStyle.objectID(),s[c].overridePoint()),i++}))})),i}(o,t,e,l),o.forEach((function(n){if(n.textStyle!=o[t].textStyle)if(n.foreign&&null==n.library){if(e.document.documentData().foreignTextStyles().indexOf(n.originalStyle)>-1&&e.document.documentData().foreignTextStyles().removeObject(n.originalStyle),null!=n.correlativeStyles)for(var r=0;r<n.correlativeStyles.length;r++)e.document.documentData().foreignTextStyles().indexOf(n.correlativeStyles[r])>-1&&e.document.documentData().foreignTextStyles().removeObject(n.correlativeStyles[r])}else e.document.documentData().layerTextStyles().removeSharedStyle(n.textStyle)})),[n,r]}function s(e){a.clog("----- Sync text styles -----");var t,r={identifier:"merge-duplicatetextstyles.webview",width:1200,height:700,show:!1,remembersWindowFrame:!0,titleBarStyle:"hidden"},s=new i.a(r),c=s.webContents,u=[];!function(){if(a.clog("Finding duplicate text styles."),(t=a.getDuplicateTextStyles(e)).length>0){a.GetSpecificTextStyleData(e,t,0),u=[];for(var n=0;n<t.length;n++)u.push({textStyleWithDuplicates:t[n],selectedIndex:-1,isUnchecked:!1,isProcessed:0==n})}}(),t.length>0?s.loadURL(n(31)):(e.document.showMessage("Looks like there are no text styles to sync."),onShutdown("merge-duplicatetextstyles.webview")),s.once("ready-to-show",(function(){s.show()})),c.on("did-finish-load",(function(){a.clog("Webview loaded"),c.executeJavaScript("DrawStylesList(".concat(JSON.stringify(u),", ").concat(a.getLibrariesEnabled(),")")).catch(console.error)})),c.on("nativeLog",(function(e){a.clog(e)})),c.on("Cancel",(function(){onShutdown("merge-duplicatetextstyles.webview")})),c.on("GetSelectedStyleData",(function(n){a.GetSpecificTextStyleData(e,t,n),c.executeJavaScript("ReDrawAfterGettingData(".concat(JSON.stringify(u[n].textStyleWithDuplicates),",").concat(n,")")).catch(console.error)})),c.on("ExecuteMerge",(function(t){a.clog("Executing Merge");for(var n=0,r=[0,0],i=0;i<t.length;i++)if(a.clog("-- Merging "+u[i].textStyleWithDuplicates.name),!t[i].isUnchecked&&t[i].selectedIndex>=0){u[i].selectedIndex=t[i].selectedIndex,o=[];for(var s=0;s<u[i].textStyleWithDuplicates.duplicates.length;s++)o.push(u[i].textStyleWithDuplicates.duplicates[s]);var c=l(e,t[i].selectedIndex);r[0]+=c[0],r[1]+=c[1],n++}onShutdown("merge-duplicatetextstyles.webview"),n<=0?(a.clog("No styles were merged"),e.document.showMessage("No styles were replaced.")):(a.clog("Updated "+r[0]+" text layers and "+r[1]+" overrides."),e.document.showMessage("Yo ho! We updated "+r[0]+" text layers and "+r[1]+" overrides."))}))}},function(e,t){e.exports="file://"+String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0]+".sketchplugin/Contents/Resources/_webpack_resources/53fd67153dd8c551c9106cb843e372a8.html"},function(e,t,n){"use strict";n.r(t),n.d(t,"EditSettings",(function(){return s})),n.d(t,"onShutdown",(function(){return c}));var r,i=n(0),a=n.n(i),o=n(1),l=n(2);function s(e){var t={identifier:"sync-with-library.webviewSettings",width:500,height:600,show:!1,remembersWindowFrame:!0,titleBarStyle:"hidden"},i=new a.a(t),o=i.webContents;i.loadURL(n(33)),r=l.getSettings(),i.once("ready-to-show",(function(){i.show()})),o.on("did-finish-load",(function(){o.executeJavaScript("AssignSettings(".concat(l.getLogsEnabled(),",").concat(l.getLibrariesEnabled(),")")).catch(console.error)})),o.on("nativeLog",(function(e){l.clog(e)})),o.on("Cancel",(function(){c("sync-with-library.webviewSettings")})),o.on("AcceptSettings",(function(e){var t,n=["licenseKey","","startTime","path","mainPluginsFolderURL","/syncwithlibrary.json","writeTextToFile"];null!=r&&null!=r[n[0]]?t={licenseKey:n[1]+r[n[0]],logs:e}:null!=r&&null!=r[n[2]]&&(t={startTime:n[1]+r[n[2]],logs:e}),l[n[6]](t,MSPluginManager[n[4]]()[n[3]]()+n[5]),c("sync-with-library.webviewSettings")}))}function c(e){var t=Object(o.getWebview)(e);t&&t.close()}},function(e,t){e.exports="file://"+String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0]+".sketchplugin/Contents/Resources/_webpack_resources/fec00184c0e32b1fa054c6f73c8e7167.html"},function(e,t){e.exports="file://"+String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0]+".sketchplugin/Contents/Resources/_webpack_resources/2dcfe345c25214b7acb917c62d76c5da.html"},function(e,t,n){"use strict";n.r(t),n.d(t,"color",(function(){return b})),n.d(t,"rgb",(function(){return N})),n.d(t,"hsl",(function(){return F})),n.d(t,"lab",(function(){return L})),n.d(t,"hcl",(function(){return G})),n.d(t,"lch",(function(){return K})),n.d(t,"gray",(function(){return j})),n.d(t,"cubehelix",(function(){return ae}));var r=function(e,t,n){e.prototype=t.prototype=n,n.constructor=e};function i(e,t){var n=Object.create(e.prototype);for(var r in t)n[r]=t[r];return n}function a(){}var o="\\s*([+-]?\\d+)\\s*",l="\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*",s="\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*",c=/^#([0-9a-f]{3,8})$/,u=new RegExp("^rgb\\("+[o,o,o]+"\\)$"),d=new RegExp("^rgb\\("+[s,s,s]+"\\)$"),h=new RegExp("^rgba\\("+[o,o,o,l]+"\\)$"),f=new RegExp("^rgba\\("+[s,s,s,l]+"\\)$"),m=new RegExp("^hsl\\("+[l,s,s]+"\\)$"),y=new RegExp("^hsla\\("+[l,s,s,l]+"\\)$"),S={aliceblue:15792383,antiquewhite:16444375,aqua:65535,aquamarine:8388564,azure:15794175,beige:16119260,bisque:16770244,black:0,blanchedalmond:16772045,blue:255,blueviolet:9055202,brown:10824234,burlywood:14596231,cadetblue:6266528,chartreuse:8388352,chocolate:13789470,coral:16744272,cornflowerblue:6591981,cornsilk:16775388,crimson:14423100,cyan:65535,darkblue:139,darkcyan:35723,darkgoldenrod:12092939,darkgray:11119017,darkgreen:25600,darkgrey:11119017,darkkhaki:12433259,darkmagenta:9109643,darkolivegreen:5597999,darkorange:16747520,darkorchid:10040012,darkred:9109504,darksalmon:15308410,darkseagreen:9419919,darkslateblue:4734347,darkslategray:3100495,darkslategrey:3100495,darkturquoise:52945,darkviolet:9699539,deeppink:16716947,deepskyblue:49151,dimgray:6908265,dimgrey:6908265,dodgerblue:2003199,firebrick:11674146,floralwhite:16775920,forestgreen:2263842,fuchsia:16711935,gainsboro:14474460,ghostwhite:16316671,gold:16766720,goldenrod:14329120,gray:8421504,green:32768,greenyellow:11403055,grey:8421504,honeydew:15794160,hotpink:16738740,indianred:13458524,indigo:4915330,ivory:16777200,khaki:15787660,lavender:15132410,lavenderblush:16773365,lawngreen:8190976,lemonchiffon:16775885,lightblue:11393254,lightcoral:15761536,lightcyan:14745599,lightgoldenrodyellow:16448210,lightgray:13882323,lightgreen:9498256,lightgrey:13882323,lightpink:16758465,lightsalmon:16752762,lightseagreen:2142890,lightskyblue:8900346,lightslategray:7833753,lightslategrey:7833753,lightsteelblue:11584734,lightyellow:16777184,lime:65280,limegreen:3329330,linen:16445670,magenta:16711935,maroon:8388608,mediumaquamarine:6737322,mediumblue:205,mediumorchid:12211667,mediumpurple:9662683,mediumseagreen:3978097,mediumslateblue:8087790,mediumspringgreen:64154,mediumturquoise:4772300,mediumvioletred:13047173,midnightblue:1644912,mintcream:16121850,mistyrose:16770273,moccasin:16770229,navajowhite:16768685,navy:128,oldlace:16643558,olive:8421376,olivedrab:7048739,orange:16753920,orangered:16729344,orchid:14315734,palegoldenrod:15657130,palegreen:10025880,paleturquoise:11529966,palevioletred:14381203,papayawhip:16773077,peachpuff:16767673,peru:13468991,pink:16761035,plum:14524637,powderblue:11591910,purple:8388736,rebeccapurple:6697881,red:16711680,rosybrown:12357519,royalblue:4286945,saddlebrown:9127187,salmon:16416882,sandybrown:16032864,seagreen:3050327,seashell:16774638,sienna:10506797,silver:12632256,skyblue:8900331,slateblue:6970061,slategray:7372944,slategrey:7372944,snow:16775930,springgreen:65407,steelblue:4620980,tan:13808780,teal:32896,thistle:14204888,tomato:16737095,turquoise:4251856,violet:15631086,wheat:16113331,white:16777215,whitesmoke:16119285,yellow:16776960,yellowgreen:10145074};function p(){return this.rgb().formatHex()}function g(){return this.rgb().formatRgb()}function b(e){var t,n;return e=(e+"").trim().toLowerCase(),(t=c.exec(e))?(n=t[1].length,t=parseInt(t[1],16),6===n?v(t):3===n?new M(t>>8&15|t>>4&240,t>>4&15|240&t,(15&t)<<4|15&t,1):8===n?w(t>>24&255,t>>16&255,t>>8&255,(255&t)/255):4===n?w(t>>12&15|t>>8&240,t>>8&15|t>>4&240,t>>4&15|240&t,((15&t)<<4|15&t)/255):null):(t=u.exec(e))?new M(t[1],t[2],t[3],1):(t=d.exec(e))?new M(255*t[1]/100,255*t[2]/100,255*t[3]/100,1):(t=h.exec(e))?w(t[1],t[2],t[3],t[4]):(t=f.exec(e))?w(255*t[1]/100,255*t[2]/100,255*t[3]/100,t[4]):(t=m.exec(e))?E(t[1],t[2]/100,t[3]/100,1):(t=y.exec(e))?E(t[1],t[2]/100,t[3]/100,t[4]):S.hasOwnProperty(e)?v(S[e]):"transparent"===e?new M(NaN,NaN,NaN,0):null}function v(e){return new M(e>>16&255,e>>8&255,255&e,1)}function w(e,t,n,r){return r<=0&&(e=t=n=NaN),new M(e,t,n,r)}function x(e){return e instanceof a||(e=b(e)),e?new M((e=e.rgb()).r,e.g,e.b,e.opacity):new M}function N(e,t,n,r){return 1===arguments.length?x(e):new M(e,t,n,null==r?1:r)}function M(e,t,n,r){this.r=+e,this.g=+t,this.b=+n,this.opacity=+r}function D(){return"#"+C(this.r)+C(this.g)+C(this.b)}function _(){var e=this.opacity;return(1===(e=isNaN(e)?1:Math.max(0,Math.min(1,e)))?"rgb(":"rgba(")+Math.max(0,Math.min(255,Math.round(this.r)||0))+", "+Math.max(0,Math.min(255,Math.round(this.g)||0))+", "+Math.max(0,Math.min(255,Math.round(this.b)||0))+(1===e?")":", "+e+")")}function C(e){return((e=Math.max(0,Math.min(255,Math.round(e)||0)))<16?"0":"")+e.toString(16)}function E(e,t,n,r){return r<=0?e=t=n=NaN:n<=0||n>=1?e=t=NaN:t<=0&&(e=NaN),new I(e,t,n,r)}function O(e){if(e instanceof I)return new I(e.h,e.s,e.l,e.opacity);if(e instanceof a||(e=b(e)),!e)return new I;if(e instanceof I)return e;var t=(e=e.rgb()).r/255,n=e.g/255,r=e.b/255,i=Math.min(t,n,r),o=Math.max(t,n,r),l=NaN,s=o-i,c=(o+i)/2;return s?(l=t===o?(n-r)/s+6*(n<r):n===o?(r-t)/s+2:(t-n)/s+4,s/=c<.5?o+i:2-o-i,l*=60):s=c>0&&c<1?0:l,new I(l,s,c,e.opacity)}function F(e,t,n,r){return 1===arguments.length?O(e):new I(e,t,n,null==r?1:r)}function I(e,t,n,r){this.h=+e,this.s=+t,this.l=+n,this.opacity=+r}function k(e,t,n){return 255*(e<60?t+(n-t)*e/60:e<180?n:e<240?t+(n-t)*(240-e)/60:t)}r(a,b,{copy:function(e){return Object.assign(new this.constructor,this,e)},displayable:function(){return this.rgb().displayable()},hex:p,formatHex:p,formatHsl:function(){return O(this).formatHsl()},formatRgb:g,toString:g}),r(M,N,i(a,{brighter:function(e){return e=null==e?1/.7:Math.pow(1/.7,e),new M(this.r*e,this.g*e,this.b*e,this.opacity)},darker:function(e){return e=null==e?.7:Math.pow(.7,e),new M(this.r*e,this.g*e,this.b*e,this.opacity)},rgb:function(){return this},displayable:function(){return-.5<=this.r&&this.r<255.5&&-.5<=this.g&&this.g<255.5&&-.5<=this.b&&this.b<255.5&&0<=this.opacity&&this.opacity<=1},hex:D,formatHex:D,formatRgb:_,toString:_})),r(I,F,i(a,{brighter:function(e){return e=null==e?1/.7:Math.pow(1/.7,e),new I(this.h,this.s,this.l*e,this.opacity)},darker:function(e){return e=null==e?.7:Math.pow(.7,e),new I(this.h,this.s,this.l*e,this.opacity)},rgb:function(){var e=this.h%360+360*(this.h<0),t=isNaN(e)||isNaN(this.s)?0:this.s,n=this.l,r=n+(n<.5?n:1-n)*t,i=2*n-r;return new M(k(e>=240?e-240:e+120,i,r),k(e,i,r),k(e<120?e+240:e-120,i,r),this.opacity)},displayable:function(){return(0<=this.s&&this.s<=1||isNaN(this.s))&&0<=this.l&&this.l<=1&&0<=this.opacity&&this.opacity<=1},formatHsl:function(){var e=this.opacity;return(1===(e=isNaN(e)?1:Math.max(0,Math.min(1,e)))?"hsl(":"hsla(")+(this.h||0)+", "+100*(this.s||0)+"%, "+100*(this.l||0)+"%"+(1===e?")":", "+e+")")}}));var P=Math.PI/180,R=180/Math.PI,T=6/29,A=3*T*T;function W(e){if(e instanceof B)return new B(e.l,e.a,e.b,e.opacity);if(e instanceof q)return X(e);e instanceof M||(e=x(e));var t,n,r=H(e.r),i=H(e.g),a=H(e.b),o=U((.2225045*r+.7168786*i+.0606169*a)/1);return r===i&&i===a?t=n=o:(t=U((.4360747*r+.3850649*i+.1430804*a)/.96422),n=U((.0139322*r+.0971045*i+.7141733*a)/.82521)),new B(116*o-16,500*(t-o),200*(o-n),e.opacity)}function j(e,t){return new B(e,0,0,null==t?1:t)}function L(e,t,n,r){return 1===arguments.length?W(e):new B(e,t,n,null==r?1:r)}function B(e,t,n,r){this.l=+e,this.a=+t,this.b=+n,this.opacity=+r}function U(e){return e>.008856451679035631?Math.pow(e,1/3):e/A+4/29}function V(e){return e>T?e*e*e:A*(e-4/29)}function z(e){return 255*(e<=.0031308?12.92*e:1.055*Math.pow(e,1/2.4)-.055)}function H(e){return(e/=255)<=.04045?e/12.92:Math.pow((e+.055)/1.055,2.4)}function J(e){if(e instanceof q)return new q(e.h,e.c,e.l,e.opacity);if(e instanceof B||(e=W(e)),0===e.a&&0===e.b)return new q(NaN,0<e.l&&e.l<100?0:NaN,e.l,e.opacity);var t=Math.atan2(e.b,e.a)*R;return new q(t<0?t+360:t,Math.sqrt(e.a*e.a+e.b*e.b),e.l,e.opacity)}function K(e,t,n,r){return 1===arguments.length?J(e):new q(n,t,e,null==r?1:r)}function G(e,t,n,r){return 1===arguments.length?J(e):new q(e,t,n,null==r?1:r)}function q(e,t,n,r){this.h=+e,this.c=+t,this.l=+n,this.opacity=+r}function X(e){if(isNaN(e.h))return new B(e.l,0,0,e.opacity);var t=e.h*P;return new B(e.l,Math.cos(t)*e.c,Math.sin(t)*e.c,e.opacity)}r(B,L,i(a,{brighter:function(e){return new B(this.l+18*(null==e?1:e),this.a,this.b,this.opacity)},darker:function(e){return new B(this.l-18*(null==e?1:e),this.a,this.b,this.opacity)},rgb:function(){var e=(this.l+16)/116,t=isNaN(this.a)?e:e+this.a/500,n=isNaN(this.b)?e:e-this.b/200;return new M(z(3.1338561*(t=.96422*V(t))-1.6168667*(e=1*V(e))-.4906146*(n=.82521*V(n))),z(-.9787684*t+1.9161415*e+.033454*n),z(.0719453*t-.2289914*e+1.4052427*n),this.opacity)}})),r(q,G,i(a,{brighter:function(e){return new q(this.h,this.c,this.l+18*(null==e?1:e),this.opacity)},darker:function(e){return new q(this.h,this.c,this.l-18*(null==e?1:e),this.opacity)},rgb:function(){return X(this).rgb()}}));var Z=-.14861,$=1.78277,Y=-.29227,Q=-.90649,ee=1.97294,te=ee*Q,ne=ee*$,re=$*Y-Q*Z;function ie(e){if(e instanceof oe)return new oe(e.h,e.s,e.l,e.opacity);e instanceof M||(e=x(e));var t=e.r/255,n=e.g/255,r=e.b/255,i=(re*r+te*t-ne*n)/(re+te-ne),a=r-i,o=(ee*(n-i)-Y*a)/Q,l=Math.sqrt(o*o+a*a)/(ee*i*(1-i)),s=l?Math.atan2(o,a)*R-120:NaN;return new oe(s<0?s+360:s,l,i,e.opacity)}function ae(e,t,n,r){return 1===arguments.length?ie(e):new oe(e,t,n,null==r?1:r)}function oe(e,t,n,r){this.h=+e,this.s=+t,this.l=+n,this.opacity=+r}r(oe,ae,i(a,{brighter:function(e){return e=null==e?1/.7:Math.pow(1/.7,e),new oe(this.h,this.s,this.l*e,this.opacity)},darker:function(e){return e=null==e?.7:Math.pow(.7,e),new oe(this.h,this.s,this.l*e,this.opacity)},rgb:function(){var e=isNaN(this.h)?0:(this.h+120)*P,t=+this.l,n=isNaN(this.s)?0:this.s*t*(1-t),r=Math.cos(e),i=Math.sin(e);return new M(255*(t+n*(Z*r+$*i)),255*(t+n*(Y*r+Q*i)),255*(t+n*(ee*r)),this.opacity)}}))}]);if("default"===key&&"function"==typeof exports)exports(context);else{if("function"!=typeof exports[key])throw new Error('Missing export named "'+key+'". Your command should contain something like `export function " + key +"() {}`.');exports[key](context)}}catch(err){if("undefined"==typeof process||!process.listenerCount||!process.listenerCount("uncaughtException"))throw err;process.emit("uncaughtException",err,"uncaughtException")}}globalThis.MergeDuplicateSymbols=__skpm_run.bind(this,"MergeDuplicateSymbols"),globalThis.onShutdown=__skpm_run.bind(this,"onShutdown"),globalThis.onRun=__skpm_run.bind(this,"default"),globalThis.MergeDuplicateLayerStyles=__skpm_run.bind(this,"MergeDuplicateLayerStyles"),globalThis.onShutdown=__skpm_run.bind(this,"onShutdown"),globalThis.MergeDuplicateTextStyles=__skpm_run.bind(this,"MergeDuplicateTextStyles"),globalThis.onShutdown=__skpm_run.bind(this,"onShutdown"),globalThis.EditSettings=__skpm_run.bind(this,"EditSettings"),globalThis.onShutdown=__skpm_run.bind(this,"onShutdown");
+var globalThis = this;
+var global = this;
+function __skpm_run (key, context) {
+  globalThis.context = context;
+  try {
+
+var exports =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/Main.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "../../../node_modules/@skpm/fs/index.js":
+/*!**************************************************!*\
+  !*** /Users/ooto/node_modules/@skpm/fs/index.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// TODO: async. Should probably be done with NSFileHandle and some notifications
+// TODO: file descriptor. Needs to be done with NSFileHandle
+var Buffer = __webpack_require__(/*! buffer */ "buffer").Buffer;
+var utils = __webpack_require__(/*! ./utils */ "../../../node_modules/@skpm/fs/utils.js");
+var parseStat = utils.parseStat;
+var fsError = utils.fsError;
+var fsErrorForPath = utils.fsErrorForPath;
+var encodingFromOptions = utils.encodingFromOptions;
+var NOT_IMPLEMENTED = utils.NOT_IMPLEMENTED;
+
+module.exports.constants = {
+  F_OK: 0,
+  R_OK: 4,
+  W_OK: 2,
+  X_OK: 1
+};
+
+module.exports.access = NOT_IMPLEMENTED("access");
+
+module.exports.accessSync = function(path, mode) {
+  mode = mode | 0;
+  var fileManager = NSFileManager.defaultManager();
+
+  switch (mode) {
+    case 0:
+      canAccess = module.exports.existsSync(path);
+      break;
+    case 1:
+      canAccess = Boolean(Number(fileManager.isExecutableFileAtPath(path)));
+      break;
+    case 2:
+      canAccess = Boolean(Number(fileManager.isWritableFileAtPath(path)));
+      break;
+    case 3:
+      canAccess =
+        Boolean(Number(fileManager.isExecutableFileAtPath(path))) &&
+        Boolean(Number(fileManager.isWritableFileAtPath(path)));
+      break;
+    case 4:
+      canAccess = Boolean(Number(fileManager.isReadableFileAtPath(path)));
+      break;
+    case 5:
+      canAccess =
+        Boolean(Number(fileManager.isReadableFileAtPath(path))) &&
+        Boolean(Number(fileManager.isExecutableFileAtPath(path)));
+      break;
+    case 6:
+      canAccess =
+        Boolean(Number(fileManager.isReadableFileAtPath(path))) &&
+        Boolean(Number(fileManager.isWritableFileAtPath(path)));
+      break;
+    case 7:
+      canAccess =
+        Boolean(Number(fileManager.isReadableFileAtPath(path))) &&
+        Boolean(Number(fileManager.isWritableFileAtPath(path))) &&
+        Boolean(Number(fileManager.isExecutableFileAtPath(path)));
+      break;
+  }
+
+  if (!canAccess) {
+    throw new Error("Can't access " + String(path));
+  }
+};
+
+module.exports.appendFile = NOT_IMPLEMENTED("appendFile");
+
+module.exports.appendFileSync = function(file, data, options) {
+  if (!module.exports.existsSync(file)) {
+    return module.exports.writeFileSync(file, data, options);
+  }
+
+  var handle = NSFileHandle.fileHandleForWritingAtPath(file);
+  handle.seekToEndOfFile();
+
+  var encoding = encodingFromOptions(options, "utf8");
+
+  var nsdata = Buffer.from(
+    data,
+    encoding === "NSData" || encoding === "buffer" ? undefined : encoding
+  ).toNSData();
+
+  handle.writeData(nsdata);
+};
+
+module.exports.chmod = NOT_IMPLEMENTED("chmod");
+
+module.exports.chmodSync = function(path, mode) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  fileManager.setAttributes_ofItemAtPath_error(
+    {
+      NSFilePosixPermissions: mode
+    },
+    path,
+    err
+  );
+
+  if (err.value() !== null) {
+    throw fsErrorForPath(path, undefined, err.value());
+  }
+};
+
+module.exports.chown = NOT_IMPLEMENTED("chown");
+module.exports.chownSync = NOT_IMPLEMENTED("chownSync");
+
+module.exports.close = NOT_IMPLEMENTED("close");
+module.exports.closeSync = NOT_IMPLEMENTED("closeSync");
+
+module.exports.copyFile = NOT_IMPLEMENTED("copyFile");
+
+module.exports.copyFileSync = function(path, dest, flags) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  fileManager.copyItemAtPath_toPath_error(path, dest, err);
+
+  if (err.value() !== null) {
+    throw fsErrorForPath(path, false, err.value());
+  }
+};
+
+module.exports.createReadStream = NOT_IMPLEMENTED("createReadStream");
+module.exports.createWriteStream = NOT_IMPLEMENTED("createWriteStream");
+
+module.exports.exists = NOT_IMPLEMENTED("exists");
+
+module.exports.existsSync = function(path) {
+  var fileManager = NSFileManager.defaultManager();
+  return Boolean(Number(fileManager.fileExistsAtPath(path)));
+};
+
+module.exports.fchmod = NOT_IMPLEMENTED("fchmod");
+module.exports.fchmodSync = NOT_IMPLEMENTED("fchmodSync");
+module.exports.fchown = NOT_IMPLEMENTED("fchown");
+module.exports.fchownSync = NOT_IMPLEMENTED("fchownSync");
+module.exports.fdatasync = NOT_IMPLEMENTED("fdatasync");
+module.exports.fdatasyncSync = NOT_IMPLEMENTED("fdatasyncSync");
+module.exports.fstat = NOT_IMPLEMENTED("fstat");
+module.exports.fstatSync = NOT_IMPLEMENTED("fstatSync");
+module.exports.fsync = NOT_IMPLEMENTED("fsync");
+module.exports.fsyncSync = NOT_IMPLEMENTED("fsyncSync");
+module.exports.ftruncate = NOT_IMPLEMENTED("ftruncate");
+module.exports.ftruncateSync = NOT_IMPLEMENTED("ftruncateSync");
+module.exports.futimes = NOT_IMPLEMENTED("futimes");
+module.exports.futimesSync = NOT_IMPLEMENTED("futimesSync");
+
+module.exports.lchmod = NOT_IMPLEMENTED("lchmod");
+module.exports.lchmodSync = NOT_IMPLEMENTED("lchmodSync");
+module.exports.lchown = NOT_IMPLEMENTED("lchown");
+module.exports.lchownSync = NOT_IMPLEMENTED("lchownSync");
+
+module.exports.link = NOT_IMPLEMENTED("link");
+
+module.exports.linkSync = function(existingPath, newPath) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  fileManager.linkItemAtPath_toPath_error(existingPath, newPath, err);
+
+  if (err.value() !== null) {
+    throw fsErrorForPath(existingPath, undefined, err.value());
+  }
+};
+
+module.exports.lstat = NOT_IMPLEMENTED("lstat");
+
+module.exports.lstatSync = function(path) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  var result = fileManager.attributesOfItemAtPath_error(path, err);
+
+  if (err.value() !== null) {
+    throw fsErrorForPath(path, undefined, err.value());
+  }
+
+  return parseStat(result);
+};
+
+module.exports.mkdir = NOT_IMPLEMENTED("mkdir");
+
+module.exports.mkdirSync = function(path, options) {
+  var mode = 0o777;
+  var recursive = false;
+  if (options && options.mode) {
+    mode = options.mode;
+  }
+  if (options && options.recursive) {
+    recursive = options.recursive;
+  }
+  if (typeof options === "number") {
+    mode = options;
+  }
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  fileManager.createDirectoryAtPath_withIntermediateDirectories_attributes_error(
+    path,
+    recursive,
+    {
+      NSFilePosixPermissions: mode
+    },
+    err
+  );
+
+  if (err.value() !== null) {
+    throw new Error(err.value());
+  }
+};
+
+module.exports.mkdtemp = NOT_IMPLEMENTED("mkdtemp");
+
+module.exports.mkdtempSync = function(path) {
+  function makeid() {
+    var text = "";
+    var possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 6; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+  }
+  var tempPath = path + makeid();
+  module.exports.mkdirSync(tempPath);
+  return tempPath;
+};
+
+module.exports.open = NOT_IMPLEMENTED("open");
+module.exports.openSync = NOT_IMPLEMENTED("openSync");
+
+module.exports.read = NOT_IMPLEMENTED("read");
+
+module.exports.readdir = NOT_IMPLEMENTED("readdir");
+
+module.exports.readdirSync = function(path, options) {
+  var encoding = encodingFromOptions(options, "utf8");
+  var fileManager = NSFileManager.defaultManager();
+  var paths = fileManager.subpathsAtPath(path);
+  var arr = [];
+  for (var i = 0; i < paths.length; i++) {
+    var pathName = paths[i];
+    arr.push(encoding === "buffer" ? Buffer.from(pathName) : String(pathName));
+  }
+  return arr;
+};
+
+module.exports.readFile = NOT_IMPLEMENTED("readFile");
+
+module.exports.readFileSync = function(path, options) {
+  var encoding = encodingFromOptions(options, "buffer");
+  var fileManager = NSFileManager.defaultManager();
+  var data = fileManager.contentsAtPath(path);
+  if (!data) {
+    throw fsErrorForPath(path, false);
+  }
+
+  var buffer = Buffer.from(data);
+
+  if (encoding === "buffer") {
+    return buffer;
+  } else if (encoding === "NSData") {
+    return buffer.toNSData();
+  } else {
+    return buffer.toString(encoding);
+  }
+};
+
+module.exports.readlink = NOT_IMPLEMENTED("readlink");
+
+module.exports.readlinkSync = function(path) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  var result = fileManager.destinationOfSymbolicLinkAtPath_error(path, err);
+
+  if (err.value() !== null) {
+    throw fsErrorForPath(path, undefined, err.value());
+  }
+
+  return String(result);
+};
+
+module.exports.readSync = NOT_IMPLEMENTED("readSync");
+
+module.exports.realpath = NOT_IMPLEMENTED("realpath");
+module.exports.realpath.native = NOT_IMPLEMENTED("realpath.native");
+
+module.exports.realpathSync = function(path) {
+  return String(NSString.stringWithString(path).stringByResolvingSymlinksInPath());
+};
+
+module.exports.realpathSync.native = NOT_IMPLEMENTED("realpathSync.native");
+
+module.exports.rename = NOT_IMPLEMENTED("rename");
+
+module.exports.renameSync = function(oldPath, newPath) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  fileManager.moveItemAtPath_toPath_error(oldPath, newPath, err);
+
+  var error = err.value();
+
+  if (error !== null) {
+    // if there is already a file, we need to overwrite it
+    if (
+      String(error.domain()) === "NSCocoaErrorDomain" &&
+      Number(error.code()) === 516
+    ) {
+      var err2 = MOPointer.alloc().init();
+      fileManager.replaceItemAtURL_withItemAtURL_backupItemName_options_resultingItemURL_error(
+        NSURL.fileURLWithPath(newPath),
+        NSURL.fileURLWithPath(oldPath),
+        null,
+        NSFileManagerItemReplacementUsingNewMetadataOnly,
+        null,
+        err2
+      );
+      if (err2.value() !== null) {
+        throw fsErrorForPath(oldPath, undefined, err2.value());
+      }
+    } else {
+      throw fsErrorForPath(oldPath, undefined, error);
+    }
+  }
+};
+
+module.exports.rmdir = NOT_IMPLEMENTED("rmdir");
+
+module.exports.rmdirSync = function(path) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  var isDirectory = module.exports.lstatSync(path).isDirectory();
+  if (!isDirectory) {
+    throw fsError("ENOTDIR", {
+      path: path,
+      syscall: "rmdir"
+    });
+  }
+  fileManager.removeItemAtPath_error(path, err);
+
+  if (err.value() !== null) {
+    throw fsErrorForPath(path, true, err.value(), "rmdir");
+  }
+};
+
+module.exports.stat = NOT_IMPLEMENTED("stat");
+
+// the only difference with lstat is that we resolve symlinks
+//
+// > lstat() is identical to stat(), except that if pathname is a symbolic
+// > link, then it returns information about the link itself, not the file
+// > that it refers to.
+// http://man7.org/linux/man-pages/man2/lstat.2.html
+module.exports.statSync = function(path) {
+  return module.exports.lstatSync(module.exports.realpathSync(path));
+};
+
+module.exports.symlink = NOT_IMPLEMENTED("symlink");
+
+module.exports.symlinkSync = function(target, path) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  var result = fileManager.createSymbolicLinkAtPath_withDestinationPath_error(
+    path,
+    target,
+    err
+  );
+
+  if (err.value() !== null) {
+    throw new Error(err.value());
+  }
+};
+
+module.exports.truncate = NOT_IMPLEMENTED("truncate");
+
+module.exports.truncateSync = function(path, len) {
+  var hFile = NSFileHandle.fileHandleForUpdatingAtPath(sFilePath);
+  hFile.truncateFileAtOffset(len || 0);
+  hFile.closeFile();
+};
+
+module.exports.unlink = NOT_IMPLEMENTED("unlink");
+
+module.exports.unlinkSync = function(path) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  var isDirectory = module.exports.lstatSync(path).isDirectory();
+  if (isDirectory) {
+    throw fsError("EPERM", {
+      path: path,
+      syscall: "unlink"
+    });
+  }
+  var result = fileManager.removeItemAtPath_error(path, err);
+
+  if (err.value() !== null) {
+    throw fsErrorForPath(path, false, err.value());
+  }
+};
+
+module.exports.unwatchFile = NOT_IMPLEMENTED("unwatchFile");
+
+module.exports.utimes = NOT_IMPLEMENTED("utimes");
+
+module.exports.utimesSync = function(path, aTime, mTime) {
+  var err = MOPointer.alloc().init();
+  var fileManager = NSFileManager.defaultManager();
+  var result = fileManager.setAttributes_ofItemAtPath_error(
+    {
+      NSFileModificationDate: aTime
+    },
+    path,
+    err
+  );
+
+  if (err.value() !== null) {
+    throw fsErrorForPath(path, undefined, err.value());
+  }
+};
+
+module.exports.watch = NOT_IMPLEMENTED("watch");
+module.exports.watchFile = NOT_IMPLEMENTED("watchFile");
+
+module.exports.write = NOT_IMPLEMENTED("write");
+
+module.exports.writeFile = NOT_IMPLEMENTED("writeFile");
+
+module.exports.writeFileSync = function(path, data, options) {
+  var encoding = encodingFromOptions(options, "utf8");
+
+  var nsdata = Buffer.from(
+    data,
+    encoding === "NSData" || encoding === "buffer" ? undefined : encoding
+  ).toNSData();
+
+  nsdata.writeToFile_atomically(path, true);
+};
+
+module.exports.writeSync = NOT_IMPLEMENTED("writeSync");
+
+
+/***/ }),
+
+/***/ "../../../node_modules/@skpm/fs/utils.js":
+/*!**************************************************!*\
+  !*** /Users/ooto/node_modules/@skpm/fs/utils.js ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports.parseStat = function parseStat(result) {
+  return {
+    dev: String(result.NSFileDeviceIdentifier),
+    // ino: 48064969, The file system specific "Inode" number for the file.
+    mode: result.NSFileType | result.NSFilePosixPermissions,
+    nlink: Number(result.NSFileReferenceCount),
+    uid: String(result.NSFileOwnerAccountID),
+    gid: String(result.NSFileGroupOwnerAccountID),
+    // rdev: 0, A numeric device identifier if the file is considered "special".
+    size: Number(result.NSFileSize),
+    // blksize: 4096, The file system block size for i/o operations.
+    // blocks: 8, The number of blocks allocated for this file.
+    atimeMs:
+      Number(result.NSFileModificationDate.timeIntervalSince1970()) * 1000,
+    mtimeMs:
+      Number(result.NSFileModificationDate.timeIntervalSince1970()) * 1000,
+    ctimeMs:
+      Number(result.NSFileModificationDate.timeIntervalSince1970()) * 1000,
+    birthtimeMs:
+      Number(result.NSFileCreationDate.timeIntervalSince1970()) * 1000,
+    atime: new Date(
+      Number(result.NSFileModificationDate.timeIntervalSince1970()) * 1000 + 0.5
+    ), // the 0.5 comes from the node source. Not sure why it's added but in doubt...
+    mtime: new Date(
+      Number(result.NSFileModificationDate.timeIntervalSince1970()) * 1000 + 0.5
+    ),
+    ctime: new Date(
+      Number(result.NSFileModificationDate.timeIntervalSince1970()) * 1000 + 0.5
+    ),
+    birthtime: new Date(
+      Number(result.NSFileCreationDate.timeIntervalSince1970()) * 1000 + 0.5
+    ),
+    isBlockDevice: function() {
+      return result.NSFileType === NSFileTypeBlockSpecial;
+    },
+    isCharacterDevice: function() {
+      return result.NSFileType === NSFileTypeCharacterSpecial;
+    },
+    isDirectory: function() {
+      return result.NSFileType === NSFileTypeDirectory;
+    },
+    isFIFO: function() {
+      return false;
+    },
+    isFile: function() {
+      return result.NSFileType === NSFileTypeRegular;
+    },
+    isSocket: function() {
+      return result.NSFileType === NSFileTypeSocket;
+    },
+    isSymbolicLink: function() {
+      return result.NSFileType === NSFileTypeSymbolicLink;
+    }
+  };
+};
+
+var ERRORS = {
+  EPERM: {
+    message: "operation not permitted",
+    errno: -1
+  },
+  ENOENT: {
+    message: "no such file or directory",
+    errno: -2
+  },
+  EACCES: {
+    message: "permission denied",
+    errno: -13
+  },
+  ENOTDIR: {
+    message: "not a directory",
+    errno: -20
+  },
+  EISDIR: {
+    message: "illegal operation on a directory",
+    errno: -21
+  }
+};
+
+function fsError(code, options) {
+  var error = new Error(
+    code +
+      ": " +
+      ERRORS[code].message +
+      ", " +
+      (options.syscall || "") +
+      (options.path ? " '" + options.path + "'" : "")
+  );
+
+  Object.keys(options).forEach(function(k) {
+    error[k] = options[k];
+  });
+
+  error.code = code;
+  error.errno = ERRORS[code].errno;
+
+  return error;
+}
+
+module.exports.fsError = fsError;
+
+module.exports.fsErrorForPath = function fsErrorForPath(
+  path,
+  shouldBeDir,
+  err,
+  syscall
+) {
+  var fileManager = NSFileManager.defaultManager();
+  var doesExist = fileManager.fileExistsAtPath(path);
+  if (!doesExist) {
+    return fsError("ENOENT", {
+      path: path,
+      syscall: syscall || "open"
+    });
+  }
+  var isReadable = fileManager.isReadableFileAtPath(path);
+  if (!isReadable) {
+    return fsError("EACCES", {
+      path: path,
+      syscall: syscall || "open"
+    });
+  }
+  if (typeof shouldBeDir !== "undefined") {
+    var isDirectory = module.exports.lstatSync(path).isDirectory();
+    if (isDirectory && !shouldBeDir) {
+      return fsError("EISDIR", {
+        path: path,
+        syscall: syscall || "read"
+      });
+    } else if (!isDirectory && shouldBeDir) {
+      return fsError("ENOTDIR", {
+        path: path,
+        syscall: syscall || "read"
+      });
+    }
+  }
+  return new Error(err || "Unknown error while manipulating " + path);
+};
+
+module.exports.encodingFromOptions = function encodingFromOptions(
+  options,
+  defaultValue
+) {
+  return options && options.encoding
+    ? String(options.encoding)
+    : options
+    ? String(options)
+    : defaultValue;
+};
+
+module.exports.NOT_IMPLEMENTED = function NOT_IMPLEMENTED(name) {
+  return function() {
+    throw new Error(
+      "fs." +
+        name +
+        " is not implemented yet. If you feel like implementing it, any contribution will be gladly accepted on https://github.com/skpm/fs"
+    );
+  };
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/@skpm/promise/index.js":
+/*!*********************************************!*\
+  !*** ./node_modules/@skpm/promise/index.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* from https://github.com/taylorhakes/promise-polyfill */
+
+function promiseFinally(callback) {
+  var constructor = this.constructor;
+  return this.then(
+    function(value) {
+      return constructor.resolve(callback()).then(function() {
+        return value;
+      });
+    },
+    function(reason) {
+      return constructor.resolve(callback()).then(function() {
+        return constructor.reject(reason);
+      });
+    }
+  );
+}
+
+function noop() {}
+
+/**
+ * @constructor
+ * @param {Function} fn
+ */
+function Promise(fn) {
+  if (!(this instanceof Promise))
+    throw new TypeError("Promises must be constructed via new");
+  if (typeof fn !== "function") throw new TypeError("not a function");
+  /** @type {!number} */
+  this._state = 0;
+  /** @type {!boolean} */
+  this._handled = false;
+  /** @type {Promise|undefined} */
+  this._value = undefined;
+  /** @type {!Array<!Function>} */
+  this._deferreds = [];
+
+  doResolve(fn, this);
+}
+
+function handle(self, deferred) {
+  while (self._state === 3) {
+    self = self._value;
+  }
+  if (self._state === 0) {
+    self._deferreds.push(deferred);
+    return;
+  }
+  self._handled = true;
+  Promise._immediateFn(function() {
+    var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
+    if (cb === null) {
+      (self._state === 1 ? resolve : reject)(deferred.promise, self._value);
+      return;
+    }
+    var ret;
+    try {
+      ret = cb(self._value);
+    } catch (e) {
+      reject(deferred.promise, e);
+      return;
+    }
+    resolve(deferred.promise, ret);
+  });
+}
+
+function resolve(self, newValue) {
+  try {
+    // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
+    if (newValue === self)
+      throw new TypeError("A promise cannot be resolved with itself.");
+    if (
+      newValue &&
+      (typeof newValue === "object" || typeof newValue === "function")
+    ) {
+      var then = newValue.then;
+      if (newValue instanceof Promise) {
+        self._state = 3;
+        self._value = newValue;
+        finale(self);
+        return;
+      } else if (typeof then === "function") {
+        doResolve(then.bind(newValue), self);
+        return;
+      }
+    }
+    self._state = 1;
+    self._value = newValue;
+    finale(self);
+  } catch (e) {
+    reject(self, e);
+  }
+}
+
+function reject(self, newValue) {
+  self._state = 2;
+  self._value = newValue;
+  finale(self);
+}
+
+function finale(self) {
+  if (self._state === 2 && self._deferreds.length === 0) {
+    Promise._immediateFn(function() {
+      if (!self._handled) {
+        Promise._unhandledRejectionFn(self._value, self);
+      }
+    });
+  }
+
+  for (var i = 0, len = self._deferreds.length; i < len; i++) {
+    handle(self, self._deferreds[i]);
+  }
+  self._deferreds = null;
+}
+
+/**
+ * @constructor
+ */
+function Handler(onFulfilled, onRejected, promise) {
+  this.onFulfilled = typeof onFulfilled === "function" ? onFulfilled : null;
+  this.onRejected = typeof onRejected === "function" ? onRejected : null;
+  this.promise = promise;
+}
+
+/**
+ * Take a potentially misbehaving resolver function and make sure
+ * onFulfilled and onRejected are only called once.
+ *
+ * Makes no guarantees about asynchrony.
+ */
+function doResolve(fn, self) {
+  var done = false;
+  try {
+    fn(
+      function(value) {
+        if (done) {
+          Promise._multipleResolvesFn("resolve", self, value);
+          return;
+        }
+        done = true;
+        resolve(self, value);
+      },
+      function(reason) {
+        if (done) {
+          Promise._multipleResolvesFn("reject", self, reason);
+          return;
+        }
+        done = true;
+        reject(self, reason);
+      }
+    );
+  } catch (ex) {
+    if (done) {
+      Promise._multipleResolvesFn("reject", self, ex);
+      return;
+    }
+    done = true;
+    reject(self, ex);
+  }
+}
+
+Promise.prototype["catch"] = function(onRejected) {
+  return this.then(null, onRejected);
+};
+
+Promise.prototype.then = function(onFulfilled, onRejected) {
+  // @ts-ignore
+  var prom = new this.constructor(noop);
+
+  handle(this, new Handler(onFulfilled, onRejected, prom));
+  return prom;
+};
+
+Promise.prototype["finally"] = promiseFinally;
+
+Promise.all = function(arr) {
+  return new Promise(function(resolve, reject) {
+    if (!Array.isArray(arr)) {
+      return reject(new TypeError("Promise.all accepts an array"));
+    }
+
+    var args = Array.prototype.slice.call(arr);
+    if (args.length === 0) return resolve([]);
+    var remaining = args.length;
+
+    function res(i, val) {
+      try {
+        if (val && (typeof val === "object" || typeof val === "function")) {
+          var then = val.then;
+          if (typeof then === "function") {
+            then.call(
+              val,
+              function(val) {
+                res(i, val);
+              },
+              reject
+            );
+            return;
+          }
+        }
+        args[i] = val;
+        if (--remaining === 0) {
+          resolve(args);
+        }
+      } catch (ex) {
+        reject(ex);
+      }
+    }
+
+    for (var i = 0; i < args.length; i++) {
+      res(i, args[i]);
+    }
+  });
+};
+
+Promise.resolve = function(value) {
+  if (value && typeof value === "object" && value.constructor === Promise) {
+    return value;
+  }
+
+  return new Promise(function(resolve) {
+    resolve(value);
+  });
+};
+
+Promise.reject = function(value) {
+  return new Promise(function(resolve, reject) {
+    reject(value);
+  });
+};
+
+Promise.race = function(arr) {
+  return new Promise(function(resolve, reject) {
+    if (!Array.isArray(arr)) {
+      return reject(new TypeError("Promise.race accepts an array"));
+    }
+
+    for (var i = 0, len = arr.length; i < len; i++) {
+      Promise.resolve(arr[i]).then(resolve, reject);
+    }
+  });
+};
+
+// Use polyfill for setImmediate for performance gains
+Promise._immediateFn = setImmediate;
+
+Promise._unhandledRejectionFn = function _unhandledRejectionFn(err, promise) {
+  if (
+    typeof process !== "undefined" &&
+    process.listenerCount &&
+    (process.listenerCount("unhandledRejection") ||
+      process.listenerCount("uncaughtException"))
+  ) {
+    process.emit("unhandledRejection", err, promise);
+    process.emit("uncaughtException", err, "unhandledRejection");
+  } else if (typeof console !== "undefined" && console) {
+    console.warn("Possible Unhandled Promise Rejection:", err);
+  }
+};
+
+Promise._multipleResolvesFn = function _multipleResolvesFn(
+  type,
+  promise,
+  value
+) {
+  if (typeof process !== "undefined" && process.emit) {
+    process.emit("multipleResolves", type, promise, value);
+  }
+};
+
+module.exports = Promise;
+
+
+/***/ }),
+
+/***/ "./node_modules/d3-color/src/color.js":
+/*!********************************************!*\
+  !*** ./node_modules/d3-color/src/color.js ***!
+  \********************************************/
+/*! exports provided: Color, darker, brighter, default, rgbConvert, rgb, Rgb, hslConvert, hsl */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Color", function() { return Color; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "darker", function() { return darker; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "brighter", function() { return brighter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return color; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rgbConvert", function() { return rgbConvert; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rgb", function() { return rgb; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Rgb", function() { return Rgb; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hslConvert", function() { return hslConvert; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hsl", function() { return hsl; });
+/* harmony import */ var _define_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./define.js */ "./node_modules/d3-color/src/define.js");
+
+
+function Color() {}
+
+var darker = 0.7;
+var brighter = 1 / darker;
+
+var reI = "\\s*([+-]?\\d+)\\s*",
+    reN = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*",
+    reP = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*",
+    reHex = /^#([0-9a-f]{3,8})$/,
+    reRgbInteger = new RegExp("^rgb\\(" + [reI, reI, reI] + "\\)$"),
+    reRgbPercent = new RegExp("^rgb\\(" + [reP, reP, reP] + "\\)$"),
+    reRgbaInteger = new RegExp("^rgba\\(" + [reI, reI, reI, reN] + "\\)$"),
+    reRgbaPercent = new RegExp("^rgba\\(" + [reP, reP, reP, reN] + "\\)$"),
+    reHslPercent = new RegExp("^hsl\\(" + [reN, reP, reP] + "\\)$"),
+    reHslaPercent = new RegExp("^hsla\\(" + [reN, reP, reP, reN] + "\\)$");
+
+var named = {
+  aliceblue: 0xf0f8ff,
+  antiquewhite: 0xfaebd7,
+  aqua: 0x00ffff,
+  aquamarine: 0x7fffd4,
+  azure: 0xf0ffff,
+  beige: 0xf5f5dc,
+  bisque: 0xffe4c4,
+  black: 0x000000,
+  blanchedalmond: 0xffebcd,
+  blue: 0x0000ff,
+  blueviolet: 0x8a2be2,
+  brown: 0xa52a2a,
+  burlywood: 0xdeb887,
+  cadetblue: 0x5f9ea0,
+  chartreuse: 0x7fff00,
+  chocolate: 0xd2691e,
+  coral: 0xff7f50,
+  cornflowerblue: 0x6495ed,
+  cornsilk: 0xfff8dc,
+  crimson: 0xdc143c,
+  cyan: 0x00ffff,
+  darkblue: 0x00008b,
+  darkcyan: 0x008b8b,
+  darkgoldenrod: 0xb8860b,
+  darkgray: 0xa9a9a9,
+  darkgreen: 0x006400,
+  darkgrey: 0xa9a9a9,
+  darkkhaki: 0xbdb76b,
+  darkmagenta: 0x8b008b,
+  darkolivegreen: 0x556b2f,
+  darkorange: 0xff8c00,
+  darkorchid: 0x9932cc,
+  darkred: 0x8b0000,
+  darksalmon: 0xe9967a,
+  darkseagreen: 0x8fbc8f,
+  darkslateblue: 0x483d8b,
+  darkslategray: 0x2f4f4f,
+  darkslategrey: 0x2f4f4f,
+  darkturquoise: 0x00ced1,
+  darkviolet: 0x9400d3,
+  deeppink: 0xff1493,
+  deepskyblue: 0x00bfff,
+  dimgray: 0x696969,
+  dimgrey: 0x696969,
+  dodgerblue: 0x1e90ff,
+  firebrick: 0xb22222,
+  floralwhite: 0xfffaf0,
+  forestgreen: 0x228b22,
+  fuchsia: 0xff00ff,
+  gainsboro: 0xdcdcdc,
+  ghostwhite: 0xf8f8ff,
+  gold: 0xffd700,
+  goldenrod: 0xdaa520,
+  gray: 0x808080,
+  green: 0x008000,
+  greenyellow: 0xadff2f,
+  grey: 0x808080,
+  honeydew: 0xf0fff0,
+  hotpink: 0xff69b4,
+  indianred: 0xcd5c5c,
+  indigo: 0x4b0082,
+  ivory: 0xfffff0,
+  khaki: 0xf0e68c,
+  lavender: 0xe6e6fa,
+  lavenderblush: 0xfff0f5,
+  lawngreen: 0x7cfc00,
+  lemonchiffon: 0xfffacd,
+  lightblue: 0xadd8e6,
+  lightcoral: 0xf08080,
+  lightcyan: 0xe0ffff,
+  lightgoldenrodyellow: 0xfafad2,
+  lightgray: 0xd3d3d3,
+  lightgreen: 0x90ee90,
+  lightgrey: 0xd3d3d3,
+  lightpink: 0xffb6c1,
+  lightsalmon: 0xffa07a,
+  lightseagreen: 0x20b2aa,
+  lightskyblue: 0x87cefa,
+  lightslategray: 0x778899,
+  lightslategrey: 0x778899,
+  lightsteelblue: 0xb0c4de,
+  lightyellow: 0xffffe0,
+  lime: 0x00ff00,
+  limegreen: 0x32cd32,
+  linen: 0xfaf0e6,
+  magenta: 0xff00ff,
+  maroon: 0x800000,
+  mediumaquamarine: 0x66cdaa,
+  mediumblue: 0x0000cd,
+  mediumorchid: 0xba55d3,
+  mediumpurple: 0x9370db,
+  mediumseagreen: 0x3cb371,
+  mediumslateblue: 0x7b68ee,
+  mediumspringgreen: 0x00fa9a,
+  mediumturquoise: 0x48d1cc,
+  mediumvioletred: 0xc71585,
+  midnightblue: 0x191970,
+  mintcream: 0xf5fffa,
+  mistyrose: 0xffe4e1,
+  moccasin: 0xffe4b5,
+  navajowhite: 0xffdead,
+  navy: 0x000080,
+  oldlace: 0xfdf5e6,
+  olive: 0x808000,
+  olivedrab: 0x6b8e23,
+  orange: 0xffa500,
+  orangered: 0xff4500,
+  orchid: 0xda70d6,
+  palegoldenrod: 0xeee8aa,
+  palegreen: 0x98fb98,
+  paleturquoise: 0xafeeee,
+  palevioletred: 0xdb7093,
+  papayawhip: 0xffefd5,
+  peachpuff: 0xffdab9,
+  peru: 0xcd853f,
+  pink: 0xffc0cb,
+  plum: 0xdda0dd,
+  powderblue: 0xb0e0e6,
+  purple: 0x800080,
+  rebeccapurple: 0x663399,
+  red: 0xff0000,
+  rosybrown: 0xbc8f8f,
+  royalblue: 0x4169e1,
+  saddlebrown: 0x8b4513,
+  salmon: 0xfa8072,
+  sandybrown: 0xf4a460,
+  seagreen: 0x2e8b57,
+  seashell: 0xfff5ee,
+  sienna: 0xa0522d,
+  silver: 0xc0c0c0,
+  skyblue: 0x87ceeb,
+  slateblue: 0x6a5acd,
+  slategray: 0x708090,
+  slategrey: 0x708090,
+  snow: 0xfffafa,
+  springgreen: 0x00ff7f,
+  steelblue: 0x4682b4,
+  tan: 0xd2b48c,
+  teal: 0x008080,
+  thistle: 0xd8bfd8,
+  tomato: 0xff6347,
+  turquoise: 0x40e0d0,
+  violet: 0xee82ee,
+  wheat: 0xf5deb3,
+  white: 0xffffff,
+  whitesmoke: 0xf5f5f5,
+  yellow: 0xffff00,
+  yellowgreen: 0x9acd32
+};
+
+Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["default"])(Color, color, {
+  copy: function(channels) {
+    return Object.assign(new this.constructor, this, channels);
+  },
+  displayable: function() {
+    return this.rgb().displayable();
+  },
+  hex: color_formatHex, // Deprecated! Use color.formatHex.
+  formatHex: color_formatHex,
+  formatHsl: color_formatHsl,
+  formatRgb: color_formatRgb,
+  toString: color_formatRgb
+});
+
+function color_formatHex() {
+  return this.rgb().formatHex();
+}
+
+function color_formatHsl() {
+  return hslConvert(this).formatHsl();
+}
+
+function color_formatRgb() {
+  return this.rgb().formatRgb();
+}
+
+function color(format) {
+  var m, l;
+  format = (format + "").trim().toLowerCase();
+  return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) // #ff0000
+      : l === 3 ? new Rgb((m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1) // #f00
+      : l === 8 ? rgba(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) // #ff000000
+      : l === 4 ? rgba((m >> 12 & 0xf) | (m >> 8 & 0xf0), (m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), (((m & 0xf) << 4) | (m & 0xf)) / 0xff) // #f000
+      : null) // invalid hex
+      : (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) // rgb(255, 0, 0)
+      : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
+      : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
+      : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
+      : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
+      : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
+      : named.hasOwnProperty(format) ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
+      : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
+      : null;
+}
+
+function rgbn(n) {
+  return new Rgb(n >> 16 & 0xff, n >> 8 & 0xff, n & 0xff, 1);
+}
+
+function rgba(r, g, b, a) {
+  if (a <= 0) r = g = b = NaN;
+  return new Rgb(r, g, b, a);
+}
+
+function rgbConvert(o) {
+  if (!(o instanceof Color)) o = color(o);
+  if (!o) return new Rgb;
+  o = o.rgb();
+  return new Rgb(o.r, o.g, o.b, o.opacity);
+}
+
+function rgb(r, g, b, opacity) {
+  return arguments.length === 1 ? rgbConvert(r) : new Rgb(r, g, b, opacity == null ? 1 : opacity);
+}
+
+function Rgb(r, g, b, opacity) {
+  this.r = +r;
+  this.g = +g;
+  this.b = +b;
+  this.opacity = +opacity;
+}
+
+Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["default"])(Rgb, rgb, Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["extend"])(Color, {
+  brighter: function(k) {
+    k = k == null ? brighter : Math.pow(brighter, k);
+    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+  },
+  darker: function(k) {
+    k = k == null ? darker : Math.pow(darker, k);
+    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+  },
+  rgb: function() {
+    return this;
+  },
+  displayable: function() {
+    return (-0.5 <= this.r && this.r < 255.5)
+        && (-0.5 <= this.g && this.g < 255.5)
+        && (-0.5 <= this.b && this.b < 255.5)
+        && (0 <= this.opacity && this.opacity <= 1);
+  },
+  hex: rgb_formatHex, // Deprecated! Use color.formatHex.
+  formatHex: rgb_formatHex,
+  formatRgb: rgb_formatRgb,
+  toString: rgb_formatRgb
+}));
+
+function rgb_formatHex() {
+  return "#" + hex(this.r) + hex(this.g) + hex(this.b);
+}
+
+function rgb_formatRgb() {
+  var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+  return (a === 1 ? "rgb(" : "rgba(")
+      + Math.max(0, Math.min(255, Math.round(this.r) || 0)) + ", "
+      + Math.max(0, Math.min(255, Math.round(this.g) || 0)) + ", "
+      + Math.max(0, Math.min(255, Math.round(this.b) || 0))
+      + (a === 1 ? ")" : ", " + a + ")");
+}
+
+function hex(value) {
+  value = Math.max(0, Math.min(255, Math.round(value) || 0));
+  return (value < 16 ? "0" : "") + value.toString(16);
+}
+
+function hsla(h, s, l, a) {
+  if (a <= 0) h = s = l = NaN;
+  else if (l <= 0 || l >= 1) h = s = NaN;
+  else if (s <= 0) h = NaN;
+  return new Hsl(h, s, l, a);
+}
+
+function hslConvert(o) {
+  if (o instanceof Hsl) return new Hsl(o.h, o.s, o.l, o.opacity);
+  if (!(o instanceof Color)) o = color(o);
+  if (!o) return new Hsl;
+  if (o instanceof Hsl) return o;
+  o = o.rgb();
+  var r = o.r / 255,
+      g = o.g / 255,
+      b = o.b / 255,
+      min = Math.min(r, g, b),
+      max = Math.max(r, g, b),
+      h = NaN,
+      s = max - min,
+      l = (max + min) / 2;
+  if (s) {
+    if (r === max) h = (g - b) / s + (g < b) * 6;
+    else if (g === max) h = (b - r) / s + 2;
+    else h = (r - g) / s + 4;
+    s /= l < 0.5 ? max + min : 2 - max - min;
+    h *= 60;
+  } else {
+    s = l > 0 && l < 1 ? 0 : h;
+  }
+  return new Hsl(h, s, l, o.opacity);
+}
+
+function hsl(h, s, l, opacity) {
+  return arguments.length === 1 ? hslConvert(h) : new Hsl(h, s, l, opacity == null ? 1 : opacity);
+}
+
+function Hsl(h, s, l, opacity) {
+  this.h = +h;
+  this.s = +s;
+  this.l = +l;
+  this.opacity = +opacity;
+}
+
+Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["default"])(Hsl, hsl, Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["extend"])(Color, {
+  brighter: function(k) {
+    k = k == null ? brighter : Math.pow(brighter, k);
+    return new Hsl(this.h, this.s, this.l * k, this.opacity);
+  },
+  darker: function(k) {
+    k = k == null ? darker : Math.pow(darker, k);
+    return new Hsl(this.h, this.s, this.l * k, this.opacity);
+  },
+  rgb: function() {
+    var h = this.h % 360 + (this.h < 0) * 360,
+        s = isNaN(h) || isNaN(this.s) ? 0 : this.s,
+        l = this.l,
+        m2 = l + (l < 0.5 ? l : 1 - l) * s,
+        m1 = 2 * l - m2;
+    return new Rgb(
+      hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
+      hsl2rgb(h, m1, m2),
+      hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
+      this.opacity
+    );
+  },
+  displayable: function() {
+    return (0 <= this.s && this.s <= 1 || isNaN(this.s))
+        && (0 <= this.l && this.l <= 1)
+        && (0 <= this.opacity && this.opacity <= 1);
+  },
+  formatHsl: function() {
+    var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+    return (a === 1 ? "hsl(" : "hsla(")
+        + (this.h || 0) + ", "
+        + (this.s || 0) * 100 + "%, "
+        + (this.l || 0) * 100 + "%"
+        + (a === 1 ? ")" : ", " + a + ")");
+  }
+}));
+
+/* From FvD 13.37, CSS Color Module Level 3 */
+function hsl2rgb(h, m1, m2) {
+  return (h < 60 ? m1 + (m2 - m1) * h / 60
+      : h < 180 ? m2
+      : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60
+      : m1) * 255;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/d3-color/src/cubehelix.js":
+/*!************************************************!*\
+  !*** ./node_modules/d3-color/src/cubehelix.js ***!
+  \************************************************/
+/*! exports provided: default, Cubehelix */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return cubehelix; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Cubehelix", function() { return Cubehelix; });
+/* harmony import */ var _define_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./define.js */ "./node_modules/d3-color/src/define.js");
+/* harmony import */ var _color_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./color.js */ "./node_modules/d3-color/src/color.js");
+/* harmony import */ var _math_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./math.js */ "./node_modules/d3-color/src/math.js");
+
+
+
+
+var A = -0.14861,
+    B = +1.78277,
+    C = -0.29227,
+    D = -0.90649,
+    E = +1.97294,
+    ED = E * D,
+    EB = E * B,
+    BC_DA = B * C - D * A;
+
+function cubehelixConvert(o) {
+  if (o instanceof Cubehelix) return new Cubehelix(o.h, o.s, o.l, o.opacity);
+  if (!(o instanceof _color_js__WEBPACK_IMPORTED_MODULE_1__["Rgb"])) o = Object(_color_js__WEBPACK_IMPORTED_MODULE_1__["rgbConvert"])(o);
+  var r = o.r / 255,
+      g = o.g / 255,
+      b = o.b / 255,
+      l = (BC_DA * b + ED * r - EB * g) / (BC_DA + ED - EB),
+      bl = b - l,
+      k = (E * (g - l) - C * bl) / D,
+      s = Math.sqrt(k * k + bl * bl) / (E * l * (1 - l)), // NaN if l=0 or l=1
+      h = s ? Math.atan2(k, bl) * _math_js__WEBPACK_IMPORTED_MODULE_2__["rad2deg"] - 120 : NaN;
+  return new Cubehelix(h < 0 ? h + 360 : h, s, l, o.opacity);
+}
+
+function cubehelix(h, s, l, opacity) {
+  return arguments.length === 1 ? cubehelixConvert(h) : new Cubehelix(h, s, l, opacity == null ? 1 : opacity);
+}
+
+function Cubehelix(h, s, l, opacity) {
+  this.h = +h;
+  this.s = +s;
+  this.l = +l;
+  this.opacity = +opacity;
+}
+
+Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["default"])(Cubehelix, cubehelix, Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["extend"])(_color_js__WEBPACK_IMPORTED_MODULE_1__["Color"], {
+  brighter: function(k) {
+    k = k == null ? _color_js__WEBPACK_IMPORTED_MODULE_1__["brighter"] : Math.pow(_color_js__WEBPACK_IMPORTED_MODULE_1__["brighter"], k);
+    return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
+  },
+  darker: function(k) {
+    k = k == null ? _color_js__WEBPACK_IMPORTED_MODULE_1__["darker"] : Math.pow(_color_js__WEBPACK_IMPORTED_MODULE_1__["darker"], k);
+    return new Cubehelix(this.h, this.s, this.l * k, this.opacity);
+  },
+  rgb: function() {
+    var h = isNaN(this.h) ? 0 : (this.h + 120) * _math_js__WEBPACK_IMPORTED_MODULE_2__["deg2rad"],
+        l = +this.l,
+        a = isNaN(this.s) ? 0 : this.s * l * (1 - l),
+        cosh = Math.cos(h),
+        sinh = Math.sin(h);
+    return new _color_js__WEBPACK_IMPORTED_MODULE_1__["Rgb"](
+      255 * (l + a * (A * cosh + B * sinh)),
+      255 * (l + a * (C * cosh + D * sinh)),
+      255 * (l + a * (E * cosh)),
+      this.opacity
+    );
+  }
+}));
+
+
+/***/ }),
+
+/***/ "./node_modules/d3-color/src/define.js":
+/*!*********************************************!*\
+  !*** ./node_modules/d3-color/src/define.js ***!
+  \*********************************************/
+/*! exports provided: default, extend */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extend", function() { return extend; });
+/* harmony default export */ __webpack_exports__["default"] = (function(constructor, factory, prototype) {
+  constructor.prototype = factory.prototype = prototype;
+  prototype.constructor = constructor;
+});
+
+function extend(parent, definition) {
+  var prototype = Object.create(parent.prototype);
+  for (var key in definition) prototype[key] = definition[key];
+  return prototype;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/d3-color/src/index.js":
+/*!********************************************!*\
+  !*** ./node_modules/d3-color/src/index.js ***!
+  \********************************************/
+/*! exports provided: color, rgb, hsl, lab, hcl, lch, gray, cubehelix */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _color_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color.js */ "./node_modules/d3-color/src/color.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "color", function() { return _color_js__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "rgb", function() { return _color_js__WEBPACK_IMPORTED_MODULE_0__["rgb"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hsl", function() { return _color_js__WEBPACK_IMPORTED_MODULE_0__["hsl"]; });
+
+/* harmony import */ var _lab_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./lab.js */ "./node_modules/d3-color/src/lab.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lab", function() { return _lab_js__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hcl", function() { return _lab_js__WEBPACK_IMPORTED_MODULE_1__["hcl"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "lch", function() { return _lab_js__WEBPACK_IMPORTED_MODULE_1__["lch"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "gray", function() { return _lab_js__WEBPACK_IMPORTED_MODULE_1__["gray"]; });
+
+/* harmony import */ var _cubehelix_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./cubehelix.js */ "./node_modules/d3-color/src/cubehelix.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "cubehelix", function() { return _cubehelix_js__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/d3-color/src/lab.js":
+/*!******************************************!*\
+  !*** ./node_modules/d3-color/src/lab.js ***!
+  \******************************************/
+/*! exports provided: gray, default, Lab, lch, hcl, Hcl */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gray", function() { return gray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return lab; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Lab", function() { return Lab; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lch", function() { return lch; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hcl", function() { return hcl; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Hcl", function() { return Hcl; });
+/* harmony import */ var _define_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./define.js */ "./node_modules/d3-color/src/define.js");
+/* harmony import */ var _color_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./color.js */ "./node_modules/d3-color/src/color.js");
+/* harmony import */ var _math_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./math.js */ "./node_modules/d3-color/src/math.js");
+
+
+
+
+// https://observablehq.com/@mbostock/lab-and-rgb
+var K = 18,
+    Xn = 0.96422,
+    Yn = 1,
+    Zn = 0.82521,
+    t0 = 4 / 29,
+    t1 = 6 / 29,
+    t2 = 3 * t1 * t1,
+    t3 = t1 * t1 * t1;
+
+function labConvert(o) {
+  if (o instanceof Lab) return new Lab(o.l, o.a, o.b, o.opacity);
+  if (o instanceof Hcl) return hcl2lab(o);
+  if (!(o instanceof _color_js__WEBPACK_IMPORTED_MODULE_1__["Rgb"])) o = Object(_color_js__WEBPACK_IMPORTED_MODULE_1__["rgbConvert"])(o);
+  var r = rgb2lrgb(o.r),
+      g = rgb2lrgb(o.g),
+      b = rgb2lrgb(o.b),
+      y = xyz2lab((0.2225045 * r + 0.7168786 * g + 0.0606169 * b) / Yn), x, z;
+  if (r === g && g === b) x = z = y; else {
+    x = xyz2lab((0.4360747 * r + 0.3850649 * g + 0.1430804 * b) / Xn);
+    z = xyz2lab((0.0139322 * r + 0.0971045 * g + 0.7141733 * b) / Zn);
+  }
+  return new Lab(116 * y - 16, 500 * (x - y), 200 * (y - z), o.opacity);
+}
+
+function gray(l, opacity) {
+  return new Lab(l, 0, 0, opacity == null ? 1 : opacity);
+}
+
+function lab(l, a, b, opacity) {
+  return arguments.length === 1 ? labConvert(l) : new Lab(l, a, b, opacity == null ? 1 : opacity);
+}
+
+function Lab(l, a, b, opacity) {
+  this.l = +l;
+  this.a = +a;
+  this.b = +b;
+  this.opacity = +opacity;
+}
+
+Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["default"])(Lab, lab, Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["extend"])(_color_js__WEBPACK_IMPORTED_MODULE_1__["Color"], {
+  brighter: function(k) {
+    return new Lab(this.l + K * (k == null ? 1 : k), this.a, this.b, this.opacity);
+  },
+  darker: function(k) {
+    return new Lab(this.l - K * (k == null ? 1 : k), this.a, this.b, this.opacity);
+  },
+  rgb: function() {
+    var y = (this.l + 16) / 116,
+        x = isNaN(this.a) ? y : y + this.a / 500,
+        z = isNaN(this.b) ? y : y - this.b / 200;
+    x = Xn * lab2xyz(x);
+    y = Yn * lab2xyz(y);
+    z = Zn * lab2xyz(z);
+    return new _color_js__WEBPACK_IMPORTED_MODULE_1__["Rgb"](
+      lrgb2rgb( 3.1338561 * x - 1.6168667 * y - 0.4906146 * z),
+      lrgb2rgb(-0.9787684 * x + 1.9161415 * y + 0.0334540 * z),
+      lrgb2rgb( 0.0719453 * x - 0.2289914 * y + 1.4052427 * z),
+      this.opacity
+    );
+  }
+}));
+
+function xyz2lab(t) {
+  return t > t3 ? Math.pow(t, 1 / 3) : t / t2 + t0;
+}
+
+function lab2xyz(t) {
+  return t > t1 ? t * t * t : t2 * (t - t0);
+}
+
+function lrgb2rgb(x) {
+  return 255 * (x <= 0.0031308 ? 12.92 * x : 1.055 * Math.pow(x, 1 / 2.4) - 0.055);
+}
+
+function rgb2lrgb(x) {
+  return (x /= 255) <= 0.04045 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4);
+}
+
+function hclConvert(o) {
+  if (o instanceof Hcl) return new Hcl(o.h, o.c, o.l, o.opacity);
+  if (!(o instanceof Lab)) o = labConvert(o);
+  if (o.a === 0 && o.b === 0) return new Hcl(NaN, 0 < o.l && o.l < 100 ? 0 : NaN, o.l, o.opacity);
+  var h = Math.atan2(o.b, o.a) * _math_js__WEBPACK_IMPORTED_MODULE_2__["rad2deg"];
+  return new Hcl(h < 0 ? h + 360 : h, Math.sqrt(o.a * o.a + o.b * o.b), o.l, o.opacity);
+}
+
+function lch(l, c, h, opacity) {
+  return arguments.length === 1 ? hclConvert(l) : new Hcl(h, c, l, opacity == null ? 1 : opacity);
+}
+
+function hcl(h, c, l, opacity) {
+  return arguments.length === 1 ? hclConvert(h) : new Hcl(h, c, l, opacity == null ? 1 : opacity);
+}
+
+function Hcl(h, c, l, opacity) {
+  this.h = +h;
+  this.c = +c;
+  this.l = +l;
+  this.opacity = +opacity;
+}
+
+function hcl2lab(o) {
+  if (isNaN(o.h)) return new Lab(o.l, 0, 0, o.opacity);
+  var h = o.h * _math_js__WEBPACK_IMPORTED_MODULE_2__["deg2rad"];
+  return new Lab(o.l, Math.cos(h) * o.c, Math.sin(h) * o.c, o.opacity);
+}
+
+Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["default"])(Hcl, hcl, Object(_define_js__WEBPACK_IMPORTED_MODULE_0__["extend"])(_color_js__WEBPACK_IMPORTED_MODULE_1__["Color"], {
+  brighter: function(k) {
+    return new Hcl(this.h, this.c, this.l + K * (k == null ? 1 : k), this.opacity);
+  },
+  darker: function(k) {
+    return new Hcl(this.h, this.c, this.l - K * (k == null ? 1 : k), this.opacity);
+  },
+  rgb: function() {
+    return hcl2lab(this).rgb();
+  }
+}));
+
+
+/***/ }),
+
+/***/ "./node_modules/d3-color/src/math.js":
+/*!*******************************************!*\
+  !*** ./node_modules/d3-color/src/math.js ***!
+  \*******************************************/
+/*! exports provided: deg2rad, rad2deg */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deg2rad", function() { return deg2rad; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rad2deg", function() { return rad2deg; });
+var deg2rad = Math.PI / 180;
+var rad2deg = 180 / Math.PI;
+
+
+/***/ }),
+
+/***/ "./node_modules/delta-e/src/dE00.js":
+/*!******************************************!*\
+  !*** ./node_modules/delta-e/src/dE00.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * @class dE00
+ * @classdesc
+ * The CIE2000 color difference algorithm.
+ * http://en.wikipedia.org/wiki/Color_difference#CIEDE2000
+ * @constructs dE00
+ * @memberOf DeltaE
+ * @property {object} x1 The LAB color configuration object.
+ * @property {number} x1.L The lightness value, on scale of 0-100.
+ * @property {number} x1.A The chroma value, on scale of -128 to 128.
+ * @property {number} x1.B The hue value, on scale of -128 to 128.
+ * @property {object} x2 The LAB color configuration object.
+ * @property {number} x2.L The lightness value, on scale of 0-100.
+ * @property {number} x2.A The chroma value, on scale of -128 to 128.
+ * @property {number} x2.B The hue value, on scale of -128 to 128.
+ * @property {object} weights The weights configuration object.
+ * @property {number} weights.lightness A weight factor to apply to lightness.
+ * @property {number} weights.chroma A weight factor to apply to chroma.
+ * @property {number} weights.hue A weight factor to apply to hue.
+ * @example
+ * var deltaE = new dE00(
+ *     {L:50, A:50, B:50},
+ *     {L:100, A:50, B:50},
+ * );
+ * console.log(deltaE.getDeltaE());
+ */
+function dE00(x1, x2, weights) {
+    var sqrt = Math.sqrt;
+    var pow = Math.pow;
+    
+    this.x1 = x1;
+    this.x2 = x2;
+    
+    this.weights = weights || {};
+    this.ksubL = this.weights.lightness || 1;
+    this.ksubC = this.weights.chroma || 1;
+    this.ksubH = this.weights.hue || 1;
+    
+    // Delta L Prime
+    this.deltaLPrime = x2.L - x1.L;
+    
+    // L Bar
+    this.LBar = (x1.L + x2.L) / 2;
+    
+    // C1 & C2
+    this.C1 = sqrt(pow(x1.A, 2) + pow(x1.B, 2));
+    this.C2 = sqrt(pow(x2.A, 2) + pow(x2.B, 2));
+    
+    // C Bar
+    this.CBar = (this.C1 + this.C2) / 2;
+    
+    // A Prime 1
+    this.aPrime1 = x1.A +
+        (x1.A / 2) *
+        (1 - sqrt(
+            pow(this.CBar, 7) /
+            (pow(this.CBar, 7) + pow(25, 7))
+        ));
+
+    // A Prime 2
+    this.aPrime2 = x2.A +
+        (x2.A / 2) *
+        (1 - sqrt(
+            pow(this.CBar, 7) /
+            (pow(this.CBar, 7) + pow(25, 7))
+        ));
+
+    // C Prime 1
+    this.CPrime1 = sqrt(
+        pow(this.aPrime1, 2) +
+        pow(x1.B, 2)
+    );
+    
+    // C Prime 2
+    this.CPrime2 = sqrt(
+        pow(this.aPrime2, 2) +
+        pow(x2.B, 2)
+    );
+    
+    // C Bar Prime
+    this.CBarPrime = (this.CPrime1 + this.CPrime2) / 2;
+    
+    // Delta C Prime
+    this.deltaCPrime = this.CPrime2 - this.CPrime1;
+    
+    // S sub L
+    this.SsubL = 1 + (
+        (0.015 * pow(this.LBar - 50, 2)) /
+        sqrt(20 + pow(this.LBar - 50, 2))
+    );
+    
+    // S sub C
+    this.SsubC = 1 + 0.045 * this.CBarPrime;
+    
+    /**
+     * Properties set in getDeltaE method, for access to convenience functions
+     */
+    // h Prime 1
+    this.hPrime1 = 0;
+    
+    // h Prime 2
+    this.hPrime2 = 0;
+    
+    // Delta h Prime
+    this.deltahPrime = 0;
+    
+    // Delta H Prime
+    this.deltaHPrime = 0;
+    
+    // H Bar Prime
+    this.HBarPrime = 0;
+    
+    // T
+    this.T = 0;
+    
+    // S sub H
+    this.SsubH = 0;
+    
+    // R sub T
+    this.RsubT = 0;
+}
+
+/**
+ * Returns the deltaE value.
+ * @method
+ * @returns {number}
+ */
+dE00.prototype.getDeltaE = function() {
+    var sqrt = Math.sqrt;
+    var sin = Math.sin;
+    var pow = Math.pow;
+    
+    // h Prime 1
+    this.hPrime1 = this.gethPrime1();
+    
+    // h Prime 2
+    this.hPrime2 = this.gethPrime2();
+    
+    // Delta h Prime
+    this.deltahPrime = this.getDeltahPrime();
+    
+    // Delta H Prime
+    this.deltaHPrime = 2 * sqrt(this.CPrime1 * this.CPrime2) * sin(this.degreesToRadians(this.deltahPrime) / 2);
+    
+    // H Bar Prime
+    this.HBarPrime = this.getHBarPrime();
+    
+    // T
+    this.T = this.getT();
+    
+    // S sub H
+    this.SsubH = 1 + 0.015 * this.CBarPrime * this.T;
+    
+    // R sub T
+    this.RsubT = this.getRsubT();
+    
+    // Put it all together!
+    var lightness = this.deltaLPrime / (this.ksubL * this.SsubL);
+    var chroma = this.deltaCPrime / (this.ksubC * this.SsubC);
+    var hue = this.deltaHPrime / (this.ksubH * this.SsubH);
+   
+    return sqrt(
+        pow(lightness, 2) +
+        pow(chroma, 2) +
+        pow(hue, 2) +
+        this.RsubT * chroma * hue
+    );
+};
+
+/**
+ * Returns the RT variable calculation.
+ * @method
+ * @returns {number}
+ */
+dE00.prototype.getRsubT = function() {
+    var sin = Math.sin;
+    var sqrt = Math.sqrt;
+    var pow = Math.pow;
+    var exp = Math.exp;
+    
+    return -2 *
+        sqrt(
+            pow(this.CBarPrime, 7) /
+            (pow(this.CBarPrime, 7) + pow(25, 7))
+        ) *
+        sin(this.degreesToRadians(
+            60 *
+            exp(
+                -(
+                    pow(
+                        (this.HBarPrime - 275) / 25, 2
+                    )
+                )
+            )
+        ));
+};
+
+/**
+ * Returns the T variable calculation.
+ * @method
+ * @returns {number}
+ */
+dE00.prototype.getT = function() {
+    var cos = Math.cos;
+    
+    return 1 -
+        0.17 * cos(this.degreesToRadians(this.HBarPrime - 30)) +
+        0.24 * cos(this.degreesToRadians(2 * this.HBarPrime)) +
+        0.32 * cos(this.degreesToRadians(3 * this.HBarPrime + 6)) -
+        0.20 * cos(this.degreesToRadians(4 * this.HBarPrime - 63));
+};
+
+/**
+ * Returns the H Bar Prime variable calculation.
+ * @method
+ * @returns {number}
+ */
+dE00.prototype.getHBarPrime= function() {
+    var abs = Math.abs;
+    
+    if (abs(this.hPrime1 - this.hPrime2) > 180) {
+        return (this.hPrime1 + this.hPrime2 + 360) / 2
+    }
+    
+    return (this.hPrime1 + this.hPrime2) / 2
+};
+
+/**
+ * Returns the Delta h Prime variable calculation.
+ * @method
+ * @returns {number}
+ */
+dE00.prototype.getDeltahPrime = function() {
+    var abs = Math.abs;
+    
+    // When either C′1 or C′2 is zero, then Δh′ is irrelevant and may be set to
+    // zero.
+    if (0 === this.C1 || 0 === this.C2) {
+        return 0;
+    }
+    
+    if (abs(this.hPrime1 - this.hPrime2) <= 180) {
+        return this.hPrime2 - this.hPrime1;
+    }
+    
+    if (this.hPrime2 <= this.hPrime1) {
+        return this.hPrime2 - this.hPrime1 + 360;
+    } else {
+        return this.hPrime2 - this.hPrime1 - 360;
+    }
+};
+
+/**
+ * Returns the h Prime 1 variable calculation.
+ * @method
+ * @returns {number}
+ */
+dE00.prototype.gethPrime1 = function() {
+    return this._gethPrimeFn(this.x1.B, this.aPrime1);
+};
+
+/**
+ * Returns the h Prime 2 variable calculation.
+ * @method
+ * @returns {number}
+ */
+dE00.prototype.gethPrime2 = function() {
+    return this._gethPrimeFn(this.x2.B, this.aPrime2);
+};
+
+/**
+ * A helper function to calculate the h Prime 1 and h Prime 2 values.
+ * @method
+ * @private
+ * @returns {number}
+ */
+dE00.prototype._gethPrimeFn = function(x, y) {
+    var hueAngle;
+    
+    if (x === 0 && y === 0) {
+        return 0;
+    }
+    
+    hueAngle = this.radiansToDegrees(Math.atan2(x, y));
+    
+    if (hueAngle >= 0) {
+        return hueAngle;
+    } else {
+        return hueAngle + 360;
+    }
+};
+
+/**
+ * Gives the radian equivalent of a specified degree angle.
+ * @method
+ * @returns {number}
+ */
+dE00.prototype.radiansToDegrees = function(radians) {
+    return radians * (180 / Math.PI);
+};
+
+/**
+ * Gives the degree equivalent of a specified radian.
+ * @method
+ * @returns {number}
+ */
+dE00.prototype.degreesToRadians = function(degrees) {
+    return degrees * (Math.PI / 180);
+};
+
+module.exports = dE00;
+
+/***/ }),
+
+/***/ "./node_modules/delta-e/src/dE76.js":
+/*!******************************************!*\
+  !*** ./node_modules/delta-e/src/dE76.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * @class dE76
+ * @classdesc
+ * The CIE76 color difference algorithm: a simple euclidean distance calculation.
+ * http://en.wikipedia.org/wiki/Color_difference#CIE76
+ * @constructs dE76
+ * @memberOf DeltaE
+ * @property {object} x1 The LAB color configuration object.
+ * @property {number} x1.L The lightness value, on scale of 0-100.
+ * @property {number} x1.A The chroma value, on scale of -128 to 128.
+ * @property {number} x1.B The hue value, on scale of -128 to 128.
+ * @property {object} x2 The LAB color configuration object.
+ * @property {number} x2.L The lightness value, on scale of 0-100.
+ * @property {number} x2.A The chroma value, on scale of -128 to 128.
+ * @property {number} x2.B The hue value, on scale of -128 to 128.
+ * @example
+ * var deltaE = new dE76(
+ *     {L:50, A:50, B:50},
+ *     {L:100, A:50, B:50},
+ * );
+ * console.log(deltaE.getDeltaE());
+ */
+function dE76(x1, x2) {
+    this.x1 = x1;
+    this.x2 = x2;
+}
+
+/**
+ * Returns the dE76 value.
+ * @method
+ * @returns {number}
+ */
+dE76.prototype.getDeltaE = function() {
+    var x1 = this.x1;
+    var x2 = this.x2;
+    
+    return Math.sqrt(
+        Math.pow(x2.L - x1.L, 2) +
+        Math.pow(x2.A - x1.A, 2) +
+        Math.pow(x2.B - x1.B, 2)
+    );
+};
+
+module.exports = dE76;
+
+/***/ }),
+
+/***/ "./node_modules/delta-e/src/dE94.js":
+/*!******************************************!*\
+  !*** ./node_modules/delta-e/src/dE94.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * @class dE94
+ * @classdesc
+ * The CIE94 algorithm: an iteration of the CIE76 algorithm.
+ * http://en.wikipedia.org/wiki/Color_difference#CIE94
+ * @constructs dE94
+ * @memberOf DeltaE
+ * @property {object} x1 The LAB color configuration object.
+ * @property {number} x1.L The lightness value, on scale of 0-100.
+ * @property {number} x1.A The chroma value, on scale of -128 to 128.
+ * @property {number} x1.B The hue value, on scale of -128 to 128.
+ * @property {object} x2 The LAB color configuration object.
+ * @property {number} x2.L The lightness value, on scale of 0-100.
+ * @property {number} x2.A The chroma value, on scale of -128 to 128.
+ * @property {number} x2.B The hue value, on scale of -128 to 128.
+ * @property {object} weights The weights configuration object.
+ * @property {number} weights.lightness A weight factor to apply to lightness.
+ * @property {number} weights.chroma A weight factor to apply to chroma.
+ * @property {number} weights.hue A weight factor to apply to hue.
+ * @example
+ * var deltaE = new dE94(
+ *     {L:50, A:50, B:50},
+ *     {L:100, A:50, B:50},
+ * );
+ * console.log(deltaE.getDeltaE());
+ */
+function dE94(x1, x2, weights) {
+    this.x1 = x1;
+    this.x2 = x2;
+    
+    this.weights = weights || {};
+    this.weights.lightness = this.weights.lightness || 1;
+    this.weights.chroma = this.weights.chroma || 1;
+    this.weights.hue = this.weights.hue || 1;
+    
+    if (1 === this.weights.lightness) {
+        this.weights.K1 = 0.045;
+        this.weights.K2 = 0.015;
+    } else {
+        this.weights.K1 = 0.048;
+        this.weights.K2 = 0.014;
+    }
+}
+
+/**
+ * Returns the dE94 value.
+ * @method
+ * @returns {number}
+ */
+dE94.prototype.getDeltaE = function() {
+    var x1 = this.x1;
+    var x2 = this.x2;
+    var sqrt = Math.sqrt;
+    var pow = Math.pow;
+    
+    return sqrt(
+        pow(this.calculateL(x1, x2), 2) +
+        pow(this.calculateA(x1, x2), 2) +
+        pow(this.calculateB(x1, x2), 2)
+    );
+};
+
+/**
+ * Calculates the lightness value.
+ * @method
+ * @returns {number}
+ */
+dE94.prototype.calculateL = function(x1, x2) {
+    return (x1.L - x2.L) / this.weights.lightness;
+};
+
+/**
+ * Calculates the chroma value.
+ * @method
+ * @returns {number}
+ */
+dE94.prototype.calculateA = function(x1, x2) {
+    var sqrt = Math.sqrt;
+    var pow = Math.pow;
+    
+    //top
+    var c1 = sqrt(pow(x1.A, 2) + pow(x1.B, 2));
+    var c2 = sqrt(pow(x2.A, 2) + pow(x2.B, 2));
+    var cab = c1 - c2;
+    
+    // bottom
+    var sc = 1 + (this.weights.K1 * c1);
+    
+    return cab / (this.weights.chroma * sc);
+};
+
+/**
+ * Calculates the hue value.
+ * @method
+ * @returns {number}
+ */
+dE94.prototype.calculateB = function(x1, x2) {
+    var sqrt = Math.sqrt;
+    var pow = Math.pow;
+    
+    // cab
+    var c1 = sqrt(pow(x1.A, 2) + pow(x1.B, 2));
+    var c2 = sqrt(pow(x2.A, 2) + pow(x2.B, 2));
+    var cab = c1 - c2;
+    
+    // top
+    var a = x1.A - x2.A;
+    var b = x1.B - x2.B;
+    var hab = sqrt(
+        pow(a, 2) +
+        pow(b, 2) -
+        pow(cab, 2)
+    );
+    
+    // bottom
+    var c1 = sqrt(pow(x1.A, 2) + pow(x1.B, 2));
+    var sh = 1 + (this.weights.K2 * c1);
+    
+    return hab / sh;
+};
+
+module.exports = dE94;
+
+/***/ }),
+
+/***/ "./node_modules/delta-e/src/index.js":
+/*!*******************************************!*\
+  !*** ./node_modules/delta-e/src/index.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * @class DeltaE
+ * @classdesc
+ * A package of dE76, dE94, and dE00 algorithms.
+ * @constructs DeltaE
+ * @example
+ * var DeltaE = new DeltaE();
+ * var labColor1 = {L: 50, A: 50, B: 50};
+ * var labColor2 = {L: 20, A: 20, B: 20};
+ * 
+ * DeltaE.getDeltaE94(labColor1, labColor2);
+ */
+var dE76 = __webpack_require__(/*! ./dE76 */ "./node_modules/delta-e/src/dE76.js");
+var dE94 = __webpack_require__(/*! ./dE94 */ "./node_modules/delta-e/src/dE94.js");
+var dE00 = __webpack_require__(/*! ./dE00 */ "./node_modules/delta-e/src/dE00.js");
+
+function DeltaE() {}
+
+/**
+ * The CIE76 color difference algorithm: a simple euclidean distance calculation.
+ * http://en.wikipedia.org/wiki/Color_difference#CIE76
+ * @property {object} x1 The LAB color configuration object.
+ * @property {number} x1.L The lightness value, on scale of 0-100.
+ * @property {number} x1.A The chroma value, on scale of -128 to 128.
+ * @property {number} x1.B The hue value, on scale of -128 to 128.
+ * @property {object} x2 The LAB color configuration object.
+ * @property {number} x2.L The lightness value, on scale of 0-100.
+ * @property {number} x2.A The chroma value, on scale of -128 to 128.
+ * @property {number} x2.B The hue value, on scale of -128 to 128.
+ * @returns {number} The computed dE76 value.
+ * @example
+ * var labColor1 = {L: 50, A: 50, B: 50};
+ * var labColor2 = {L: 20, A: 20, B: 20};
+ * 
+ * DeltaE.getDeltaE76(labColor1, labColor2);
+ */
+DeltaE.prototype.getDeltaE76 = function(lab1, lab2) {
+    var deltaE = new dE76(lab1, lab2);
+    return deltaE.getDeltaE();
+};
+
+/**
+ * The CIE94 algorithm: an iteration of the CIE76 algorithm.
+ * http://en.wikipedia.org/wiki/Color_difference#CIE94
+ * @property {object} x1 The LAB color configuration object.
+ * @property {number} x1.L The lightness value, on scale of 0-100.
+ * @property {number} x1.A The chroma value, on scale of -128 to 128.
+ * @property {number} x1.B The hue value, on scale of -128 to 128.
+ * @property {object} x2 The LAB color configuration object.
+ * @property {number} x2.L The lightness value, on scale of 0-100.
+ * @property {number} x2.A The chroma value, on scale of -128 to 128.
+ * @property {number} x2.B The hue value, on scale of -128 to 128.
+ * @property {object} weights The weights configuration object.
+ * @property {number} weights.lightness A weight factor to apply to lightness.
+ * @property {number} weights.chroma A weight factor to apply to chroma.
+ * @property {number} weights.hue A weight factor to apply to hue.
+ * @returns {number} The computed dE94 value.
+ * @example
+ * var labColor1 = {L: 50, A: 50, B: 50};
+ * var labColor2 = {L: 20, A: 20, B: 20};
+ * 
+ * DeltaE.getDeltaE94(labColor1, labColor2);
+ */
+DeltaE.prototype.getDeltaE94 = function(lab1, lab2) {
+    var deltaE = new dE94(lab1, lab2);
+    return deltaE.getDeltaE();
+};
+
+/**
+ * The CIE2000 color difference algorithm.
+ * http://en.wikipedia.org/wiki/Color_difference#CIEDE2000
+ * @property {object} x1 The LAB color configuration object.
+ * @property {number} x1.L The lightness value, on scale of 0-100.
+ * @property {number} x1.A The chroma value, on scale of -128 to 128.
+ * @property {number} x1.B The hue value, on scale of -128 to 128.
+ * @property {object} x2 The LAB color configuration object.
+ * @property {number} x2.L The lightness value, on scale of 0-100.
+ * @property {number} x2.A The chroma value, on scale of -128 to 128.
+ * @property {number} x2.B The hue value, on scale of -128 to 128.
+ * @property {object} weights The weights configuration object.
+ * @property {number} weights.lightness A weight factor to apply to lightness.
+ * @property {number} weights.chroma A weight factor to apply to chroma.
+ * @property {number} weights.hue A weight factor to apply to hue.
+ * @returns {number} The computed dE00 value.
+ * @example
+ * var labColor1 = {L: 50, A: 50, B: 50};
+ * var labColor2 = {L: 20, A: 20, B: 20};
+ * 
+ * DeltaE.getDeltaE00(labColor1, labColor2);
+ */
+DeltaE.prototype.getDeltaE00 = function(lab1, lab2) {
+    var deltaE = new dE00(lab1, lab2);
+    return deltaE.getDeltaE();
+};
+
+module.exports = new DeltaE;
+
+/***/ }),
+
+/***/ "./node_modules/mocha-js-delegate/index.js":
+/*!*************************************************!*\
+  !*** ./node_modules/mocha-js-delegate/index.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/* globals MOClassDescription, NSObject, NSSelectorFromString, NSClassFromString, MOPropertyDescription */
+
+module.exports = function MochaDelegate(definition, superclass) {
+  var uniqueClassName =
+    'MochaJSDelegate_DynamicClass_' + NSUUID.UUID().UUIDString()
+
+  var delegateClassDesc = MOClassDescription.allocateDescriptionForClassWithName_superclass_(
+    uniqueClassName,
+    superclass || NSObject
+  )
+
+  // Storage
+  var handlers = {}
+  var ivars = {}
+
+  // Define an instance method
+  function setHandlerForSelector(selectorString, func) {
+    var handlerHasBeenSet = selectorString in handlers
+    var selector = NSSelectorFromString(selectorString)
+
+    handlers[selectorString] = func
+
+    /*
+      For some reason, Mocha acts weird about arguments: https://github.com/logancollins/Mocha/issues/28
+      We have to basically create a dynamic handler with a likewise dynamic number of predefined arguments.
+    */
+    if (!handlerHasBeenSet) {
+      var args = []
+      var regex = /:/g
+      while (regex.exec(selectorString)) {
+        args.push('arg' + args.length)
+      }
+
+      // eslint-disable-next-line no-eval
+      var dynamicFunction = eval(
+        '(function (' +
+          args.join(', ') +
+          ') { return handlers[selectorString].apply(this, arguments); })'
+      )
+
+      delegateClassDesc.addInstanceMethodWithSelector_function(
+        selector,
+        dynamicFunction
+      )
+    }
+  }
+
+  // define a property
+  function setIvar(key, value) {
+    var ivarHasBeenSet = key in handlers
+
+    ivars[key] = value
+
+    if (!ivarHasBeenSet) {
+      delegateClassDesc.addInstanceVariableWithName_typeEncoding(key, '@')
+      var description = MOPropertyDescription.new()
+      description.name = key
+      description.typeEncoding = '@'
+      description.weak = true
+      description.ivarName = key
+      delegateClassDesc.addProperty(description)
+    }
+  }
+
+  this.getClass = function() {
+    return NSClassFromString(uniqueClassName)
+  }
+
+  this.getClassInstance = function(instanceVariables) {
+    var instance = NSClassFromString(uniqueClassName).new()
+    Object.keys(ivars).forEach(function(key) {
+      instance[key] = ivars[key]
+    })
+    Object.keys(instanceVariables || {}).forEach(function(key) {
+      instance[key] = instanceVariables[key]
+    })
+    return instance
+  }
+  // alias
+  this.new = this.getClassInstance
+
+  // Convenience
+  if (typeof definition === 'object') {
+    Object.keys(definition).forEach(
+      function(key) {
+        if (typeof definition[key] === 'function') {
+          setHandlerForSelector(key, definition[key])
+        } else {
+          setIvar(key, definition[key])
+        }
+      }
+    )
+  }
+
+  delegateClassDesc.registerClass()
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/browser-api.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/browser-api.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function parseHexColor(color) {
+  // Check the string for incorrect formatting.
+  if (!color || color[0] !== '#') {
+    if (
+      color &&
+      typeof color.isKindOfClass === 'function' &&
+      color.isKindOfClass(NSColor)
+    ) {
+      return color
+    }
+    throw new Error(
+      'Incorrect color formating. It should be an hex color: #RRGGBBAA'
+    )
+  }
+
+  // append FF if alpha channel is not specified.
+  var source = color.substr(1)
+  if (source.length === 3) {
+    source += 'F'
+  } else if (source.length === 6) {
+    source += 'FF'
+  }
+  // Convert the string from #FFF format to #FFFFFF format.
+  var hex
+  if (source.length === 4) {
+    for (var i = 0; i < 4; i += 1) {
+      hex += source[i]
+      hex += source[i]
+    }
+  } else if (source.length === 8) {
+    hex = source
+  } else {
+    return NSColor.whiteColor()
+  }
+
+  var r = parseInt(hex.slice(0, 2), 16)
+  var g = parseInt(hex.slice(2, 4), 16)
+  var b = parseInt(hex.slice(4, 6), 16)
+  var a = parseInt(hex.slice(6, 8), 16)
+
+  return NSColor.colorWithSRGBRed_green_blue_alpha(r, g, b, a)
+}
+
+module.exports = function(browserWindow, panel, webview) {
+  // keep reference to the subviews
+  browserWindow._panel = panel
+  browserWindow._webview = webview
+  browserWindow._destroyed = false
+
+  browserWindow.destroy = function() {
+    return panel.close()
+  }
+
+  browserWindow.close = function() {
+    if (panel.delegate().utils && panel.delegate().utils.parentWindow) {
+      var shouldClose = true
+      browserWindow.emit('close', {
+        get defaultPrevented() {
+          return !shouldClose
+        },
+        preventDefault: function() {
+          shouldClose = false
+        },
+      })
+      if (shouldClose) {
+        panel.delegate().utils.parentWindow.endSheet(panel)
+      }
+      return
+    }
+
+    if (!browserWindow.isClosable()) {
+      return
+    }
+
+    panel.performClose(null)
+  }
+
+  function focus(focused) {
+    if (!browserWindow.isVisible()) {
+      return
+    }
+    if (focused) {
+      NSApplication.sharedApplication().activateIgnoringOtherApps(true)
+      panel.makeKeyAndOrderFront(null)
+    } else {
+      panel.orderBack(null)
+      NSApp.mainWindow().makeKeyAndOrderFront(null)
+    }
+  }
+
+  browserWindow.focus = focus.bind(this, true)
+  browserWindow.blur = focus.bind(this, false)
+
+  browserWindow.isFocused = function() {
+    return panel.isKeyWindow()
+  }
+
+  browserWindow.isDestroyed = function() {
+    return browserWindow._destroyed
+  }
+
+  browserWindow.show = function() {
+    // This method is supposed to put focus on window, however if the app does not
+    // have focus then "makeKeyAndOrderFront" will only show the window.
+    NSApp.activateIgnoringOtherApps(true)
+
+    if (panel.delegate().utils && panel.delegate().utils.parentWindow) {
+      return panel.delegate().utils.parentWindow.beginSheet_completionHandler(
+        panel,
+        __mocha__.createBlock_function('v16@?0q8', function() {
+          browserWindow.emit('closed')
+        })
+      )
+    }
+
+    return panel.makeKeyAndOrderFront(null)
+  }
+
+  browserWindow.showInactive = function() {
+    return panel.orderFrontRegardless()
+  }
+
+  browserWindow.hide = function() {
+    return panel.orderOut(null)
+  }
+
+  browserWindow.isVisible = function() {
+    return panel.isVisible()
+  }
+
+  browserWindow.isModal = function() {
+    return false
+  }
+
+  browserWindow.maximize = function() {
+    if (!browserWindow.isMaximized()) {
+      panel.zoom(null)
+    }
+  }
+  browserWindow.unmaximize = function() {
+    if (browserWindow.isMaximized()) {
+      panel.zoom(null)
+    }
+  }
+
+  browserWindow.isMaximized = function() {
+    if ((panel.styleMask() & NSResizableWindowMask) !== 0) {
+      return panel.isZoomed()
+    }
+    var rectScreen = NSScreen.mainScreen().visibleFrame()
+    var rectWindow = panel.frame()
+    return (
+      rectScreen.origin.x == rectWindow.origin.x &&
+      rectScreen.origin.y == rectWindow.origin.y &&
+      rectScreen.size.width == rectWindow.size.width &&
+      rectScreen.size.height == rectWindow.size.height
+    )
+  }
+
+  browserWindow.minimize = function() {
+    return panel.miniaturize(null)
+  }
+
+  browserWindow.restore = function() {
+    return panel.deminiaturize(null)
+  }
+
+  browserWindow.isMinimized = function() {
+    return panel.isMiniaturized()
+  }
+
+  browserWindow.setFullScreen = function(fullscreen) {
+    if (fullscreen !== browserWindow.isFullscreen()) {
+      panel.toggleFullScreen(null)
+    }
+  }
+
+  browserWindow.isFullscreen = function() {
+    return panel.styleMask() & NSFullScreenWindowMask
+  }
+
+  browserWindow.setAspectRatio = function(aspectRatio /* , extraSize */) {
+    // Reset the behaviour to default if aspect_ratio is set to 0 or less.
+    if (aspectRatio > 0.0) {
+      panel.setAspectRatio(NSMakeSize(aspectRatio, 1.0))
+    } else {
+      panel.setResizeIncrements(NSMakeSize(1.0, 1.0))
+    }
+  }
+
+  browserWindow.setBounds = function(bounds, animate) {
+    if (!bounds) {
+      return
+    }
+
+    // Do nothing if in fullscreen mode.
+    if (browserWindow.isFullscreen()) {
+      return
+    }
+
+    const newBounds = Object.assign(browserWindow.getBounds(), bounds)
+
+    // TODO: Check size constraints since setFrame does not check it.
+    // var size = bounds.size
+    // size.SetToMax(GetMinimumSize());
+    // gfx::Size max_size = GetMaximumSize();
+    // if (!max_size.IsEmpty())
+    //   size.SetToMin(max_size);
+
+    var cocoaBounds = NSMakeRect(
+      newBounds.x,
+      0,
+      newBounds.width,
+      newBounds.height
+    )
+    // Flip Y coordinates based on the primary screen
+    var screen = NSScreen.screens().firstObject()
+    cocoaBounds.origin.y = NSHeight(screen.frame()) - newBounds.y
+
+    panel.setFrame_display_animate(cocoaBounds, true, animate)
+  }
+
+  browserWindow.getBounds = function() {
+    const cocoaBounds = panel.frame()
+    var mainScreenRect = NSScreen.screens()
+      .firstObject()
+      .frame()
+    return {
+      x: cocoaBounds.origin.x,
+      y: Math.round(NSHeight(mainScreenRect) - cocoaBounds.origin.y),
+      width: cocoaBounds.size.width,
+      height: cocoaBounds.size.height,
+    }
+  }
+
+  browserWindow.setContentBounds = function(bounds, animate) {
+    // TODO:
+    browserWindow.setBounds(bounds, animate)
+  }
+
+  browserWindow.getContentBounds = function() {
+    // TODO:
+    return browserWindow.getBounds()
+  }
+
+  browserWindow.setSize = function(width, height, animate) {
+    // TODO: handle resizing around center
+    return browserWindow.setBounds({ width: width, height: height }, animate)
+  }
+
+  browserWindow.getSize = function() {
+    var bounds = browserWindow.getBounds()
+    return [bounds.width, bounds.height]
+  }
+
+  browserWindow.setContentSize = function(width, height, animate) {
+    // TODO: handle resizing around center
+    return browserWindow.setContentBounds(
+      { width: width, height: height },
+      animate
+    )
+  }
+
+  browserWindow.getContentSize = function() {
+    var bounds = browserWindow.getContentBounds()
+    return [bounds.width, bounds.height]
+  }
+
+  browserWindow.setMinimumSize = function(width, height) {
+    const minSize = CGSizeMake(width, height)
+    panel.setContentMinSize(minSize)
+  }
+
+  browserWindow.getMinimumSize = function() {
+    const size = panel.contentMinSize()
+    return [size.width, size.height]
+  }
+
+  browserWindow.setMaximumSize = function(width, height) {
+    const maxSize = CGSizeMake(width, height)
+    panel.setContentMaxSize(maxSize)
+  }
+
+  browserWindow.getMaximumSize = function() {
+    const size = panel.contentMaxSize()
+    return [size.width, size.height]
+  }
+
+  browserWindow.setResizable = function(resizable) {
+    return browserWindow._setStyleMask(resizable, NSResizableWindowMask)
+  }
+
+  browserWindow.isResizable = function() {
+    return panel.styleMask() & NSResizableWindowMask
+  }
+
+  browserWindow.setMovable = function(movable) {
+    return panel.setMovable(movable)
+  }
+  browserWindow.isMovable = function() {
+    return panel.isMovable()
+  }
+
+  browserWindow.setMinimizable = function(minimizable) {
+    return browserWindow._setStyleMask(minimizable, NSMiniaturizableWindowMask)
+  }
+
+  browserWindow.isMinimizable = function() {
+    return panel.styleMask() & NSMiniaturizableWindowMask
+  }
+
+  browserWindow.setMaximizable = function(maximizable) {
+    if (panel.standardWindowButton(NSWindowZoomButton)) {
+      panel.standardWindowButton(NSWindowZoomButton).setEnabled(maximizable)
+    }
+  }
+
+  browserWindow.isMaximizable = function() {
+    return (
+      panel.standardWindowButton(NSWindowZoomButton) &&
+      panel.standardWindowButton(NSWindowZoomButton).isEnabled()
+    )
+  }
+
+  browserWindow.setFullScreenable = function(fullscreenable) {
+    browserWindow._setCollectionBehavior(
+      fullscreenable,
+      NSWindowCollectionBehaviorFullScreenPrimary
+    )
+    // On EL Capitan this flag is required to hide fullscreen button.
+    browserWindow._setCollectionBehavior(
+      !fullscreenable,
+      NSWindowCollectionBehaviorFullScreenAuxiliary
+    )
+  }
+
+  browserWindow.isFullScreenable = function() {
+    var collectionBehavior = panel.collectionBehavior()
+    return collectionBehavior & NSWindowCollectionBehaviorFullScreenPrimary
+  }
+
+  browserWindow.setClosable = function(closable) {
+    browserWindow._setStyleMask(closable, NSClosableWindowMask)
+  }
+
+  browserWindow.isClosable = function() {
+    return panel.styleMask() & NSClosableWindowMask
+  }
+
+  browserWindow.setAlwaysOnTop = function(top, level, relativeLevel) {
+    var windowLevel = NSNormalWindowLevel
+    var maxWindowLevel = CGWindowLevelForKey(kCGMaximumWindowLevelKey)
+    var minWindowLevel = CGWindowLevelForKey(kCGMinimumWindowLevelKey)
+
+    if (top) {
+      if (level === 'normal') {
+        windowLevel = NSNormalWindowLevel
+      } else if (level === 'torn-off-menu') {
+        windowLevel = NSTornOffMenuWindowLevel
+      } else if (level === 'modal-panel') {
+        windowLevel = NSModalPanelWindowLevel
+      } else if (level === 'main-menu') {
+        windowLevel = NSMainMenuWindowLevel
+      } else if (level === 'status') {
+        windowLevel = NSStatusWindowLevel
+      } else if (level === 'pop-up-menu') {
+        windowLevel = NSPopUpMenuWindowLevel
+      } else if (level === 'screen-saver') {
+        windowLevel = NSScreenSaverWindowLevel
+      } else if (level === 'dock') {
+        // Deprecated by macOS, but kept for backwards compatibility
+        windowLevel = NSDockWindowLevel
+      } else {
+        windowLevel = NSFloatingWindowLevel
+      }
+    }
+
+    var newLevel = windowLevel + (relativeLevel || 0)
+    if (newLevel >= minWindowLevel && newLevel <= maxWindowLevel) {
+      panel.setLevel(newLevel)
+    } else {
+      throw new Error(
+        'relativeLevel must be between ' +
+          minWindowLevel +
+          ' and ' +
+          maxWindowLevel
+      )
+    }
+  }
+
+  browserWindow.isAlwaysOnTop = function() {
+    return panel.level() !== NSNormalWindowLevel
+  }
+
+  browserWindow.moveTop = function() {
+    return panel.orderFrontRegardless()
+  }
+
+  browserWindow.center = function() {
+    panel.center()
+  }
+
+  browserWindow.setPosition = function(x, y, animate) {
+    return browserWindow.setBounds({ x: x, y: y }, animate)
+  }
+
+  browserWindow.getPosition = function() {
+    var bounds = browserWindow.getBounds()
+    return [bounds.x, bounds.y]
+  }
+
+  browserWindow.setTitle = function(title) {
+    panel.setTitle(title)
+  }
+
+  browserWindow.getTitle = function() {
+    return String(panel.title())
+  }
+
+  var attentionRequestId = 0
+  browserWindow.flashFrame = function(flash) {
+    if (flash) {
+      attentionRequestId = NSApp.requestUserAttention(NSInformationalRequest)
+    } else {
+      NSApp.cancelUserAttentionRequest(attentionRequestId)
+      attentionRequestId = 0
+    }
+  }
+
+  browserWindow.getNativeWindowHandle = function() {
+    return panel
+  }
+
+  browserWindow.getNativeWebViewHandle = function() {
+    return webview
+  }
+
+  browserWindow.loadURL = function(url) {
+    // When frameLocation is a file, prefix it with the Sketch Resources path
+    if (/^(?!https?|file).*\.html?$/.test(url)) {
+      if (typeof __command !== 'undefined' && __command.pluginBundle()) {
+        url =
+          'file://' +
+          __command
+            .pluginBundle()
+            .urlForResourceNamed(url)
+            .path()
+      }
+    }
+
+    if (/^file:\/\/.*\.html?$/.test(url)) {
+      // ensure URLs containing spaces are properly handled
+      url = NSString.alloc().initWithString(url)
+      url = url.stringByAddingPercentEncodingWithAllowedCharacters(
+        NSCharacterSet.URLQueryAllowedCharacterSet()
+      )
+      webview.loadFileURL_allowingReadAccessToURL(
+        NSURL.URLWithString(url),
+        NSURL.URLWithString('file:///')
+      )
+      return
+    }
+
+    const properURL = NSURL.URLWithString(url)
+    const urlRequest = NSURLRequest.requestWithURL(properURL)
+
+    webview.loadRequest(urlRequest)
+  }
+
+  browserWindow.reload = function() {
+    webview.reload()
+  }
+
+  browserWindow.setHasShadow = function(hasShadow) {
+    return panel.setHasShadow(hasShadow)
+  }
+
+  browserWindow.hasShadow = function() {
+    return panel.hasShadow()
+  }
+
+  browserWindow.setOpacity = function(opacity) {
+    return panel.setAlphaValue(opacity)
+  }
+
+  browserWindow.getOpacity = function() {
+    return panel.alphaValue()
+  }
+
+  browserWindow.setVisibleOnAllWorkspaces = function(visible) {
+    return browserWindow._setCollectionBehavior(
+      visible,
+      NSWindowCollectionBehaviorCanJoinAllSpaces
+    )
+  }
+
+  browserWindow.isVisibleOnAllWorkspaces = function() {
+    var collectionBehavior = panel.collectionBehavior()
+    return collectionBehavior & NSWindowCollectionBehaviorCanJoinAllSpaces
+  }
+
+  browserWindow.setIgnoreMouseEvents = function(ignore) {
+    return panel.setIgnoresMouseEvents(ignore)
+  }
+
+  browserWindow.setContentProtection = function(enable) {
+    panel.setSharingType(enable ? NSWindowSharingNone : NSWindowSharingReadOnly)
+  }
+
+  browserWindow.setAutoHideCursor = function(autoHide) {
+    panel.setDisableAutoHideCursor(autoHide)
+  }
+
+  browserWindow.setVibrancy = function(type) {
+    var effectView = browserWindow._vibrantView
+
+    if (!type) {
+      if (effectView == null) {
+        return
+      }
+
+      effectView.removeFromSuperview()
+      panel.setVibrantView(null)
+      return
+    }
+
+    if (effectView == null) {
+      var contentView = panel.contentView()
+      effectView = NSVisualEffectView.alloc().initWithFrame(
+        contentView.bounds()
+      )
+      browserWindow._vibrantView = effectView
+
+      effectView.setAutoresizingMask(NSViewWidthSizable | NSViewHeightSizable)
+      effectView.setBlendingMode(NSVisualEffectBlendingModeBehindWindow)
+      effectView.setState(NSVisualEffectStateActive)
+      effectView.setFrame(contentView.bounds())
+      contentView.addSubview_positioned_relativeTo(
+        effectView,
+        NSWindowBelow,
+        null
+      )
+    }
+
+    var vibrancyType = NSVisualEffectMaterialLight
+
+    if (type === 'appearance-based') {
+      vibrancyType = NSVisualEffectMaterialAppearanceBased
+    } else if (type === 'light') {
+      vibrancyType = NSVisualEffectMaterialLight
+    } else if (type === 'dark') {
+      vibrancyType = NSVisualEffectMaterialDark
+    } else if (type === 'titlebar') {
+      vibrancyType = NSVisualEffectMaterialTitlebar
+    } else if (type === 'selection') {
+      vibrancyType = NSVisualEffectMaterialSelection
+    } else if (type === 'menu') {
+      vibrancyType = NSVisualEffectMaterialMenu
+    } else if (type === 'popover') {
+      vibrancyType = NSVisualEffectMaterialPopover
+    } else if (type === 'sidebar') {
+      vibrancyType = NSVisualEffectMaterialSidebar
+    } else if (type === 'medium-light') {
+      vibrancyType = NSVisualEffectMaterialMediumLight
+    } else if (type === 'ultra-dark') {
+      vibrancyType = NSVisualEffectMaterialUltraDark
+    }
+
+    effectView.setMaterial(vibrancyType)
+  }
+
+  browserWindow._setBackgroundColor = function(colorName) {
+    var color = parseHexColor(colorName)
+    webview.setValue_forKey(false, 'drawsBackground')
+    panel.backgroundColor = color
+  }
+
+  browserWindow._invalidate = function() {
+    panel.flushWindow()
+    panel.contentView().setNeedsDisplay(true)
+  }
+
+  browserWindow._setStyleMask = function(on, flag) {
+    var wasMaximizable = browserWindow.isMaximizable()
+    if (on) {
+      panel.setStyleMask(panel.styleMask() | flag)
+    } else {
+      panel.setStyleMask(panel.styleMask() & ~flag)
+    }
+    // Change style mask will make the zoom button revert to default, probably
+    // a bug of Cocoa or macOS.
+    browserWindow.setMaximizable(wasMaximizable)
+  }
+
+  browserWindow._setCollectionBehavior = function(on, flag) {
+    var wasMaximizable = browserWindow.isMaximizable()
+    if (on) {
+      panel.setCollectionBehavior(panel.collectionBehavior() | flag)
+    } else {
+      panel.setCollectionBehavior(panel.collectionBehavior() & ~flag)
+    }
+    // Change collectionBehavior will make the zoom button revert to default,
+    // probably a bug of Cocoa or macOS.
+    browserWindow.setMaximizable(wasMaximizable)
+  }
+
+  browserWindow._showWindowButton = function(button) {
+    var view = panel.standardWindowButton(button)
+    view.superview().addSubview_positioned_relative(view, NSWindowAbove, null)
+  }
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/constants.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/constants.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {
+  JS_BRIDGE: '__skpm_sketchBridge',
+  JS_BRIDGE_RESULT_SUCCESS: '__skpm_sketchBridge_success',
+  JS_BRIDGE_RESULT_ERROR: '__skpm_sketchBridge_error',
+  START_MOVING_WINDOW: '__skpm_startMovingWindow',
+  EXECUTE_JAVASCRIPT: '__skpm_executeJS',
+  EXECUTE_JAVASCRIPT_SUCCESS: '__skpm_executeJS_success_',
+  EXECUTE_JAVASCRIPT_ERROR: '__skpm_executeJS_error_',
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/dispatch-first-click.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/dispatch-first-click.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var tagsToFocus =
+  '["text", "textarea", "date", "datetime-local", "email", "number", "month", "password", "search", "tel", "time", "url", "week" ]'
+
+module.exports = function(webView, event) {
+  var point = webView.convertPoint_fromView(event.locationInWindow(), null)
+  return (
+    'var el = document.elementFromPoint(' + // get the DOM element that match the event
+    point.x +
+    ', ' +
+    point.y +
+    '); ' +
+    'if (el && el.tagName === "SELECT") {' + // select needs special handling
+    '  var event = document.createEvent("MouseEvents");' +
+    '  event.initMouseEvent("mousedown", true, true, window);' +
+    '  el.dispatchEvent(event);' +
+    '} else if (el && ' + // some tags need to be focused instead of clicked
+    tagsToFocus +
+    '.indexOf(el.type) >= 0 && ' +
+    'el.focus' +
+    ') {' +
+    'el.focus();' + // so focus them
+    '} else if (el) {' +
+    'el.dispatchEvent(new Event("click", {bubbles: true}))' + // click the others
+    '}'
+  )
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/execute-javascript.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/execute-javascript.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Promise) {var CONSTANTS = __webpack_require__(/*! ./constants */ "./node_modules/sketch-module-web-view/lib/constants.js")
+
+module.exports = function(webview, browserWindow) {
+  function executeJavaScript(script, userGesture, callback) {
+    if (typeof userGesture === 'function') {
+      callback = userGesture
+      userGesture = false
+    }
+    var fiber = coscript.createFiber()
+
+    // if the webview is not ready yet, defer the execution until it is
+    if (
+      webview.navigationDelegate().state &&
+      webview.navigationDelegate().state.wasReady == 0
+    ) {
+      return new Promise(function(resolve, reject) {
+        browserWindow.once('ready-to-show', function() {
+          executeJavaScript(script, userGesture, callback)
+            .then(resolve)
+            .catch(reject)
+          fiber.cleanup()
+        })
+      })
+    }
+
+    return new Promise(function(resolve, reject) {
+      var requestId = Math.random()
+
+      browserWindow.webContents.on(
+        CONSTANTS.EXECUTE_JAVASCRIPT_SUCCESS + requestId,
+        function(res) {
+          try {
+            if (callback) {
+              callback(null, res)
+            }
+            resolve(res)
+          } catch (err) {
+            reject(err)
+          }
+          fiber.cleanup()
+        }
+      )
+      browserWindow.webContents.on(
+        CONSTANTS.EXECUTE_JAVASCRIPT_ERROR + requestId,
+        function(err) {
+          try {
+            if (callback) {
+              callback(err)
+              resolve()
+            } else {
+              reject(err)
+            }
+          } catch (err2) {
+            reject(err2)
+          }
+          fiber.cleanup()
+        }
+      )
+
+      webview.evaluateJavaScript_completionHandler(
+        module.exports.wrapScript(script, requestId),
+        null
+      )
+    })
+  }
+
+  return executeJavaScript
+}
+
+module.exports.wrapScript = function(script, requestId) {
+  return (
+    'window.' +
+    CONSTANTS.EXECUTE_JAVASCRIPT +
+    '(' +
+    requestId +
+    ', ' +
+    JSON.stringify(script) +
+    ')'
+  )
+}
+
+module.exports.injectScript = function(webView) {
+  var source =
+    'window.' +
+    CONSTANTS.EXECUTE_JAVASCRIPT +
+    ' = function(id, script) {' +
+    '  try {' +
+    '    var res = eval(script);' +
+    '    if (res && typeof res.then === "function" && typeof res.catch === "function") {' +
+    '      res.then(function (res2) {' +
+    '        window.postMessage("' +
+    CONSTANTS.EXECUTE_JAVASCRIPT_SUCCESS +
+    '" + id, res2);' +
+    '      })' +
+    '      .catch(function (err) {' +
+    '        window.postMessage("' +
+    CONSTANTS.EXECUTE_JAVASCRIPT_ERROR +
+    '" + id, err);' +
+    '      })' +
+    '    } else {' +
+    '      window.postMessage("' +
+    CONSTANTS.EXECUTE_JAVASCRIPT_SUCCESS +
+    '" + id, res);' +
+    '    }' +
+    '  } catch (err) {' +
+    '    window.postMessage("' +
+    CONSTANTS.EXECUTE_JAVASCRIPT_ERROR +
+    '" + id, err);' +
+    '  }' +
+    '}'
+  var script = WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(
+    source,
+    0,
+    true
+  )
+  webView
+    .configuration()
+    .userContentController()
+    .addUserScript(script)
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@skpm/promise/index.js */ "./node_modules/@skpm/promise/index.js")))
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/fitSubview.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/fitSubview.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function addEdgeConstraint(edge, subview, view, constant) {
+  view.addConstraint(
+    NSLayoutConstraint.constraintWithItem_attribute_relatedBy_toItem_attribute_multiplier_constant(
+      subview,
+      edge,
+      NSLayoutRelationEqual,
+      view,
+      edge,
+      1,
+      constant
+    )
+  )
+}
+module.exports = function fitSubviewToView(subview, view, constants) {
+  constants = constants || []
+  subview.setTranslatesAutoresizingMaskIntoConstraints(false)
+
+  addEdgeConstraint(NSLayoutAttributeLeft, subview, view, constants[0] || 0)
+  addEdgeConstraint(NSLayoutAttributeTop, subview, view, constants[1] || 0)
+  addEdgeConstraint(NSLayoutAttributeRight, subview, view, constants[2] || 0)
+  addEdgeConstraint(NSLayoutAttributeBottom, subview, view, constants[3] || 0)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* let's try to match the API from Electron's Browser window
+(https://github.com/electron/electron/blob/master/docs/api/browser-window.md) */
+var EventEmitter = __webpack_require__(/*! events */ "events")
+var buildBrowserAPI = __webpack_require__(/*! ./browser-api */ "./node_modules/sketch-module-web-view/lib/browser-api.js")
+var buildWebAPI = __webpack_require__(/*! ./webview-api */ "./node_modules/sketch-module-web-view/lib/webview-api.js")
+var fitSubviewToView = __webpack_require__(/*! ./fitSubview */ "./node_modules/sketch-module-web-view/lib/fitSubview.js")
+var dispatchFirstClick = __webpack_require__(/*! ./dispatch-first-click */ "./node_modules/sketch-module-web-view/lib/dispatch-first-click.js")
+var injectClientMessaging = __webpack_require__(/*! ./inject-client-messaging */ "./node_modules/sketch-module-web-view/lib/inject-client-messaging.js")
+var movableArea = __webpack_require__(/*! ./movable-area */ "./node_modules/sketch-module-web-view/lib/movable-area.js")
+var executeJavaScript = __webpack_require__(/*! ./execute-javascript */ "./node_modules/sketch-module-web-view/lib/execute-javascript.js")
+var setDelegates = __webpack_require__(/*! ./set-delegates */ "./node_modules/sketch-module-web-view/lib/set-delegates.js")
+
+function BrowserWindow(options) {
+  options = options || {}
+
+  var identifier = options.identifier || NSUUID.UUID().UUIDString()
+  var threadDictionary = NSThread.mainThread().threadDictionary()
+
+  var existingBrowserWindow = BrowserWindow.fromId(identifier)
+
+  // if we already have a window opened, reuse it
+  if (existingBrowserWindow) {
+    return existingBrowserWindow
+  }
+
+  var browserWindow = new EventEmitter()
+  browserWindow.id = identifier
+
+  if (options.modal && !options.parent) {
+    throw new Error('A modal needs to have a parent.')
+  }
+
+  // Long-running script
+  var fiber = coscript.createFiber()
+
+  // Window size
+  var width = options.width || 800
+  var height = options.height || 600
+  var mainScreenRect = NSScreen.screens()
+    .firstObject()
+    .frame()
+  var cocoaBounds = NSMakeRect(
+    typeof options.x !== 'undefined'
+      ? options.x
+      : Math.round((NSWidth(mainScreenRect) - width) / 2),
+    typeof options.y !== 'undefined'
+      ? NSHeight(mainScreenRect) - options.y
+      : Math.round((NSHeight(mainScreenRect) - height) / 2),
+    width,
+    height
+  )
+
+  if (options.titleBarStyle && options.titleBarStyle !== 'default') {
+    options.frame = false
+  }
+
+  var useStandardWindow = options.windowType !== 'textured'
+  var styleMask = NSTitledWindowMask
+
+  // this is commented out because the toolbar doesn't appear otherwise :thinking-face:
+  // if (!useStandardWindow || options.frame === false) {
+  //   styleMask = NSFullSizeContentViewWindowMask
+  // }
+  if (options.minimizable !== false) {
+    styleMask |= NSMiniaturizableWindowMask
+  }
+  if (options.closable !== false) {
+    styleMask |= NSClosableWindowMask
+  }
+  if (options.resizable !== false) {
+    styleMask |= NSResizableWindowMask
+  }
+  if (!useStandardWindow || options.transparent || options.frame === false) {
+    styleMask |= NSTexturedBackgroundWindowMask
+  }
+
+  var panel = NSPanel.alloc().initWithContentRect_styleMask_backing_defer(
+    cocoaBounds,
+    styleMask,
+    NSBackingStoreBuffered,
+    true
+  )
+
+  var wkwebviewConfig = WKWebViewConfiguration.alloc().init()
+  var webView = WKWebView.alloc().initWithFrame_configuration(
+    CGRectMake(0, 0, options.width || 800, options.height || 600),
+    wkwebviewConfig
+  )
+  injectClientMessaging(webView)
+  webView.setAutoresizingMask(NSViewWidthSizable | NSViewHeightSizable)
+
+  buildBrowserAPI(browserWindow, panel, webView)
+  buildWebAPI(browserWindow, panel, webView)
+  setDelegates(browserWindow, panel, webView, options)
+
+  if (options.windowType === 'desktop') {
+    panel.setLevel(kCGDesktopWindowLevel - 1)
+    // panel.setCanBecomeKeyWindow(false)
+    panel.setCollectionBehavior(
+      NSWindowCollectionBehaviorCanJoinAllSpaces |
+        NSWindowCollectionBehaviorStationary |
+        NSWindowCollectionBehaviorIgnoresCycle
+    )
+  }
+
+  if (
+    typeof options.minWidth !== 'undefined' ||
+    typeof options.minHeight !== 'undefined'
+  ) {
+    browserWindow.setMinimumSize(options.minWidth || 0, options.minHeight || 0)
+  }
+
+  if (
+    typeof options.maxWidth !== 'undefined' ||
+    typeof options.maxHeight !== 'undefined'
+  ) {
+    browserWindow.setMaximumSize(
+      options.maxWidth || 10000,
+      options.maxHeight || 10000
+    )
+  }
+
+  // if (options.focusable === false) {
+  //   panel.setCanBecomeKeyWindow(false)
+  // }
+
+  if (options.transparent || options.frame === false) {
+    panel.titlebarAppearsTransparent = true
+    panel.titleVisibility = NSWindowTitleHidden
+    panel.setOpaque(0)
+    panel.isMovableByWindowBackground = true
+    var toolbar2 = NSToolbar.alloc().initWithIdentifier(
+      'titlebarStylingToolbar'
+    )
+    toolbar2.setShowsBaselineSeparator(false)
+    panel.setToolbar(toolbar2)
+  }
+
+  if (options.titleBarStyle === 'hiddenInset') {
+    var toolbar = NSToolbar.alloc().initWithIdentifier('titlebarStylingToolbar')
+    toolbar.setShowsBaselineSeparator(false)
+    panel.setToolbar(toolbar)
+  }
+
+  if (options.frame === false || !options.useContentSize) {
+    browserWindow.setSize(width, height)
+  }
+
+  if (options.center) {
+    browserWindow.center()
+  }
+
+  if (options.alwaysOnTop) {
+    browserWindow.setAlwaysOnTop(true)
+  }
+
+  if (options.fullscreen) {
+    browserWindow.setFullScreen(true)
+  }
+  browserWindow.setFullScreenable(!!options.fullscreenable)
+
+  let title = options.title
+  if (options.frame === false) {
+    title = undefined
+  } else if (
+    typeof title === 'undefined' &&
+    typeof __command !== 'undefined' &&
+    __command.pluginBundle()
+  ) {
+    title = __command.pluginBundle().name()
+  }
+
+  if (title) {
+    browserWindow.setTitle(title)
+  }
+
+  var backgroundColor = options.backgroundColor
+  if (options.transparent) {
+    backgroundColor = NSColor.clearColor()
+  }
+  if (!backgroundColor && options.frame === false && options.vibrancy) {
+    backgroundColor = NSColor.clearColor()
+  }
+
+  browserWindow._setBackgroundColor(
+    backgroundColor || NSColor.windowBackgroundColor()
+  )
+
+  if (options.hasShadow === false) {
+    browserWindow.setHasShadow(false)
+  }
+
+  if (typeof options.opacity !== 'undefined') {
+    browserWindow.setOpacity(options.opacity)
+  }
+
+  options.webPreferences = options.webPreferences || {}
+
+  webView
+    .configuration()
+    .preferences()
+    .setValue_forKey(
+      options.webPreferences.devTools !== false,
+      'developerExtrasEnabled'
+    )
+  webView
+    .configuration()
+    .preferences()
+    .setValue_forKey(
+      options.webPreferences.javascript !== false,
+      'javaScriptEnabled'
+    )
+  webView
+    .configuration()
+    .preferences()
+    .setValue_forKey(!!options.webPreferences.plugins, 'plugInsEnabled')
+  webView
+    .configuration()
+    .preferences()
+    .setValue_forKey(
+      options.webPreferences.minimumFontSize || 0,
+      'minimumFontSize'
+    )
+
+  if (options.webPreferences.zoomFactor) {
+    webView.setMagnification(options.webPreferences.zoomFactor)
+  }
+
+  var contentView = panel.contentView()
+
+  if (options.frame !== false) {
+    webView.setFrame(contentView.bounds())
+    contentView.addSubview(webView)
+  } else {
+    // In OSX 10.10, adding subviews to the root view for the NSView hierarchy
+    // produces warnings. To eliminate the warnings, we resize the contentView
+    // to fill the window, and add subviews to that.
+    // http://crbug.com/380412
+    contentView.setAutoresizingMask(NSViewWidthSizable | NSViewHeightSizable)
+    fitSubviewToView(contentView, contentView.superview())
+
+    webView.setFrame(contentView.bounds())
+    contentView.addSubview(webView)
+
+    // The fullscreen button should always be hidden for frameless window.
+    if (panel.standardWindowButton(NSWindowFullScreenButton)) {
+      panel.standardWindowButton(NSWindowFullScreenButton).setHidden(true)
+    }
+
+    if (!options.titleBarStyle || options.titleBarStyle === 'default') {
+      // Hide the window buttons.
+      panel.standardWindowButton(NSWindowZoomButton).setHidden(true)
+      panel.standardWindowButton(NSWindowMiniaturizeButton).setHidden(true)
+      panel.standardWindowButton(NSWindowCloseButton).setHidden(true)
+
+      // Some third-party macOS utilities check the zoom button's enabled state to
+      // determine whether to show custom UI on hover, so we disable it here to
+      // prevent them from doing so in a frameless app window.
+      panel.standardWindowButton(NSWindowZoomButton).setEnabled(false)
+    }
+  }
+
+  if (options.vibrancy) {
+    browserWindow.setVibrancy(options.vibrancy)
+  }
+
+  // Set maximizable state last to ensure zoom button does not get reset
+  // by calls to other APIs.
+  browserWindow.setMaximizable(options.maximizable !== false)
+
+  panel.setHidesOnDeactivate(options.hidesOnDeactivate !== false)
+
+  if (options.remembersWindowFrame) {
+    panel.setFrameAutosaveName(identifier)
+    panel.setFrameUsingName_force(panel.frameAutosaveName(), false)
+  }
+
+  if (options.acceptsFirstMouse) {
+    browserWindow.on('focus', function(event) {
+      if (event.type() === NSEventTypeLeftMouseDown) {
+        browserWindow.webContents
+          .executeJavaScript(dispatchFirstClick(webView, event))
+          .catch(() => {})
+      }
+    })
+  }
+
+  executeJavaScript.injectScript(webView)
+  movableArea.injectScript(webView)
+  movableArea.setupHandler(browserWindow)
+
+  if (options.show !== false) {
+    browserWindow.show()
+  }
+
+  browserWindow.on('closed', function() {
+    browserWindow._destroyed = true
+    threadDictionary.removeObjectForKey(identifier)
+    var observer = threadDictionary[identifier + '.themeObserver']
+    if (observer) {
+      NSApplication.sharedApplication().removeObserver_forKeyPath(
+        observer,
+        'effectiveAppearance'
+      )
+      threadDictionary.removeObjectForKey(identifier + '.themeObserver')
+    }
+    fiber.cleanup()
+  })
+
+  threadDictionary[identifier] = panel
+
+  fiber.onCleanup(function() {
+    if (!browserWindow._destroyed) {
+      browserWindow.destroy()
+    }
+  })
+
+  return browserWindow
+}
+
+BrowserWindow.fromId = function(identifier) {
+  var threadDictionary = NSThread.mainThread().threadDictionary()
+
+  if (threadDictionary[identifier]) {
+    return BrowserWindow.fromPanel(threadDictionary[identifier], identifier)
+  }
+
+  return undefined
+}
+
+BrowserWindow.fromPanel = function(panel, identifier) {
+  var browserWindow = new EventEmitter()
+  browserWindow.id = identifier
+
+  if (!panel || !panel.contentView) {
+    throw new Error('needs to pass an NSPanel')
+  }
+
+  var webView = null
+  var subviews = panel.contentView().subviews()
+  for (var i = 0; i < subviews.length; i += 1) {
+    if (
+      !webView &&
+      !subviews[i].isKindOfClass(WKInspectorWKWebView) &&
+      subviews[i].isKindOfClass(WKWebView)
+    ) {
+      webView = subviews[i]
+    }
+  }
+
+  if (!webView) {
+    throw new Error('The panel needs to have a webview')
+  }
+
+  buildBrowserAPI(browserWindow, panel, webView)
+  buildWebAPI(browserWindow, panel, webView)
+
+  return browserWindow
+}
+
+module.exports = BrowserWindow
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/inject-client-messaging.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/inject-client-messaging.js ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var CONSTANTS = __webpack_require__(/*! ./constants */ "./node_modules/sketch-module-web-view/lib/constants.js")
+
+module.exports = function(webView) {
+  var source =
+    'window.originalPostMessage = window.postMessage;' +
+    'window.postMessage = function(actionName) {' +
+    '  if (!actionName) {' +
+    "    throw new Error('missing action name')" +
+    '  }' +
+    '  var id = String(Math.random()).replace(".", "");' +
+    '    var args = [].slice.call(arguments);' +
+    '    args.unshift(id);' +
+    '  return new Promise(function (resolve, reject) {' +
+    '    window["' +
+    CONSTANTS.JS_BRIDGE_RESULT_SUCCESS +
+    '" + id] = resolve;' +
+    '    window["' +
+    CONSTANTS.JS_BRIDGE_RESULT_ERROR +
+    '" + id] = reject;' +
+    '    window.webkit.messageHandlers.' +
+    CONSTANTS.JS_BRIDGE +
+    '.postMessage(JSON.stringify(args));' +
+    '  });' +
+    '}'
+  var script = WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(
+    source,
+    0,
+    true
+  )
+  webView
+    .configuration()
+    .userContentController()
+    .addUserScript(script)
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/movable-area.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/movable-area.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var CONSTANTS = __webpack_require__(/*! ./constants */ "./node_modules/sketch-module-web-view/lib/constants.js")
+
+module.exports.injectScript = function(webView) {
+  var source =
+    '(function () {' +
+    "document.addEventListener('mousedown', onMouseDown);" +
+    '' +
+    'function shouldDrag(target) {' +
+    '  if (!target || (target.dataset || {}).appRegion === "no-drag") { return false }' +
+    '  if ((target.dataset || {}).appRegion === "drag") { return true }' +
+    '  return shouldDrag(target.parentElement)' +
+    '};' +
+    '' +
+    'function onMouseDown(e) {' +
+    '  if (e.button !== 0 || !shouldDrag(e.target)) { return }' +
+    '  window.postMessage("' +
+    CONSTANTS.START_MOVING_WINDOW +
+    '");' +
+    '};' +
+    '})()'
+  var script = WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(
+    source,
+    0,
+    true
+  )
+  webView
+    .configuration()
+    .userContentController()
+    .addUserScript(script)
+}
+
+module.exports.setupHandler = function(browserWindow) {
+  var initialMouseLocation = null
+  var initialWindowPosition = null
+  var interval = null
+
+  function moveWindow() {
+    // if the user released the button, stop moving the window
+    if (!initialWindowPosition || NSEvent.pressedMouseButtons() !== 1) {
+      clearInterval(interval)
+      initialMouseLocation = null
+      initialWindowPosition = null
+      return
+    }
+
+    var mouse = NSEvent.mouseLocation()
+    browserWindow.setPosition(
+      initialWindowPosition.x + (mouse.x - initialMouseLocation.x),
+      initialWindowPosition.y + (initialMouseLocation.y - mouse.y), // y is inverted
+      false
+    )
+  }
+
+  browserWindow.webContents.on(CONSTANTS.START_MOVING_WINDOW, function() {
+    initialMouseLocation = NSEvent.mouseLocation()
+    var position = browserWindow.getPosition()
+    initialWindowPosition = {
+      x: position[0],
+      y: position[1],
+    }
+
+    interval = setInterval(moveWindow, 1000 / 60) // 60 fps
+  })
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/parseWebArguments.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/parseWebArguments.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function(webArguments) {
+  var args = null
+  try {
+    args = JSON.parse(webArguments)
+  } catch (e) {
+    // malformed arguments
+  }
+
+  if (
+    !args ||
+    !args.constructor ||
+    args.constructor !== Array ||
+    args.length == 0
+  ) {
+    return null
+  }
+
+  return args
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/set-delegates.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/set-delegates.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(Promise) {var ObjCClass = __webpack_require__(/*! mocha-js-delegate */ "./node_modules/mocha-js-delegate/index.js")
+var parseWebArguments = __webpack_require__(/*! ./parseWebArguments */ "./node_modules/sketch-module-web-view/lib/parseWebArguments.js")
+var CONSTANTS = __webpack_require__(/*! ./constants */ "./node_modules/sketch-module-web-view/lib/constants.js")
+
+// We create one ObjC class for ourselves here
+var WindowDelegateClass
+var NavigationDelegateClass
+var WebScriptHandlerClass
+var ThemeObserverClass
+
+// TODO: events
+// - 'page-favicon-updated'
+// - 'new-window'
+// - 'did-navigate-in-page'
+// - 'will-prevent-unload'
+// - 'crashed'
+// - 'unresponsive'
+// - 'responsive'
+// - 'destroyed'
+// - 'before-input-event'
+// - 'certificate-error'
+// - 'found-in-page'
+// - 'media-started-playing'
+// - 'media-paused'
+// - 'did-change-theme-color'
+// - 'update-target-url'
+// - 'cursor-changed'
+// - 'context-menu'
+// - 'select-bluetooth-device'
+// - 'paint'
+// - 'console-message'
+
+module.exports = function(browserWindow, panel, webview, options) {
+  if (!ThemeObserverClass) {
+    ThemeObserverClass = new ObjCClass({
+      utils: null,
+
+      'observeValueForKeyPath:ofObject:change:context:': function() {
+        this.utils.executeJavaScript(
+          "document.body.classList.remove('__skpm-" +
+            (typeof MSTheme !== 'undefined' && MSTheme.sharedTheme().isDark()
+              ? 'light'
+              : 'dark') +
+            "'); document.body.classList.add('__skpm-" +
+            (typeof MSTheme !== 'undefined' && MSTheme.sharedTheme().isDark()
+              ? 'dark'
+              : 'light') +
+            "')"
+        )
+      },
+    })
+  }
+
+  if (!WindowDelegateClass) {
+    WindowDelegateClass = new ObjCClass({
+      utils: null,
+      panel: null,
+
+      'windowDidResize:': function() {
+        this.utils.emit('resize')
+      },
+
+      'windowDidMiniaturize:': function() {
+        this.utils.emit('minimize')
+      },
+
+      'windowDidDeminiaturize:': function() {
+        this.utils.emit('restore')
+      },
+
+      'windowDidEnterFullScreen:': function() {
+        this.utils.emit('enter-full-screen')
+      },
+
+      'windowDidExitFullScreen:': function() {
+        this.utils.emit('leave-full-screen')
+      },
+
+      'windowDidMove:': function() {
+        this.utils.emit('move')
+        this.utils.emit('moved')
+      },
+
+      'windowShouldClose:': function() {
+        var shouldClose = 1
+        this.utils.emit('close', {
+          get defaultPrevented() {
+            return !shouldClose
+          },
+          preventDefault: function() {
+            shouldClose = 0
+          },
+        })
+        return shouldClose
+      },
+
+      'windowWillClose:': function() {
+        this.utils.emit('closed')
+      },
+
+      'windowDidBecomeKey:': function() {
+        this.utils.emit('focus', this.panel.currentEvent())
+      },
+
+      'windowDidResignKey:': function() {
+        this.utils.emit('blur')
+      },
+    })
+  }
+
+  if (!NavigationDelegateClass) {
+    NavigationDelegateClass = new ObjCClass({
+      state: {
+        wasReady: 0,
+      },
+      utils: null,
+
+      // // Called when the web view begins to receive web content.
+      'webView:didCommitNavigation:': function(webView) {
+        this.utils.emit('will-navigate', {}, String(String(webView.URL())))
+      },
+
+      // // Called when web content begins to load in a web view.
+      'webView:didStartProvisionalNavigation:': function() {
+        this.utils.emit('did-start-navigation')
+        this.utils.emit('did-start-loading')
+      },
+
+      // Called when a web view receives a server redirect.
+      'webView:didReceiveServerRedirectForProvisionalNavigation:': function() {
+        this.utils.emit('did-get-redirect-request')
+      },
+
+      // // Called when the web view needs to respond to an authentication challenge.
+      // 'webView:didReceiveAuthenticationChallenge:completionHandler:': function(
+      //   webView,
+      //   challenge,
+      //   completionHandler
+      // ) {
+      //   function callback(username, password) {
+      //     completionHandler(
+      //       0,
+      //       NSURLCredential.credentialWithUser_password_persistence(
+      //         username,
+      //         password,
+      //         1
+      //       )
+      //     )
+      //   }
+      //   var protectionSpace = challenge.protectionSpace()
+      //   this.utils.emit(
+      //     'login',
+      //     {},
+      //     {
+      //       method: String(protectionSpace.authenticationMethod()),
+      //       url: 'not implemented', // TODO:
+      //       referrer: 'not implemented', // TODO:
+      //     },
+      //     {
+      //       isProxy: !!protectionSpace.isProxy(),
+      //       scheme: String(protectionSpace.protocol()),
+      //       host: String(protectionSpace.host()),
+      //       port: Number(protectionSpace.port()),
+      //       realm: String(protectionSpace.realm()),
+      //     },
+      //     callback
+      //   )
+      // },
+
+      // Called when an error occurs during navigation.
+      // 'webView:didFailNavigation:withError:': function(
+      //   webView,
+      //   navigation,
+      //   error
+      // ) {},
+
+      // Called when an error occurs while the web view is loading content.
+      'webView:didFailProvisionalNavigation:withError:': function(
+        webView,
+        navigation,
+        error
+      ) {
+        this.utils.emit('did-fail-load', error)
+      },
+
+      // Called when the navigation is complete.
+      'webView:didFinishNavigation:': function() {
+        if (this.state.wasReady == 0) {
+          this.state.wasReady = 1
+          this.utils.emitBrowserEvent('ready-to-show')
+        }
+        this.utils.emit('did-navigate')
+        this.utils.emit('did-frame-navigate')
+        this.utils.emit('did-stop-loading')
+        this.utils.emit('did-finish-load')
+        this.utils.emit('did-frame-finish-load')
+      },
+
+      // Called when the web view’s web content process is terminated.
+      'webViewWebContentProcessDidTerminate:': function() {
+        this.utils.emit('dom-ready')
+      },
+
+      // Decides whether to allow or cancel a navigation.
+      // webView:decidePolicyForNavigationAction:decisionHandler:
+
+      // Decides whether to allow or cancel a navigation after its response is known.
+      // webView:decidePolicyForNavigationResponse:decisionHandler:
+    })
+  }
+
+  if (!WebScriptHandlerClass) {
+    WebScriptHandlerClass = new ObjCClass({
+      utils: null,
+      'userContentController:didReceiveScriptMessage:': function(_, message) {
+        var args = this.utils.parseWebArguments(String(message.body()))
+        if (!args) {
+          return
+        }
+        if (!args[0] || typeof args[0] !== 'string') {
+          return
+        }
+        args[0] = String(args[0])
+
+        this.utils.emit.apply(this, args)
+      },
+    })
+  }
+
+  var themeObserver = ThemeObserverClass.new({
+    utils: {
+      executeJavaScript(script) {
+        webview.evaluateJavaScript_completionHandler(script, null)
+      },
+    },
+  })
+
+  var script = WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(
+    "document.addEventListener('DOMContentLoaded', function() { document.body.classList.add('__skpm-" +
+      (typeof MSTheme !== 'undefined' && MSTheme.sharedTheme().isDark()
+        ? 'dark'
+        : 'light') +
+      "') }, false)",
+    0,
+    true
+  )
+  webview
+    .configuration()
+    .userContentController()
+    .addUserScript(script)
+
+  NSApplication.sharedApplication().addObserver_forKeyPath_options_context(
+    themeObserver,
+    'effectiveAppearance',
+    NSKeyValueChangeNewKey,
+    null
+  )
+
+  var threadDictionary = NSThread.mainThread().threadDictionary()
+  threadDictionary[browserWindow.id + '.themeObserver'] = themeObserver
+
+  var navigationDelegate = NavigationDelegateClass.new({
+    utils: {
+      setTitle: browserWindow.setTitle.bind(browserWindow),
+      emitBrowserEvent() {
+        try {
+          browserWindow.emit.apply(browserWindow, arguments)
+        } catch (err) {
+          if (
+            typeof process !== 'undefined' &&
+            process.listenerCount &&
+            process.listenerCount('uncaughtException')
+          ) {
+            process.emit('uncaughtException', err, 'uncaughtException')
+          } else {
+            console.error(err)
+            throw err
+          }
+        }
+      },
+      emit() {
+        try {
+          browserWindow.webContents.emit.apply(
+            browserWindow.webContents,
+            arguments
+          )
+        } catch (err) {
+          if (
+            typeof process !== 'undefined' &&
+            process.listenerCount &&
+            process.listenerCount('uncaughtException')
+          ) {
+            process.emit('uncaughtException', err, 'uncaughtException')
+          } else {
+            console.error(err)
+            throw err
+          }
+        }
+      },
+    },
+    state: {
+      wasReady: 0,
+    },
+  })
+
+  webview.setNavigationDelegate(navigationDelegate)
+
+  var webScriptHandler = WebScriptHandlerClass.new({
+    utils: {
+      emit(id, type) {
+        if (!type) {
+          webview.evaluateJavaScript_completionHandler(
+            CONSTANTS.JS_BRIDGE_RESULT_SUCCESS + id + '()',
+            null
+          )
+          return
+        }
+
+        var args = []
+        for (var i = 2; i < arguments.length; i += 1) args.push(arguments[i])
+
+        var listeners = browserWindow.webContents.listeners(type)
+
+        Promise.all(
+          listeners.map(function(l) {
+            return Promise.resolve().then(function() {
+              return l.apply(l, args)
+            })
+          })
+        )
+          .then(function(res) {
+            webview.evaluateJavaScript_completionHandler(
+              CONSTANTS.JS_BRIDGE_RESULT_SUCCESS +
+                id +
+                '(' +
+                JSON.stringify(res) +
+                ')',
+              null
+            )
+          })
+          .catch(function(err) {
+            webview.evaluateJavaScript_completionHandler(
+              CONSTANTS.JS_BRIDGE_RESULT_ERROR +
+                id +
+                '(' +
+                JSON.stringify(err) +
+                ')',
+              null
+            )
+          })
+      },
+      parseWebArguments: parseWebArguments,
+    },
+  })
+
+  webview
+    .configuration()
+    .userContentController()
+    .addScriptMessageHandler_name(webScriptHandler, CONSTANTS.JS_BRIDGE)
+
+  var utils = {
+    emit() {
+      try {
+        browserWindow.emit.apply(browserWindow, arguments)
+      } catch (err) {
+        if (
+          typeof process !== 'undefined' &&
+          process.listenerCount &&
+          process.listenerCount('uncaughtException')
+        ) {
+          process.emit('uncaughtException', err, 'uncaughtException')
+        } else {
+          console.error(err)
+          throw err
+        }
+      }
+    },
+  }
+  if (options.modal) {
+    // find the window of the document
+    var msdocument
+    if (options.parent.type === 'Document') {
+      msdocument = options.parent.sketchObject
+    } else {
+      msdocument = options.parent
+    }
+    if (msdocument && String(msdocument.class()) === 'MSDocumentData') {
+      // we only have an MSDocumentData instead of a MSDocument
+      // let's try to get back to the MSDocument
+      msdocument = msdocument.delegate()
+    }
+    utils.parentWindow = msdocument.windowForSheet()
+  }
+
+  var windowDelegate = WindowDelegateClass.new({
+    utils: utils,
+    panel: panel,
+  })
+
+  panel.setDelegate(windowDelegate)
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@skpm/promise/index.js */ "./node_modules/@skpm/promise/index.js")))
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/lib/webview-api.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/lib/webview-api.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var EventEmitter = __webpack_require__(/*! events */ "events")
+var executeJavaScript = __webpack_require__(/*! ./execute-javascript */ "./node_modules/sketch-module-web-view/lib/execute-javascript.js")
+
+// let's try to match https://github.com/electron/electron/blob/master/docs/api/web-contents.md
+module.exports = function buildAPI(browserWindow, panel, webview) {
+  var webContents = new EventEmitter()
+
+  webContents.loadURL = browserWindow.loadURL
+
+  webContents.loadFile = function(/* filePath */) {
+    // TODO:
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+
+  webContents.downloadURL = function(/* filePath */) {
+    // TODO:
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+
+  webContents.getURL = function() {
+    return String(webview.url())
+  }
+
+  webContents.getTitle = function() {
+    return String(webview.title())
+  }
+
+  webContents.isDestroyed = function() {
+    // TODO:
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+
+  webContents.focus = browserWindow.focus
+  webContents.isFocused = browserWindow.isFocused
+
+  webContents.isLoading = function() {
+    return !!webview.loading()
+  }
+
+  webContents.isLoadingMainFrame = function() {
+    // TODO:
+    return !!webview.loading()
+  }
+
+  webContents.isWaitingForResponse = function() {
+    return !webview.loading()
+  }
+
+  webContents.stop = function() {
+    webview.stopLoading()
+  }
+  webContents.reload = function() {
+    webview.reload()
+  }
+  webContents.reloadIgnoringCache = function() {
+    webview.reloadFromOrigin()
+  }
+  webContents.canGoBack = function() {
+    return !!webview.canGoBack()
+  }
+  webContents.canGoForward = function() {
+    return !!webview.canGoForward()
+  }
+  webContents.canGoToOffset = function(offset) {
+    return !!webview.backForwardList().itemAtIndex(offset)
+  }
+  webContents.clearHistory = function() {
+    // TODO:
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+  webContents.goBack = function() {
+    webview.goBack()
+  }
+  webContents.goForward = function() {
+    webview.goForward()
+  }
+  webContents.goToIndex = function(index) {
+    var backForwardList = webview.backForwardList()
+    var backList = backForwardList.backList()
+    var backListLength = backList.count()
+    if (backListLength > index) {
+      webview.loadRequest(NSURLRequest.requestWithURL(backList[index]))
+      return
+    }
+    var forwardList = backForwardList.forwardList()
+    if (forwardList.count() > index - backListLength) {
+      webview.loadRequest(
+        NSURLRequest.requestWithURL(forwardList[index - backListLength])
+      )
+      return
+    }
+    throw new Error('Cannot go to index ' + index)
+  }
+  webContents.goToOffset = function(offset) {
+    if (!webContents.canGoToOffset(offset)) {
+      throw new Error('Cannot go to offset ' + offset)
+    }
+    webview.loadRequest(
+      NSURLRequest.requestWithURL(webview.backForwardList().itemAtIndex(offset))
+    )
+  }
+  webContents.isCrashed = function() {
+    // TODO:
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+  webContents.setUserAgent = function(/* userAgent */) {
+    // TODO:
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+  webContents.getUserAgent = function() {
+    const userAgent = webview.customUserAgent()
+    return userAgent ? String(userAgent) : undefined
+  }
+  webContents.insertCSS = function(css) {
+    var source =
+      "var style = document.createElement('style'); style.innerHTML = " +
+      css.replace(/"/, '\\"') +
+      '; document.head.appendChild(style);'
+    var script = WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(
+      source,
+      0,
+      true
+    )
+    webview
+      .configuration()
+      .userContentController()
+      .addUserScript(script)
+  }
+  webContents.insertJS = function(source) {
+    var script = WKUserScript.alloc().initWithSource_injectionTime_forMainFrameOnly(
+      source,
+      0,
+      true
+    )
+    webview
+      .configuration()
+      .userContentController()
+      .addUserScript(script)
+  }
+  webContents.executeJavaScript = executeJavaScript(webview, browserWindow)
+  webContents.setIgnoreMenuShortcuts = function() {
+    // TODO:??
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+  webContents.setAudioMuted = function(/* muted */) {
+    // TODO:??
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+  webContents.isAudioMuted = function() {
+    // TODO:??
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+  webContents.setZoomFactor = function(factor) {
+    webview.setMagnification_centeredAtPoint(factor, CGPointMake(0, 0))
+  }
+  webContents.getZoomFactor = function(callback) {
+    callback(Number(webview.magnification()))
+  }
+  webContents.setZoomLevel = function(level) {
+    // eslint-disable-next-line no-restricted-properties
+    webContents.setZoomFactor(Math.pow(1.2, level))
+  }
+  webContents.getZoomLevel = function(callback) {
+    // eslint-disable-next-line no-restricted-properties
+    callback(Math.log(Number(webview.magnification())) / Math.log(1.2))
+  }
+  webContents.setVisualZoomLevelLimits = function(/* minimumLevel, maximumLevel */) {
+    // TODO:??
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+  webContents.setLayoutZoomLevelLimits = function(/* minimumLevel, maximumLevel */) {
+    // TODO:??
+    console.warn(
+      'Not implemented yet, please open a PR on https://github.com/skpm/sketch-module-web-view :)'
+    )
+  }
+
+  // TODO:
+  // webContents.undo = function() {
+  //   webview.undoManager().undo()
+  // }
+  // webContents.redo = function() {
+  //   webview.undoManager().redo()
+  // }
+  // webContents.cut = webview.cut
+  // webContents.copy = webview.copy
+  // webContents.paste = webview.paste
+  // webContents.pasteAndMatchStyle = webview.pasteAsRichText
+  // webContents.delete = webview.delete
+  // webContents.replace = webview.replaceSelectionWithText
+
+  webContents.send = function() {
+    const script =
+      'window.postMessage({' +
+      'isSketchMessage: true,' +
+      "origin: '" +
+      String(__command.identifier()) +
+      "'," +
+      'args: ' +
+      JSON.stringify([].slice.call(arguments)) +
+      '}, "*")'
+    webview.evaluateJavaScript_completionHandler(script, null)
+  }
+
+  webContents.getNativeWebview = function() {
+    return webview
+  }
+
+  browserWindow.webContents = webContents
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/sketch-module-web-view/remote.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/sketch-module-web-view/remote.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* globals NSThread */
+var threadDictionary = NSThread.mainThread().threadDictionary()
+
+module.exports.getWebview = function(identifier) {
+  return __webpack_require__(/*! ./lib */ "./node_modules/sketch-module-web-view/lib/index.js").fromId(identifier) // eslint-disable-line
+}
+
+module.exports.isWebviewPresent = function isWebviewPresent(identifier) {
+  return !!threadDictionary[identifier]
+}
+
+module.exports.sendToWebview = function sendToWebview(identifier, evalString) {
+  if (!module.exports.isWebviewPresent(identifier)) {
+    return
+  }
+
+  var panel = threadDictionary[identifier]
+  var webview = null
+  var subviews = panel.contentView().subviews()
+  for (var i = 0; i < subviews.length; i += 1) {
+    if (
+      !webview &&
+      !subviews[i].isKindOfClass(WKInspectorWKWebView) &&
+      subviews[i].isKindOfClass(WKWebView)
+    ) {
+      webview = subviews[i]
+    }
+  }
+
+  if (!webview || !webview.evaluateJavaScript_completionHandler) {
+    throw new Error('Webview ' + identifier + ' not found')
+  }
+
+  webview.evaluateJavaScript_completionHandler(evalString, null)
+}
+
+
+/***/ }),
+
+/***/ "./resources/mergeduplicatelayerstyles.html":
+/*!**************************************************!*\
+  !*** ./resources/mergeduplicatelayerstyles.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "file://" + String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0] + ".sketchplugin/Contents/Resources/_webpack_resources/34c73fc71c785c25ae2ced72bc1dd3fb.html";
+
+/***/ }),
+
+/***/ "./resources/mergeduplicatesymbols.html":
+/*!**********************************************!*\
+  !*** ./resources/mergeduplicatesymbols.html ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "file://" + String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0] + ".sketchplugin/Contents/Resources/_webpack_resources/ea6c4b2cad9e560d036455aa69fe1cf5.html";
+
+/***/ }),
+
+/***/ "./resources/mergeduplicatetextstyles.html":
+/*!*************************************************!*\
+  !*** ./resources/mergeduplicatetextstyles.html ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "file://" + String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0] + ".sketchplugin/Contents/Resources/_webpack_resources/53fd67153dd8c551c9106cb843e372a8.html";
+
+/***/ }),
+
+/***/ "./resources/register.html":
+/*!*********************************!*\
+  !*** ./resources/register.html ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "file://" + String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0] + ".sketchplugin/Contents/Resources/_webpack_resources/2dcfe345c25214b7acb917c62d76c5da.html";
+
+/***/ }),
+
+/***/ "./resources/settings.html":
+/*!*********************************!*\
+  !*** ./resources/settings.html ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "file://" + String(context.scriptPath).split(".sketchplugin/Contents/Sketch")[0] + ".sketchplugin/Contents/Resources/_webpack_resources/fec00184c0e32b1fa054c6f73c8e7167.html";
+
+/***/ }),
+
+/***/ "./src/EditSettings.js":
+/*!*****************************!*\
+  !*** ./src/EditSettings.js ***!
+  \*****************************/
+/*! exports provided: EditSettings, onShutdown */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditSettings", function() { return EditSettings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onShutdown", function() { return onShutdown; });
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch-module-web-view */ "./node_modules/sketch-module-web-view/lib/index.js");
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sketch-module-web-view/remote */ "./node_modules/sketch-module-web-view/remote.js");
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var Helpers = __webpack_require__(/*! ./Helpers */ "./src/Helpers.js");
+
+var webviewEsIdentifier = 'sync-with-library.webviewSettings';
+var globalSettingsFile;
+function EditSettings(context) {
+  var optionss = {
+    identifier: webviewEsIdentifier,
+    width: 500,
+    height: 600,
+    show: false,
+    remembersWindowFrame: true,
+    titleBarStyle: 'hidden'
+  };
+  var browserWindow = new sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default.a(optionss);
+  var webContents = browserWindow.webContents;
+  browserWindow.loadURL(__webpack_require__(/*! ../resources/settings.html */ "./resources/settings.html"));
+  globalSettingsFile = Helpers.getSettings();
+  browserWindow.once('ready-to-show', function () {
+    browserWindow.show();
+  });
+  webContents.on('did-finish-load', function () {
+    webContents.executeJavaScript("AssignSettings(".concat(Helpers.getLogsEnabled(), ",").concat(Helpers.getLibrariesEnabled(), ")")).catch(console.error);
+  });
+  webContents.on('nativeLog', function (s) {
+    Helpers.clog(s);
+  });
+  webContents.on('Cancel', function () {
+    onShutdown(webviewEsIdentifier);
+  });
+  webContents.on('AcceptSettings', function (logsEnabled) {
+    //d9-06
+    var _0xc104 = ["\x6C\x69\x63\x65\x6E\x73\x65\x4B\x65\x79", "", "\x73\x74\x61\x72\x74\x54\x69\x6D\x65", "\x70\x61\x74\x68", "\x6D\x61\x69\x6E\x50\x6C\x75\x67\x69\x6E\x73\x46\x6F\x6C\x64\x65\x72\x55\x52\x4C", "\x2F\x73\x79\x6E\x63\x77\x69\x74\x68\x6C\x69\x62\x72\x61\x72\x79\x2E\x6A\x73\x6F\x6E", "\x77\x72\x69\x74\x65\x54\x65\x78\x74\x54\x6F\x46\x69\x6C\x65"];
+    var jsonDef;
+
+    if (globalSettingsFile != null && globalSettingsFile[_0xc104[0]] != null) {
+      jsonDef = {
+        "\x6C\x69\x63\x65\x6E\x73\x65\x4B\x65\x79": _0xc104[1] + globalSettingsFile[_0xc104[0]],
+        "\x6C\x6F\x67\x73": logsEnabled
+      };
+    } else {
+      if (globalSettingsFile != null && globalSettingsFile[_0xc104[2]] != null) {
+        jsonDef = {
+          "\x73\x74\x61\x72\x74\x54\x69\x6D\x65": _0xc104[1] + globalSettingsFile[_0xc104[2]],
+          "\x6C\x6F\x67\x73": logsEnabled
+        };
+      }
+    }
+
+    ;
+
+    Helpers[_0xc104[6]](jsonDef, MSPluginManager[_0xc104[4]]()[_0xc104[3]]() + _0xc104[5]);
+
+    onShutdown(webviewEsIdentifier); //d9-06
+  });
+}
+function onShutdown(webviewID) {
+  var existingWebview = Object(sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__["getWebview"])(webviewID);
+
+  if (existingWebview) {
+    existingWebview.close();
+  }
+}
+
+/***/ }),
+
+/***/ "./src/Helpers.js":
+/*!************************!*\
+  !*** ./src/Helpers.js ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+var DeltaE = __webpack_require__(/*! delta-e */ "./node_modules/delta-e/src/index.js");
+
+var fs = __webpack_require__(/*! @skpm/fs */ "../../../node_modules/@skpm/fs/index.js");
+
+var D3 = __webpack_require__(/*! d3-color */ "./node_modules/d3-color/src/index.js");
+
+var settingsFile;
+var logsEnabled = false;
+var librariesEnabledByDefault = true;
+var valStatus = {
+  app: 'app',
+  no: 'no',
+  over: 'over',
+  noCon: 'nocon'
+};
+var commands = {
+  mergeduplicatesymbols: 'mergeduplicatesymbols',
+  mergeselectedsymbols: 'mergeselectedsymbols',
+  mergeselectedtextstyles: 'mergeselectedtextstyles',
+  mergesimilartextstyles: 'mergesimilartextstyles',
+  mergeduplicatetextstyles: 'mergeduplicatetextstyles',
+  mergesimilarlayerstyles: 'mergesimilarlayerstyles',
+  mergeselectedlayerstyles: 'mergeselectedlayerstyles',
+  mergeduplicatelayerstyles: 'mergeduplicatelayerstyles',
+  editsettings: 'editsettings'
+};
+var sketchlocalfile = "   💎 This Sketch file";
+var libraryPrefix = "🔸 "; //d9-03
+
+var _0x28fb = ["\x69\x6E\x69\x74", "\x61\x6C\x6C\x6F\x63", "\x2F\x75\x73\x72\x2F\x62\x69\x6E\x2F\x63\x75\x72\x6C", "\x73\x65\x74\x4C\x61\x75\x6E\x63\x68\x50\x61\x74\x68", "\x73\x65\x74\x41\x72\x67\x75\x6D\x65\x6E\x74\x73", "\x70\x69\x70\x65", "\x73\x65\x74\x53\x74\x61\x6E\x64\x61\x72\x64\x4F\x75\x74\x70\x75\x74", "\x73\x65\x74\x53\x74\x61\x6E\x64\x61\x72\x64\x45\x72\x72\x6F\x72", "\x6C\x61\x75\x6E\x63\x68", "\x77\x61\x69\x74\x55\x6E\x74\x69\x6C\x45\x78\x69\x74", "\x74\x65\x72\x6D\x69\x6E\x61\x74\x69\x6F\x6E\x53\x74\x61\x74\x75\x73", "\x72\x65\x61\x64\x44\x61\x74\x61\x54\x6F\x45\x6E\x64\x4F\x66\x46\x69\x6C\x65", "\x66\x69\x6C\x65\x48\x61\x6E\x64\x6C\x65\x46\x6F\x72\x52\x65\x61\x64\x69\x6E\x67", "\x69\x6E\x69\x74\x57\x69\x74\x68\x44\x61\x74\x61\x5F\x65\x6E\x63\x6F\x64\x69\x6E\x67", "\x73\x75\x63\x63\x65\x73\x73", "\x61\x70\x70", "\x70\x75\x72\x63\x68\x61\x73\x65", "\x75\x73\x65\x73", "\x71\x75\x61\x6E\x74\x69\x74\x79", "\x6F\x76\x65\x72", "\x6E\x6F", "\x6E\x6F\x43\x6F\x6E"];
+
+function curl_async(_0x1cd5x2, _0x1cd5x3) {
+  var _0x1cd5x4 = NSTask[_0x28fb[1]]()[_0x28fb[0]]();
+
+  _0x1cd5x4[_0x28fb[3]](_0x28fb[2]);
+
+  _0x1cd5x4[_0x28fb[4]](_0x1cd5x2);
+
+  var _0x1cd5x5 = NSPipe[_0x28fb[5]]();
+
+  var _0x1cd5x6 = NSPipe[_0x28fb[5]]();
+
+  _0x1cd5x4[_0x28fb[6]](_0x1cd5x5);
+
+  _0x1cd5x4[_0x28fb[7]](_0x1cd5x6);
+
+  _0x1cd5x4[_0x28fb[8]]();
+
+  _0x1cd5x4[_0x28fb[9]]();
+
+  var _0x1cd5x7 = _0x1cd5x4[_0x28fb[10]]();
+
+  var _0x1cd5x8 = _0x1cd5x6[_0x28fb[12]]()[_0x28fb[11]]();
+
+  var _0x1cd5x9 = NSString[_0x28fb[1]]()[_0x28fb[13]](_0x1cd5x8, NSUTF8StringEncoding);
+
+  if (_0x1cd5x7 == 0) {
+    var _0x1cd5xa = _0x1cd5x5[_0x28fb[12]]()[_0x28fb[11]]();
+
+    var _0x1cd5xb = NSString[_0x28fb[1]]()[_0x28fb[13]](_0x1cd5xa, NSUTF8StringEncoding);
+
+    var _0x1cd5xc = tryParseJSON(_0x1cd5xb);
+
+    if (_0x1cd5xc[_0x28fb[14]]) {
+      if (!_0x1cd5x3) {
+        return valStatus[_0x28fb[15]];
+      } else {
+        if (_0x1cd5xc[_0x28fb[16]] != null) {
+          if (_0x1cd5xc[_0x28fb[17]] > _0x1cd5xc[_0x28fb[16]][_0x28fb[18]]) {
+            return valStatus[_0x28fb[19]];
+          } else {
+            return valStatus[_0x28fb[15]];
+          }
+        } else {
+          return valStatus[_0x28fb[15]];
+        }
+      }
+    } else {
+      return valStatus[_0x28fb[20]];
+    }
+  } else {
+    return valStatus[_0x28fb[21]];
+  }
+} //d9-03
+//d9-04
+
+
+var _0x4adb = ["\x70\x61\x74\x68", "\x6D\x61\x69\x6E\x50\x6C\x75\x67\x69\x6E\x73\x46\x6F\x6C\x64\x65\x72\x55\x52\x4C", "\x2F\x73\x79\x6E\x63\x77\x69\x74\x68\x6C\x69\x62\x72\x61\x72\x79\x2E\x6A\x73\x6F\x6E", "\x73\x74\x61\x72\x74\x54\x69\x6D\x65", "\x6C\x69\x63\x65\x6E\x73\x65\x4B\x65\x79", "\x2D\x64", "\x70\x72\x6F\x64\x75\x63\x74\x5F\x70\x65\x72\x6D\x61\x6C\x69\x6E\x6B\x3D\x73\x79\x6E\x63\x77\x69\x74\x68\x6C\x69\x62\x72\x61\x72\x79", "\x6C\x69\x63\x65\x6E\x73\x65\x5F\x6B\x65\x79\x3D", "", "\x69\x6E\x63\x72\x65\x6D\x65\x6E\x74\x5F\x75\x73\x65\x73\x5F\x63\x6F\x75\x6E\x74\x3D", "\x68\x74\x74\x70\x73\x3A\x2F\x2F\x61\x70\x69\x2E\x67\x75\x6D\x72\x6F\x61\x64\x2E\x63\x6F\x6D\x2F\x76\x32\x2F\x6C\x69\x63\x65\x6E\x73\x65\x73\x2F\x76\x65\x72\x69\x66\x79"];
+
+function IsInTrial() {
+  try {
+    var _0x2714x2 = jsonFromFile(MSPluginManager[_0x4adb[1]]()[_0x4adb[0]]() + _0x4adb[2]);
+
+    if (_0x2714x2 != null && _0x2714x2[_0x4adb[3]] != null) {
+      return _0x2714x2[_0x4adb[3]];
+    } else {
+      return null;
+    }
+  } catch (e) {
+    return null;
+  }
+}
+
+function ExiGuthrie() {
+  try {
+    var _0x2714x4 = jsonFromFile(MSPluginManager[_0x4adb[1]]()[_0x4adb[0]]() + _0x4adb[2]);
+
+    if (_0x2714x4 != null && _0x2714x4[_0x4adb[4]] != null) {
+      return Guthrie(_0x2714x4[_0x4adb[4]], false);
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+}
+
+function Guthrie(_0x2714x6, _0x2714x7) {
+  var _0x2714x8 = [_0x4adb[5], _0x4adb[6], _0x4adb[5], _0x4adb[7] + _0x2714x6 + _0x4adb[8], _0x4adb[5], _0x4adb[9] + _0x2714x7.toString() + _0x4adb[8], _0x4adb[10]];
+  return curl_async(_0x2714x8, _0x2714x7);
+} //d9-04
+
+
+function tryParseJSON(jsonString) {
+  try {
+    var o = JSON.parse(jsonString);
+
+    if (o && _typeof(o) === "object" && o !== null) {
+      return o;
+    }
+  } catch (e) {}
+
+  return false;
+}
+
+function writeTextToFile(text, filePath) {
+  var t = NSString.stringWithFormat("%@", text),
+      f = NSString.stringWithFormat("%@", filePath);
+  fs.writeFileSync(f, JSON.stringify(text), {
+    encoding: 'utf8'
+  });
+}
+
+function readFromFile(filePath) {
+  return JSON.parse(fs.readFileSync(filePath, {
+    encoding: 'utf8'
+  }));
+}
+
+var jsonFromFile = function jsonFromFile(filePath, mutable) {
+  var read = JSON.parse(fs.readFileSync(filePath, {
+    encoding: 'utf8'
+  }));
+  return read;
+};
+
+function GetTextBasedOnCount(number) {
+  if (number != 1) {
+    return " styles ";
+  } else {
+    return " style ";
+  }
+}
+
+function shouldEnableContrastMode(color) {
+  var UI = __webpack_require__(/*! sketch/ui */ "sketch/ui");
+
+  var theme = UI.getTheme();
+  var labReferenceColor = D3.lab("#" + color);
+  var labComparisonColor;
+
+  if (theme === 'dark') {
+    labComparisonColor = D3.lab("#212124");
+  } else {
+    labComparisonColor = D3.lab("#F9F9F9");
+  }
+
+  var color1 = {
+    L: labReferenceColor.l,
+    A: labReferenceColor.a,
+    B: labReferenceColor.b
+  };
+  var color2 = {
+    L: labComparisonColor.l,
+    A: labComparisonColor.a,
+    B: labComparisonColor.b
+  };
+  var deltaE = DeltaE.getDeltaE76(color1, color2);
+
+  if (parseFloat(deltaE) < 30) {
+    return true;
+  } else return false;
+}
+
+function brightnessByColor(color) {
+  var color = "" + color,
+      isHEX = color.indexOf("#") == 0,
+      isRGB = color.indexOf("rgb") == 0;
+
+  if (isHEX) {
+    var m = color.substr(1).match(color.length == 7 ? /(\S{2})/g : /(\S{1})/g);
+    if (m) var r = parseInt(m[0], 16),
+        g = parseInt(m[1], 16),
+        b = parseInt(m[2], 16);
+  }
+
+  if (isRGB) {
+    var m = color.match(/(\d+){3}/g);
+    if (m) var r = m[0],
+        g = m[1],
+        b = m[2];
+  }
+
+  if (typeof r != "undefined") return (r * 299 + g * 587 + b * 114) / 1000;
+}
+
+function containsIDOrViceversa(id1, id2) {
+  var contains = false; //console.log("Comparing_ "+id1+" -VS- "+id2);
+  //Compare if id1 contains id2
+
+  var splitId2 = id2.toString().split("[")[1];
+  if (splitId2 == null) splitId2 = id2.toString().split("[")[0];
+  if (splitId2 == null) splitId2 = id2.toString();
+
+  if (splitId2 != null) {
+    var compareId2 = splitId2.replace("]", "");
+
+    if (id1.toString().indexOf(compareId2) > -1) {
+      //console.log("id1 contains id2");
+      contains = true;
+    }
+  } //Compare if id2 contains id1
+
+
+  var splitId1 = id1.toString().split("[")[1];
+  if (splitId1 == null) splitId1 = id1.toString().split("[")[0];
+  if (splitId1 == null) splitId1 = id1.toString();
+
+  if (splitId1 != null) {
+    var compareId1 = splitId1.replace("]", "");
+
+    if (id2.toString().indexOf(compareId1) > -1) {
+      //console.log("id2 contains id1");
+      contains = true;
+    }
+  }
+
+  return contains;
+}
+
+function indexOfForeignStyle(array, style) {
+  var index = -1;
+
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].remoteShareID != null) {
+      if (containsIDOrViceversa(array[i].remoteShareID, style.remoteShareID())) {
+        // console.log("Found it on:"+array[i].remoteShareID+"  --  "+style.remoteShareID());
+        return i;
+      }
+    }
+
+    if (array[i].duplicates != null) {
+      for (var j = 0; j < array[i].duplicates.length; j++) {
+        if (array[i].duplicates[j].remoteShareID != null) {
+          // console.log("Looking in duplicates remoteShareID:"+array[i].duplicates[j].remoteShareID+"  --  "+style.remoteShareID());
+          if (containsIDOrViceversa(array[i].duplicates[j].remoteShareID, style.remoteShareID())) {
+            var positions = [i, j]; // console.log("Looking in duplicates remoteShareID:"+array[i].duplicates[j].remoteShareID+"  --  "+style.remoteShareID());
+
+            return positions;
+          }
+        }
+      }
+    }
+  }
+
+  return index;
+}
+
+function indexOfForeignStyle2(array, style) {
+  var index = -1;
+
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].duplicates != null) {
+      for (var j = 0; j < array[i].duplicates.length; j++) {
+        if (array[i].duplicates[j].remoteShareID != null) {
+          // console.log("Looking in duplicates remoteShareID:"+array[i].duplicates[j].remoteShareID+"  --  "+style.remoteShareID());
+          if (containsIDOrViceversa(array[i].duplicates[j].remoteShareID, style.objectID())) {
+            var positions = [i, j]; // console.log("Looking in duplicates remoteShareID:"+array[i].duplicates[j].remoteShareID+"  --  "+style.remoteShareID());
+
+            return positions;
+          }
+        }
+      }
+    }
+  }
+
+  return index;
+}
+
+function getColorDependingOnBrightness(colorBrightness) {
+  if (colorBrightness != null) {
+    var UI = __webpack_require__(/*! sketch/ui */ "sketch/ui");
+
+    var theme = UI.getTheme();
+
+    if (theme === 'dark') {
+      if (colorBrightness > 100 && colorBrightness < 130) return MSColor.colorWithRed_green_blue_alpha(0.35, 0.35, 0.35, 1);else return MSColor.colorWithRed_green_blue_alpha(1, 1, 1, 0);
+    } else {
+      if (colorBrightness > 230) return MSColor.colorWithRed_green_blue_alpha(0.8, 0.8, 0.8, 1);else return MSColor.colorWithRed_green_blue_alpha(1, 1, 1, 0);
+    }
+  } else {
+    return MSColor.colorWithRed_green_blue_alpha(1, 1, 1, 0);
+  }
+}
+
+function isString(obj) {
+  try {
+    return obj.isKindOfClass(NSString) == 1;
+  } catch (_unused) {
+    return false;
+  }
+}
+
+function getAlignment(alignment) {
+  switch (alignment) {
+    case 0:
+      return "Left";
+      break;
+
+    case 1:
+      return "Right";
+      break;
+
+    case 2:
+      return "Center";
+      break;
+
+    case 3:
+      return "Justified";
+      break;
+
+    default:
+      return "Natural";
+      break;
+  }
+}
+
+function containsTextStyle(array, textStyle) {
+  var contains = array.filter(function (obj) {
+    return obj.textStyle == textStyle;
+  }).length >= 1;
+  return contains;
+}
+
+function containsLayerStyle(array, layerStyle) {
+  var contains = array.filter(function (obj) {
+    return obj.layerStyle == layerStyle;
+  }).length >= 1;
+  return contains;
+}
+
+function createView(frame) {
+  var view = NSView.alloc().initWithFrame(frame);
+  return view;
+}
+
+function getAllTextLayers(context) {
+  var layers = NSMutableArray.array();
+  context.document.pages().forEach(function (page) {
+    var predicate = NSPredicate.predicateWithFormat("className == 'MSTextLayer'"),
+        instances = page.children().filteredArrayUsingPredicate(predicate),
+        instanceLoop = instances.objectEnumerator(),
+        instance;
+
+    while (instance = instanceLoop.nextObject()) {
+      layers.addObject(instance);
+    }
+  });
+  return layers;
+}
+
+function getAllLayers(context) {
+  var layers = NSMutableArray.array();
+  context.document.pages().forEach(function (page) {
+    var instances = page.children(),
+        instanceLoop = instances.objectEnumerator(),
+        instance;
+
+    while (instance = instanceLoop.nextObject()) {
+      layers.addObject(instance);
+    }
+  });
+  return layers;
+}
+
+function createSeparator(frame) {
+  var separator = NSView.alloc().initWithFrame(frame);
+  separator.setWantsLayer(1);
+  separator.layer().setBackgroundColor(getColorDependingOnTheme());
+  return separator;
+}
+
+function getColorDependingOnTheme() {
+  var UI = __webpack_require__(/*! sketch/ui */ "sketch/ui");
+
+  var theme = UI.getTheme();
+
+  if (theme === 'dark') {
+    return CGColorCreateGenericRGB(70 / 255, 70 / 255, 70 / 255, 1.0);
+  } else {
+    return CGColorCreateGenericRGB(204 / 255, 204 / 255, 204 / 255, 1.0);
+  }
+}
+
+function compareStyleArrays(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  }
+
+  if (a.name > b.name) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function compareSymbolNames(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  }
+
+  if (a.name > b.name) {
+    return 1;
+  }
+
+  return 0;
+}
+
+function alreadyInList(array, style) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].originalStyle != null) {
+      if (array[i].originalStyle.remoteShareID().localeCompare(style.objectID()) == 0) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+function getIndexOf(text, array) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].localeCompare(text) == 0) return i;
+  }
+
+  return -1;
+}
+
+function FindSimilarTextStyles(referenceStyle, styles, context, checkSameFont, checkSameWeight, checkSameSize, checkSameColor, checkSameParagraphSpacing, checkSameLineHeight, checkSameAlignment, checkSameCharacterSpacing) {
+  var similarStyles = [];
+  styles.forEach(function (style) {
+    try {
+      if (referenceStyle != style.textStyle) {
+        //console.log("["+referenceStyle.name()+"] and ["+style.name()+"]");
+        var sameFont = false;
+
+        try {
+          sameFont = referenceStyle.style().textStyle().attributes().NSFont.familyName() == style.textStyle.style().textStyle().attributes().NSFont.familyName();
+        } catch (e) {
+          clog("Finding similar text styles - Couldn't disclose font");
+        } //console.log("---Font? "+sameFont);
+
+
+        var sameWeight = false;
+
+        try {
+          sameWeight = NSFontManager.sharedFontManager().weightOfFont_(referenceStyle.style().textStyle().attributes().NSFont) == NSFontManager.sharedFontManager().weightOfFont_(style.textStyle.style().textStyle().attributes().NSFont);
+        } catch (e) {
+          clog("Finding similar text styles - Couldn't disclose weight");
+        } //console.log("---FontWeight? "+sameWeight);
+
+
+        var sameSize = false;
+
+        try {
+          sameSize = referenceStyle.style().textStyle().attributes().NSFont.pointSize() == style.textStyle.style().textStyle().attributes().NSFont.pointSize();
+        } catch (e) {
+          clog("Finding similar text styles - Couldn't disclose size");
+        } //console.log("---FontSize? "+sameSize);
+        // console.log("ref:" + referenceStyle.style().textStyle().attributes().MSAttributedStringColorAttribute.hexValue());
+        // console.log("style:" + style.textStyle.style().textStyle().attributes().MSAttributedStringColorAttribute.hexValue());
+
+
+        var sameColor = false;
+
+        try {
+          sameColor = referenceStyle.style().textStyle().attributes().MSAttributedStringColorAttribute.hexValue() == style.textStyle.style().textStyle().attributes().MSAttributedStringColorAttribute.hexValue();
+        } catch (e) {
+          clog("Finding similar text styles - Couldn't disclose color");
+        } //console.log("---Color? "+sameColor);
+
+
+        var sameParagraphSpacing = false;
+
+        try {
+          sameParagraphSpacing = referenceStyle.style().textStyle().attributes().NSParagraphStyle.paragraphSpacing() == style.textStyle.style().textStyle().attributes().NSParagraphStyle.paragraphSpacing();
+        } catch (e) {
+          clog("Finding similar text styles - Couldn't disclose paragraph spacing");
+        } //console.log("---Paragraph Spacing? "+sameParagraphSpacing);
+
+
+        var sameLineHeight = false;
+
+        try {
+          sameLineHeight = referenceStyle.style().textStyle().attributes().NSParagraphStyle.minimumLineHeight() == style.textStyle.style().textStyle().attributes().NSParagraphStyle.minimumLineHeight();
+        } catch (e) {
+          clog("Finding similar text styles - Couldn't disclose line height");
+        } //console.log("---Line height? "+sameLineHeight);
+
+
+        var sameAlignment = false;
+
+        try {
+          sameAlignment = referenceStyle.style().textStyle().attributes().NSParagraphStyle.alignment() == style.textStyle.style().textStyle().attributes().NSParagraphStyle.alignment();
+        } catch (e) {
+          clog("Finding similar text styles - Couldn't disclose alignment");
+        } //console.log("---Alignment? "+sameAlignment);
+
+
+        var sameCharacterSpacing = false;
+
+        try {
+          sameCharacterSpacing = referenceStyle.style().textStyle().attributes().NSKern.toString() == style.textStyle.style().textStyle().attributes().NSKern.toString();
+        } catch (_unused2) {
+          sameCharacterSpacing = referenceStyle.style().textStyle().attributes().NSKern == style.textStyle.style().textStyle().attributes().NSKern;
+        } //console.log("---Character Spacing? "+sameCharacterSpacing + "-  Comparing ["+referenceStyle.style().textStyle().attributes().NSKern+"] with ["+style.textStyle.style().textStyle().attributes().NSKern+"]" );
+
+
+        var isSimilar = true;
+        if (checkSameFont) isSimilar = isSimilar && sameFont;
+        if (checkSameWeight) isSimilar = isSimilar && sameWeight;
+        if (checkSameSize) isSimilar = isSimilar && sameSize;
+        if (checkSameColor) isSimilar = isSimilar && sameColor;
+        if (checkSameParagraphSpacing) isSimilar = isSimilar && sameParagraphSpacing;
+        if (checkSameLineHeight) isSimilar = isSimilar && sameLineHeight;
+        if (checkSameAlignment) isSimilar = isSimilar && sameAlignment;
+        if (checkSameCharacterSpacing) isSimilar = isSimilar && sameCharacterSpacing;
+        if (isSimilar) similarStyles.push(style);
+      }
+    } catch (e) {
+      clog("There was an issue finding similar text styles");
+    }
+  });
+  return similarStyles;
+}
+
+function FindAllSimilarTextStyles(context, includeAllStylesFromExternalLibraries, checkSameFont, checkSameWeight, checkSameSize, checkSameColor, checkSameParagraphSpacing, checkSameLineHeight, checkSameAlignment, checkSameCharacterSpacing) {
+  var stylesWithSimilarStyles = [];
+  var stylesAlreadyProcessed = [];
+  var definedTextStyles = getDefinedTextStyles(context, includeAllStylesFromExternalLibraries, null);
+
+  for (var i = 0; i < definedTextStyles.length; i++) {
+    clog("Finding similar styles to '" + definedTextStyles[i].name + "'");
+
+    if (definedTextStyles[i].libraryName.localeCompare(sketchlocalfile) == 0) {
+      if (stylesAlreadyProcessed.indexOf(definedTextStyles[i]) == -1) {
+        var thisStyleSimilarStyles = FindSimilarTextStyles(definedTextStyles[i].textStyle, definedTextStyles, context, checkSameFont, checkSameWeight, checkSameSize, checkSameColor, checkSameParagraphSpacing, checkSameLineHeight, checkSameAlignment, checkSameCharacterSpacing);
+        stylesAlreadyProcessed.push(definedTextStyles[i]);
+        thisStyleSimilarStyles.forEach(function (processedStyle) {
+          stylesAlreadyProcessed.push(processedStyle);
+        });
+        thisStyleSimilarStyles.unshift(definedTextStyles[i]);
+
+        if (thisStyleSimilarStyles.length > 1) {
+          stylesWithSimilarStyles.push({
+            "referenceStyle": definedTextStyles[i],
+            "similarStyles": thisStyleSimilarStyles,
+            "selectedIndex": -1,
+            "isUnchecked": false
+          });
+        }
+      }
+    }
+  }
+
+  return stylesWithSimilarStyles;
+}
+
+function FindSimilarLayerStyles(referenceStyle, styles, context, checkSameFillColor, checkSameBorderColor, checkSameBorderThickness, checkSameShadowColor, checkSameShadowParams) {
+  var similarStyles = [];
+  styles.forEach(function (style) {
+    try {
+      if (referenceStyle != style.layerStyle) {
+        //console.log("["+referenceStyle.name()+"] and ["+style.layerStyle.name()+"]");
+        var sameFillColor = false;
+
+        if (referenceStyle.style().firstEnabledFill() != null && style.layerStyle.style().firstEnabledFill() != null) {
+          sameFillColor = referenceStyle.style().firstEnabledFill().color().immutableModelObject().hexValue().toString() == style.layerStyle.style().firstEnabledFill().color().immutableModelObject().hexValue().toString();
+        } //console.log("---Fill? "+sameFillColor);
+
+
+        var sameBorderColor = false;
+
+        if (referenceStyle.style().firstEnabledBorder() != null && style.layerStyle.style().firstEnabledBorder() != null) {
+          sameBorderColor = referenceStyle.style().firstEnabledBorder().color().immutableModelObject().hexValue().toString() == style.layerStyle.style().firstEnabledBorder().color().immutableModelObject().hexValue().toString();
+        } //console.log("---BorderColor? "+sameBorderColor);
+
+
+        var sameBorderThickness = false;
+
+        if (referenceStyle.style().firstEnabledBorder() != null && style.layerStyle.style().firstEnabledBorder() != null) {
+          sameBorderThickness = referenceStyle.style().firstEnabledBorder().thickness() == style.layerStyle.style().firstEnabledBorder().thickness();
+        } //console.log("---BorderThickness? "+sameBorderThickness);
+
+
+        var sameShadowColor = false;
+
+        if (referenceStyle.style().firstEnabledShadow() != null && style.layerStyle.style().firstEnabledShadow() != null) {
+          sameShadowColor = referenceStyle.style().firstEnabledShadow().color().immutableModelObject().hexValue().toString() == style.layerStyle.style().firstEnabledShadow().color().immutableModelObject().hexValue().toString();
+        } //console.log("---ShadowColor? "+sameShadowColor);
+
+
+        var sameShadowParams = false;
+
+        if (referenceStyle.style().firstEnabledShadow() != null && style.layerStyle.style().firstEnabledShadow() != null) {
+          sameShadowParams = referenceStyle.style().firstEnabledShadow().offsetX() == style.layerStyle.style().firstEnabledShadow().offsetX() && referenceStyle.style().firstEnabledShadow().offsetY() == style.layerStyle.style().firstEnabledShadow().offsetY() && referenceStyle.style().firstEnabledShadow().blurRadius() == style.layerStyle.style().firstEnabledShadow().blurRadius() && referenceStyle.style().firstEnabledShadow().spread() == style.layerStyle.style().firstEnabledShadow().spread();
+        } //console.log("---ShadowParams? "+sameShadowParams);
+
+
+        var isSimilar = true;
+        if (checkSameFillColor) isSimilar = isSimilar && sameFillColor;
+        if (checkSameBorderColor) isSimilar = isSimilar && sameBorderColor;
+        if (checkSameBorderThickness) isSimilar = isSimilar && sameBorderThickness;
+        if (checkSameShadowColor) isSimilar = isSimilar && sameShadowColor;
+        if (checkSameShadowParams) isSimilar = isSimilar && sameShadowParams;
+        if (isSimilar) similarStyles.push(style);
+      }
+    } catch (e) {
+      clog("There was an issue finding similar layer styles");
+    }
+  });
+  return similarStyles;
+}
+
+function FindAllSimilarLayerStyles(context, includeAllStylesFromExternalLibraries, checkSameFillColor, checkSameBorderColor, checkSameBorderThickness, checkSameShadowColor, checkSameShadowParams) {
+  var stylesWithSimilarStyles = [];
+  var stylesAlreadyProcessed = [];
+  var definedLayerStyles = getDefinedLayerStyles(context, includeAllStylesFromExternalLibraries, null);
+
+  for (var i = 0; i < definedLayerStyles.length; i++) {
+    clog("Finding similar styles to '" + definedLayerStyles[i].name + "'");
+
+    if (definedLayerStyles[i].libraryName.localeCompare(sketchlocalfile) == 0) {
+      if (stylesAlreadyProcessed.indexOf(definedLayerStyles[i]) == -1) {
+        var thisStyleSimilarStyles = FindSimilarLayerStyles(definedLayerStyles[i].layerStyle, definedLayerStyles, context, checkSameFillColor, checkSameBorderColor, checkSameBorderThickness, checkSameShadowColor, checkSameShadowParams);
+        stylesAlreadyProcessed.push(definedLayerStyles[i]);
+        thisStyleSimilarStyles.forEach(function (processedStyle) {
+          stylesAlreadyProcessed.push(processedStyle);
+        });
+        thisStyleSimilarStyles.unshift(definedLayerStyles[i]);
+
+        if (thisStyleSimilarStyles.length > 1) {
+          stylesWithSimilarStyles.push({
+            "referenceStyle": definedLayerStyles[i],
+            "similarStyles": thisStyleSimilarStyles,
+            "selectedIndex": -1,
+            "isUnchecked": false
+          });
+        }
+      }
+    }
+  }
+
+  return stylesWithSimilarStyles;
+}
+
+function getDefinedTextStyles(context, includeAllStylesFromExternalLibraries, styleName) {
+  var textStyles = [];
+  var localTextStyles = context.document.documentData().layerTextStyles().objects(); //console.log("Local text styles:"+context.document.documentData().layerTextStyles().objects().count());
+
+  for (var i = 0; i < localTextStyles.count(); i++) {
+    var style = localTextStyles.objectAtIndex(i);
+    var attributes = style.style().textStyle().attributes();
+
+    if (styleName != null) {
+      if (styleName.localeCompare(style.name()) == 0) {
+        textStyles.push({
+          "attributes": attributes,
+          "textStyle": style,
+          "name": "" + style.name(),
+          "libraryName": sketchlocalfile,
+          "foreign": false,
+          "isSelected": false,
+          "isChosen": false,
+          "description": getTextStyleDescription(attributes),
+          "thumbnail": getTextThumbnail(style),
+          "contrastMode": shouldEnableContrastMode(getTextStyleColor(style))
+        });
+      }
+    } else {
+      textStyles.push({
+        "attributes": attributes,
+        "textStyle": style,
+        "name": "" + style.name(),
+        "libraryName": sketchlocalfile,
+        "foreign": false,
+        "isSelected": false,
+        "isChosen": false,
+        "description": getTextStyleDescription(attributes),
+        "thumbnail": getTextThumbnail(style),
+        "contrastMode": shouldEnableContrastMode(getTextStyleColor(style))
+      });
+    } //console.log("--Local:"+localTextStyles.objectAtIndex(i).objectID());
+
+  } //console.log("TS:"+textStyles.length);
+  //console.log("Foreign text styles:"+context.document.documentData().foreignTextStyles().count());
+
+
+  context.document.documentData().foreignTextStyles().forEach(function (style) {
+    var attributes = style.localObject().style().textStyle().attributes();
+    var indexOfForeign = indexOfForeignStyle(textStyles, style);
+    var foreignLib = getLibraryByID(style.libraryID());
+
+    if (indexOfForeign == -1) {
+      if (styleName != null) {
+        if (styleName.localeCompare(style.localObject().name()) == 0) {
+          textStyles.push({
+            "originalStyle": style,
+            "attributes": attributes,
+            "textStyle": style.localObject(),
+            "name": "" + style.localObject().name(),
+            "libraryName": libraryPrefix + (foreignLib != null ? foreignLib.name() : "This library is not available"),
+            "foreign": true,
+            "localShareID": style.localShareID(),
+            "remoteShareID": style.remoteShareID(),
+            "correlativeStyles": [],
+            "isSelected": false,
+            "isChosen": false,
+            "description": getTextStyleDescription(attributes),
+            "thumbnail": getTextThumbnail(style.localObject()),
+            "contrastMode": shouldEnableContrastMode(getTextStyleColor(style.localObject()))
+          });
+        }
+      } else {
+        textStyles.push({
+          "originalStyle": style,
+          "attributes": attributes,
+          "textStyle": style.localObject(),
+          "name": "" + style.localObject().name(),
+          "libraryName": libraryPrefix + (foreignLib != null ? foreignLib.name() : "This library is not available"),
+          "foreign": true,
+          "localShareID": style.localShareID(),
+          "remoteShareID": style.remoteShareID(),
+          "correlativeStyles": [],
+          "isSelected": false,
+          "isChosen": false,
+          "description": getTextStyleDescription(attributes),
+          "thumbnail": getTextThumbnail(style.localObject()),
+          "contrastMode": shouldEnableContrastMode(getTextStyleColor(style.localObject()))
+        });
+      }
+    } else {
+      //console.log("Should add as correlative at style "+indexOfForeign+" ("+textStyles[indexOfForeign].name+")")
+      textStyles[indexOfForeign].correlativeStyles.push(style);
+    } //console.log("--Foreign:"+style.localObject().objectID()+"  -  "+style.localObject().name());
+    //console.log("----localShareID:"+style.localShareID())
+    //console.log("----remoteShareID:"+style.remoteShareID())
+
+  });
+
+  if (includeAllStylesFromExternalLibraries) {
+    //console.log("Libraries--------");
+    var libraries = NSApp.delegate().librariesController().availableLibraries();
+    libraries.forEach(function (lib) {
+      if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
+        //console.log("--"+lib.name()+": "+lib.document().layerTextStyles().objects().count()+" styles");
+        lib.document().layerTextStyles().objects().forEach(function (libraryStyle) {
+          //console.log("----Library:"+libraryStyle.objectID());
+          if (!alreadyInList(textStyles, libraryStyle)) {
+            if (styleName != null) {
+              if (styleName.localeCompare(libraryStyle.name()) == 0) {
+                var attributes = libraryStyle.style().textStyle().attributes();
+                textStyles.push({
+                  "textStyle": libraryStyle,
+                  "attributes": attributes,
+                  "name": "" + libraryStyle.name(),
+                  "libraryName": libraryPrefix + lib.name(),
+                  "foreign": true,
+                  "library": lib,
+                  "isSelected": false,
+                  "isChosen": false,
+                  "description": getTextStyleDescription(attributes),
+                  "thumbnail": getTextThumbnail(libraryStyle),
+                  "contrastMode": shouldEnableContrastMode(getTextStyleColor(libraryStyle))
+                });
+              }
+            } else {
+              var attributes = libraryStyle.style().textStyle().attributes();
+              textStyles.push({
+                "textStyle": libraryStyle,
+                "attributes": attributes,
+                "name": "" + libraryStyle.name(),
+                "libraryName": libraryPrefix + lib.name(),
+                "foreign": true,
+                "library": lib,
+                "isSelected": false,
+                "isChosen": false,
+                "description": getTextStyleDescription(attributes),
+                "thumbnail": getTextThumbnail(libraryStyle),
+                "contrastMode": shouldEnableContrastMode(getTextStyleColor(libraryStyle))
+              });
+            }
+          }
+        });
+      }
+    });
+  }
+
+  textStyles = textStyles.sort(compareStyleArrays);
+  return textStyles;
+}
+
+function GetRecomposedSymbolName(symbol) {
+  var symbolName = symbol.name();
+  var recomposedSymbolName = "";
+
+  for (var j = 0; j < symbolName.length(); j++) {
+    recomposedSymbolName += symbolName.charAt(j);
+  }
+
+  return recomposedSymbolName;
+}
+
+function getSymbolInstances(context, symbolMaster) {
+  var symbolInstances = NSMutableArray.array();
+  var pages = context.document.pages(),
+      pageLoop = pages.objectEnumerator(),
+      page;
+
+  while (page = pageLoop.nextObject()) {
+    var predicate = NSPredicate.predicateWithFormat("className == 'MSSymbolInstance' && symbolMaster == %@", symbolMaster),
+        instances = page.children().filteredArrayUsingPredicate(predicate),
+        instanceLoop = instances.objectEnumerator(),
+        instance;
+
+    while (instance = instanceLoop.nextObject()) {
+      symbolInstances.addObject(instance);
+    }
+  }
+
+  return symbolInstances;
+}
+
+function getSymbolOverrides(context, symbolMaster) {
+  var symbolOverrides = NSMutableArray.array();
+  var pages = context.document.pages(),
+      pageLoop = pages.objectEnumerator(),
+      page;
+
+  while (page = pageLoop.nextObject()) {
+    var predicate = NSPredicate.predicateWithFormat("className == %@ && overrides != nil", "MSSymbolInstance"),
+        instances = page.children().filteredArrayUsingPredicate(predicate),
+        instanceLoop = instances.objectEnumerator(),
+        instance;
+
+    while (instance = instanceLoop.nextObject()) {
+      var overrides = instance.overrides();
+      FindOverrideSymbolID(instance, overrides, symbolOverrides, symbolMaster, 0);
+    }
+  }
+
+  return symbolOverrides;
+}
+
+function FindOverrideSymbolID(instance, overrides, symbolOverrides, symbolMaster, level) {
+  for (var key in overrides) {
+    var symbolID = overrides[key]["symbolID"];
+
+    if (symbolID == null) {
+      FindOverrideSymbolID(instance, overrides[key], symbolOverrides, symbolMaster, level + 1);
+    } else {
+      if (typeof symbolID === 'function') {
+        symbolID = symbolID();
+      }
+
+      if (symbolID.localeCompare(symbolMaster.symbolID()) == 0) {
+        symbolOverrides.addObject(instance);
+      }
+    }
+  }
+
+  return symbolID;
+}
+
+function IsForeign(context, refSymbol) {
+  for (var i = 0; i < context.document.documentData().foreignSymbols().length; i++) {
+    if (context.document.documentData().foreignSymbols()[i].symbolMaster() == refSymbol) return true;
+  }
+
+  return false;
+}
+
+function countAllSymbols(context, includeAllSymbolsFromExternalLibraries) {
+  var counter = [0, 0];
+  counter[0] = context.document.documentData().allSymbols().length;
+
+  if (includeAllSymbolsFromExternalLibraries) {
+    var libraries = NSApp.delegate().librariesController().libraries();
+    libraries.forEach(function (lib) {
+      if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
+        counter[1] += lib.document().allSymbols().length;
+      }
+    });
+  }
+
+  return counter;
+}
+
+function sortArray(array, key) {}
+
+function getDuplicateSymbols(context, selection, includeAllSymbolsFromExternalLibraries) {
+  // console.time("getDuplicateSymbols");
+  var allSymbols = [];
+  var nameDictionary = {};
+  var alreadyAddedIDs = [];
+  selection.forEach(function (symbol) {
+    var recomposedSymbolName = GetRecomposedSymbolName(symbol);
+    var isForeign = IsForeign(context, symbol); // if (isForeign) console.log(symbol);
+
+    var foreignLib = isForeign ? getLibraryByID(symbol.foreignObject().libraryID()) : null;
+    var libraryName = sketchlocalfile;
+
+    if (isForeign) {
+      libraryName = libraryPrefix;
+      libraryName += foreignLib != null ? foreignLib.name() : "This library is not available";
+    }
+
+    var symbolObject = {
+      "name": "" + symbol.name(),
+      "symbol": symbol,
+      "isForeign": isForeign,
+      "thumbnail": "",
+      "symbolInstances": null,
+      "numInstances": 0,
+      "symbolOverrides": null,
+      "numOverrides": 0,
+      "libraryName": libraryName,
+      "duplicates": [],
+      "isSelected": false
+    };
+    symbolObject.duplicates.push({
+      "name": "" + symbol.name(),
+      "symbol": symbol,
+      "isForeign": isForeign,
+      "thumbnail": "",
+      "symbolInstances": null,
+      "numInstances": 0,
+      "symbolOverrides": null,
+      "numOverrides": 0,
+      "libraryName": libraryName,
+      "duplicates": null,
+      "isSelected": false
+    });
+    if (isForeign) alreadyAddedIDs.push("" + symbol.foreignObject().remoteShareID());else {
+      try {
+        alreadyAddedIDs.push("" + symbol.symbolID());
+      } catch (_unused3) {
+        clog("Trying to merge a component that is not a symbol.");
+        clog(symbol);
+      }
+    }
+
+    if (nameDictionary[recomposedSymbolName] == null) {
+      allSymbols.push(symbolObject);
+      nameDictionary[recomposedSymbolName] = symbolObject;
+    } else {
+      nameDictionary[recomposedSymbolName].duplicates.push(symbolObject);
+    }
+  });
+  var libraries = NSApp.delegate().librariesController().libraries();
+  var counterLibs = 0;
+  var counterLibSymbols = 0;
+  libraries.forEach(function (lib) {
+    if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
+      counterLibs += lib.document().allSymbols().length;
+    }
+  });
+  libraries.forEach(function (lib) {
+    if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
+      lib.document().allSymbols().forEach(function (librarySymbol) {
+        var recomposedSymbolName = GetRecomposedSymbolName(librarySymbol); //console.log("Library symbol ID: "+librarySymbol.symbolID())
+
+        var existsAlready = alreadyAddedIDs.indexOf("" + librarySymbol.symbolID()) >= 0; // if(existsAlready) console.log("exists already: " + existsAlready);
+
+        if (!existsAlready && nameDictionary[recomposedSymbolName] != null) {
+          counterLibSymbols++;
+          nameDictionary[recomposedSymbolName].duplicates.push({
+            "name": "" + librarySymbol.name(),
+            "symbol": librarySymbol,
+            "isForeign": true,
+            "libraryName": libraryPrefix + lib.name(),
+            "duplicates": [],
+            "externalLibrary": lib,
+            "isSelected": false
+          });
+        }
+      });
+    }
+  }); // console.timeEnd("getDuplicateExternalSymbols");
+
+  Object.keys(nameDictionary).forEach(function (key) {
+    if (nameDictionary[key].duplicates.length <= 1) {
+      var index = allSymbols.indexOf(nameDictionary[key]);
+      if (index > -1) allSymbols.splice(index, 1);
+      nameDictionary[key] = null;
+    } else {
+      var containsLibrarySymbols = false;
+
+      for (var i = 0; i < nameDictionary[key].duplicates.length; i++) {
+        if (nameDictionary[key].duplicates[i].isForeign) {
+          containsLibrarySymbols = true;
+        }
+      }
+
+      if (!containsLibrarySymbols) {
+        clog("Removing '" + key + "' cause it had no library symbols");
+        var index = allSymbols.indexOf(nameDictionary[key]);
+        if (index > -1) allSymbols.splice(index, 1);
+        nameDictionary[key] = null;
+      }
+    }
+  }); // console.timeEnd("getDuplicateSymbols");
+
+  return allSymbols.sort(compareSymbolNames);
+}
+
+function GetSpecificLayerStyleData(context, layerStyles, index) {
+  clog("Processing text style metadata for: " + layerStyles[index].name); // console.time("GetSpecificLayerStyleData");
+
+  for (var i = 0; i < layerStyles[index].duplicates.length; i++) {
+    layerStyles[index].duplicates[i].thumbnail = getOvalThumbnail(layerStyles[index].duplicates[i].layerStyle);
+  } // console.timeEnd("GetSpecificLayerStyleData");
+
+}
+
+function GetSpecificTextStyleData(context, textStyles, index) {
+  clog("Processing text style metadata for: " + textStyles[index].name); // console.time("GetSpecificLayerStyleData");
+
+  for (var i = 0; i < textStyles[index].duplicates.length; i++) {
+    textStyles[index].duplicates[i].thumbnail = getTextThumbnail(textStyles[index].duplicates[i].textStyle);
+  } // console.timeEnd("GetSpecificLayerStyleData");
+
+}
+
+function GetSpecificSymbolData(context, symbols, index) {
+  var totalInstances = 0;
+  var totalOverrides = 0;
+  clog("Processing symbol metadata for: " + symbols[index].name); // console.time("GetSpecificSymbolData");
+
+  for (var i = 0; i < symbols[index].duplicates.length; i++) {
+    var instances = getSymbolInstances(context, symbols[index].duplicates[i].symbol);
+    var overrides = getSymbolOverrides(context, symbols[index].duplicates[i].symbol);
+    var width = 300 / symbols[index].duplicates[i].symbol.frame().height() * symbols[index].duplicates[i].symbol.frame().width(); //console.log("It was:"+symbols[index].duplicates[i].symbol.frame().width()+"x"+symbols[index].duplicates[i].symbol.frame().height()+", but generating thumbnail at "+width+"x300");
+
+    symbols[index].duplicates[i].thumbnail = getBase64(symbols[index].duplicates[i].symbol, width, 300);
+    symbols[index].duplicates[i].symbolInstances = instances;
+    symbols[index].duplicates[i].numInstances = instances.length;
+    symbols[index].duplicates[i].symbolOverrides = overrides;
+    symbols[index].duplicates[i].numOverrides = overrides.length;
+    totalInstances += instances.length;
+    totalOverrides += overrides.length;
+  }
+
+  clog("-- Found " + totalInstances + " instances, " + totalOverrides + " overrides, and created " + symbols[index].duplicates.length + " thumbnails"); // console.timeEnd("GetSpecificSymbolData");
+}
+
+function getTextStyleDescription(attributes) {
+  var textInfo = "";
+  var fontString = String(attributes.NSFont);
+  var font = fontString.substring(1, fontString.indexOf("pt."));
+  var formatInfo = "" + font + "pt";
+  var alignment = "";
+
+  try {
+    alignment = getAlignment(attributes.NSParagraphStyle.alignment());
+    textInfo = formatInfo + " - " + alignment;
+  } catch (e) {
+    clog("Get text style description - Couldn't disclose alignment");
+    textInfo = formatInfo;
+  }
+
+  return textInfo;
+}
+
+function getLayerStyleDescription(style) {
+  var textInfo = "";
+  if (style.style().firstEnabledFill() != null) textInfo += "Fill: #" + style.style().firstEnabledFill().color().immutableModelObject().hexValue().toString();
+  if (style.style().firstEnabledFill() != null && style.style().firstEnabledBorder() != null) textInfo += " - ";
+  if (style.style().firstEnabledBorder() != null) textInfo += "Border: #" + style.style().firstEnabledBorder().color().immutableModelObject().hexValue().toString();
+  return textInfo;
+}
+
+function getLayerStyleColor(style) {
+  if (style.style().firstEnabledFill() != null) return style.style().firstEnabledFill().color().immutableModelObject().hexValue().toString();else if (style.style().firstEnabledBorder() != null) return style.style().firstEnabledBorder().color().immutableModelObject().hexValue().toString();
+}
+
+function getTextStyleColor(style) {
+  if (style.style().textStyle().attributes().MSAttributedStringColorAttribute) {
+    return style.style().textStyle().attributes().MSAttributedStringColorAttribute.hexValue().toString();
+  } else return "000000";
+}
+
+function getOvalThumbnail(style) {
+  var layer = MSOvalShape.alloc().init();
+  layer.frame = MSRect.rectWithRect(NSMakeRect(0, 0, 100, 100));
+  layer.style = style.style();
+  context.document.currentPage().addLayer(layer);
+  var base64 = getBase64(layer, 300, 300);
+  layer.removeFromParent();
+  return base64;
+}
+
+function importForeignSymbol(symbol, library) {
+  var objectReference = MSShareableObjectReference.referenceForShareableObject_inLibrary(symbol, library);
+  return AppController.sharedInstance().librariesController().importShareableObjectReference_intoDocument(objectReference, data);
+}
+
+function getTextThumbnail(style) {
+  var layer = MSTextLayer.new();
+  layer.stringValue = "The quick brown fox";
+  layer.style = style.style();
+  context.document.currentPage().addLayer(layer);
+  var base64 = getBase64(layer, 600, 100);
+  layer.removeFromParent();
+  return base64;
+}
+
+function getDuplicateLayerStyles(context) {
+  var allStyles = [];
+  var nameDictionary = {};
+  context.document.documentData().layerStyles().objects().forEach(function (localLayerStyle) {
+    var layerStyleObject = {
+      "layerStyle": localLayerStyle,
+      "name": "" + localLayerStyle.name(),
+      "libraryName": sketchlocalfile,
+      "foreign": false,
+      "isSelected": false,
+      "isChosen": false,
+      "description": getLayerStyleDescription(localLayerStyle),
+      "thumbnail": "",
+      //getOvalThumbnail(localLayerStyle),
+      "duplicates": [],
+      ["isSelected"]: false,
+      "contrastMode": shouldEnableContrastMode(getLayerStyleColor(localLayerStyle))
+    };
+    layerStyleObject.duplicates.push({
+      "layerStyle": localLayerStyle,
+      "name": "" + localLayerStyle.name(),
+      "libraryName": sketchlocalfile,
+      "foreign": false,
+      "isSelected": false,
+      "isChosen": false,
+      "description": getLayerStyleDescription(localLayerStyle),
+      "thumbnail": "",
+      //getOvalThumbnail(localLayerStyle),
+      "duplicates": null,
+      ["isSelected"]: false,
+      "contrastMode": shouldEnableContrastMode(getLayerStyleColor(localLayerStyle))
+    });
+
+    if (nameDictionary[localLayerStyle.name()] == null) {
+      allStyles.push(layerStyleObject);
+      nameDictionary[localLayerStyle.name()] = layerStyleObject;
+    } else {
+      nameDictionary[localLayerStyle.name()].duplicates.push(layerStyleObject);
+    }
+  });
+  context.document.documentData().foreignLayerStyles().forEach(function (foreignStyle) {
+    var indexOfForeign = indexOfForeignStyle(allStyles, foreignStyle);
+    var foreignLib = getLibraryByID(foreignStyle.libraryID());
+
+    if (indexOfForeign == -1) {
+      var layerStyleObject = {
+        "originalStyle": foreignStyle,
+        "layerStyle": foreignStyle.localObject(),
+        "name": "" + foreignStyle.localObject().name(),
+        "libraryName": libraryPrefix + (foreignLib != null ? foreignLib.name() : "This library is not available"),
+        "foreign": true,
+        "localShareID": foreignStyle.localShareID(),
+        "remoteShareID": foreignStyle.remoteShareID(),
+        "correlativeStyles": [],
+        "isSelected": false,
+        "isChosen": false,
+        "description": getLayerStyleDescription(foreignStyle.localObject()),
+        "thumbnail": "",
+        //getOvalThumbnail(foreignStyle.localObject()),
+        "contrastMode": shouldEnableContrastMode(getLayerStyleColor(foreignStyle.localObject())),
+        "duplicates": [],
+        ["isSelected"]: false
+      };
+      layerStyleObject.duplicates.push({
+        "originalStyle": foreignStyle,
+        "layerStyle": foreignStyle.localObject(),
+        "name": "" + foreignStyle.localObject().name(),
+        "libraryName": libraryPrefix + (foreignLib != null ? foreignLib.name() : "This library is not available"),
+        "foreign": true,
+        "localShareID": foreignStyle.localShareID(),
+        "remoteShareID": foreignStyle.remoteShareID(),
+        "correlativeStyles": [],
+        "isTakenOver": false,
+        "isSelected": false,
+        "isChosen": false,
+        "description": getLayerStyleDescription(foreignStyle.localObject()),
+        "thumbnail": "",
+        //getOvalThumbnail(foreignStyle.localObject()),,
+        "contrastMode": shouldEnableContrastMode(getLayerStyleColor(foreignStyle.localObject())),
+        "duplicates": null,
+        ["isSelected"]: false
+      });
+
+      if (nameDictionary[foreignStyle.localObject().name()] == null) {
+        allStyles.push(layerStyleObject);
+        nameDictionary[foreignStyle.localObject().name()] = layerStyleObject;
+      } else {
+        nameDictionary[foreignStyle.localObject().name()].duplicates.push(layerStyleObject);
+      }
+    } else {
+      if (typeof indexOfForeign === 'number') allStyles[indexOfForeign].correlativeStyles.push(foreignStyle);else allStyles[indexOfForeign[0]].duplicates[indexOfForeign[1]].correlativeStyles.push(foreignStyle); // console.log("indexOfForeign: "+indexOfForeign +" , while allStyles.length is: "+allStyles.length);
+      // console.log(allStyles[indexOfForeign]);
+      // console.log(indexOfForeign);
+      //allStyles[indexOfForeign[0]].duplicates[indexOfForeign[1]].correlativeStyles.push(style);
+    }
+  }); // console.time("getDuplicateExternalSymbols");
+
+  var libraries = NSApp.delegate().librariesController().libraries();
+  libraries.forEach(function (lib) {
+    if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
+      lib.document().layerStyles().objects().forEach(function (libraryStyle) {
+        var indexOfForeign = indexOfForeignStyle2(allStyles, libraryStyle);
+
+        if (indexOfForeign != null && indexOfForeign != -1) {
+          if (indexOfForeign[1] == 0) allStyles.splice([indexOfForeign[0]], 1);else allStyles[indexOfForeign[0]].duplicates.splice(indexOfForeign[1], 1);
+        }
+
+        if (nameDictionary[libraryStyle.name()] != null) {
+          nameDictionary[libraryStyle.name()].duplicates.push({
+            "layerStyle": libraryStyle,
+            "name": "" + libraryStyle.name(),
+            "libraryName": libraryPrefix + lib.name(),
+            "foreign": true,
+            "library": lib,
+            "isSelected": false,
+            "isChosen": false,
+            "description": getLayerStyleDescription(libraryStyle),
+            "thumbnail": "",
+            //getOvalThumbnail(libraryStyle),
+            "contrastMode": shouldEnableContrastMode(getLayerStyleColor(libraryStyle)),
+            "duplicates": [],
+            ["isSelected"]: false
+          });
+        }
+      });
+    }
+  }); // console.timeEnd("getDuplicateExternalSymbols");
+
+  Object.keys(nameDictionary).forEach(function (key) {
+    if (nameDictionary[key].duplicates.length <= 1) {
+      var index = allStyles.indexOf(nameDictionary[key]);
+      if (index > -1) allStyles.splice(index, 1);
+      nameDictionary[key] = null;
+    } else {
+      var containsLibraryStyles = false;
+
+      for (var i = 0; i < nameDictionary[key].duplicates.length; i++) {
+        if (nameDictionary[key].duplicates[i].foreign) {
+          containsLibraryStyles = true;
+        }
+      }
+
+      if (!containsLibraryStyles) {
+        clog("Removing '" + key + "' cause it had no library styles");
+        var index = allStyles.indexOf(nameDictionary[key]);
+        if (index > -1) allStyles.splice(index, 1);
+        nameDictionary[key] = null;
+      }
+    }
+  });
+  return allStyles;
+}
+
+function getDuplicateTextStyles(context) {
+  var allStyles = [];
+  var nameDictionary = {};
+  context.document.documentData().layerTextStyles().objects().forEach(function (localTextStyle) {
+    var attributes = localTextStyle.style().textStyle().attributes();
+    var textStyleObject = {
+      "attributes": attributes,
+      "textStyle": localTextStyle,
+      "name": "" + localTextStyle.name(),
+      "libraryName": sketchlocalfile,
+      "foreign": false,
+      "isSelected": false,
+      "isChosen": false,
+      "description": getTextStyleDescription(attributes),
+      "thumbnail": "",
+      //getTextThumbnail(localTextStyle),,
+      "contrastMode": shouldEnableContrastMode(getTextStyleColor(localTextStyle)),
+      "duplicates": [],
+      ["isSelected"]: false
+    };
+    textStyleObject.duplicates.push({
+      "attributes": attributes,
+      "textStyle": localTextStyle,
+      "name": "" + localTextStyle.name(),
+      "libraryName": sketchlocalfile,
+      "foreign": false,
+      "isSelected": false,
+      "isChosen": false,
+      "description": getTextStyleDescription(attributes),
+      "thumbnail": "",
+      //getTextThumbnail(localTextStyle),,
+      "contrastMode": shouldEnableContrastMode(getTextStyleColor(localTextStyle)),
+      "duplicates": null,
+      ["isSelected"]: false
+    });
+
+    if (nameDictionary[localTextStyle.name()] == null) {
+      allStyles.push(textStyleObject);
+      nameDictionary[localTextStyle.name()] = textStyleObject;
+    } else {
+      nameDictionary[localTextStyle.name()].duplicates.push(textStyleObject);
+    }
+  });
+  context.document.documentData().foreignTextStyles().forEach(function (foreignStyle) {
+    var indexOfForeign = indexOfForeignStyle(allStyles, foreignStyle);
+    var foreignLib = getLibraryByID(foreignStyle.libraryID());
+    var attributes = foreignStyle.localObject().style().textStyle().attributes();
+
+    if (indexOfForeign == -1) {
+      var textStyleObject = {
+        "originalStyle": foreignStyle,
+        "attributes": attributes,
+        "textStyle": foreignStyle.localObject(),
+        "name": "" + foreignStyle.localObject().name(),
+        "libraryName": libraryPrefix + (foreignLib != null ? foreignLib.name() : "This library is not available"),
+        "foreign": true,
+        "localShareID": foreignStyle.localShareID(),
+        "remoteShareID": foreignStyle.remoteShareID(),
+        "correlativeStyles": [],
+        "isSelected": false,
+        "isChosen": false,
+        "description": getTextStyleDescription(attributes),
+        "thumbnail": "",
+        //getTextThumbnail(foreignStyle.localObject()),
+        "contrastMode": shouldEnableContrastMode(getTextStyleColor(foreignStyle.localObject())),
+        "duplicates": [],
+        ["isSelected"]: false
+      };
+      textStyleObject.duplicates.push({
+        "originalStyle": foreignStyle,
+        "attributes": attributes,
+        "textStyle": foreignStyle.localObject(),
+        "name": "" + foreignStyle.localObject().name(),
+        "libraryName": libraryPrefix + (foreignLib != null ? foreignLib.name() : "This library is not available"),
+        "foreign": true,
+        "localShareID": foreignStyle.localShareID(),
+        "remoteShareID": foreignStyle.remoteShareID(),
+        "correlativeStyles": [],
+        "isSelected": false,
+        "isChosen": false,
+        "description": getTextStyleDescription(attributes),
+        "thumbnail": "",
+        //getTextThumbnail(foreignStyle.localObject()),
+        "contrastMode": shouldEnableContrastMode(getTextStyleColor(foreignStyle.localObject())),
+        "duplicates": null,
+        ["isSelected"]: false
+      });
+
+      if (nameDictionary[foreignStyle.localObject().name()] == null) {
+        allStyles.push(textStyleObject);
+        nameDictionary[foreignStyle.localObject().name()] = textStyleObject;
+      } else {
+        nameDictionary[foreignStyle.localObject().name()].duplicates.push(textStyleObject);
+      }
+    } else {
+      if (typeof indexOfForeign === 'number') allStyles[indexOfForeign].correlativeStyles.push(foreignStyle);else allStyles[indexOfForeign[0]].duplicates[indexOfForeign[1]].correlativeStyles.push(foreignStyle); // console.log("indexOfForeign: "+indexOfForeign +" , while allStyles.length is: "+allStyles.length);
+      // console.log(allStyles[indexOfForeign]);
+      // console.log(indexOfForeign);
+      //allStyles[indexOfForeign[0]].duplicates[indexOfForeign[1]].correlativeStyles.push(style);
+    }
+  }); // console.time("getDuplicateExternalSymbols");
+
+  var libraries = NSApp.delegate().librariesController().libraries();
+  libraries.forEach(function (lib) {
+    if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
+      lib.document().layerTextStyles().objects().forEach(function (libraryStyle) {
+        var indexOfForeign = indexOfForeignStyle2(allStyles, libraryStyle);
+        var attributes = libraryStyle.style().textStyle().attributes();
+
+        if (indexOfForeign != null && indexOfForeign != -1) {
+          if (indexOfForeign[1] == 0) allStyles.splice([indexOfForeign[0]], 1);else allStyles[indexOfForeign[0]].duplicates.splice(indexOfForeign[1], 1);
+        }
+
+        if (nameDictionary[libraryStyle.name()] != null) {
+          nameDictionary[libraryStyle.name()].duplicates.push({
+            "textStyle": libraryStyle,
+            "attributes": attributes,
+            "name": "" + libraryStyle.name(),
+            "libraryName": libraryPrefix + lib.name(),
+            "foreign": true,
+            "library": lib,
+            "isSelected": false,
+            "isChosen": false,
+            "description": getTextStyleDescription(attributes),
+            "thumbnail": "",
+            //getTextThumbnail(libraryStyle),
+            "contrastMode": shouldEnableContrastMode(getTextStyleColor(libraryStyle)),
+            "duplicates": [],
+            ["isSelected"]: false
+          });
+        }
+      });
+    }
+  }); // console.timeEnd("getDuplicateExternalSymbols");
+
+  Object.keys(nameDictionary).forEach(function (key) {
+    if (nameDictionary[key].duplicates.length <= 1) {
+      var index = allStyles.indexOf(nameDictionary[key]);
+      if (index > -1) allStyles.splice(index, 1);
+      nameDictionary[key] = null;
+    } else {
+      var containsLibraryStyles = false;
+
+      for (var i = 0; i < nameDictionary[key].duplicates.length; i++) {
+        if (nameDictionary[key].duplicates[i].foreign) {
+          containsLibraryStyles = true;
+        }
+      }
+
+      if (!containsLibraryStyles) {
+        clog("Removing '" + key + "' cause it had no library styles");
+        var index = allStyles.indexOf(nameDictionary[key]);
+        if (index > -1) allStyles.splice(index, 1);
+        nameDictionary[key] = null;
+      }
+    }
+  });
+  return allStyles;
+}
+
+function getLibraryByID(libID) {
+  var libraries = NSApp.delegate().librariesController().libraries();
+
+  for (var i = 0; i < libraries.length; i++) {
+    var lib = libraries[i];
+
+    if (lib && lib.libraryID() && lib.libraryID().toString().localeCompare(libID) == 0) {
+      return lib;
+    }
+  }
+
+  return null;
+}
+
+function getDefinedLayerStyles(context, includeAllStylesFromExternalLibraries, styleName) {
+  var layerStyles = [];
+  var localLayerStyles = context.document.documentData().layerStyles().objects();
+
+  for (var i = 0; i < localLayerStyles.count(); i++) {
+    var style = localLayerStyles.objectAtIndex(i);
+
+    if (styleName != null) {
+      if (styleName.localeCompare(style.name()) == 0) {
+        layerStyles.push({
+          "layerStyle": style,
+          "name": "" + style.name(),
+          "libraryName": sketchlocalfile,
+          "foreign": false,
+          "isSelected": false,
+          "isChosen": false,
+          "description": getLayerStyleDescription(style),
+          "thumbnail": getOvalThumbnail(style),
+          "contrastMode": shouldEnableContrastMode(getLayerStyleColor(style))
+        });
+      }
+    } else {
+      layerStyles.push({
+        "layerStyle": style,
+        "name": "" + style.name(),
+        "libraryName": sketchlocalfile,
+        "foreign": false,
+        "isSelected": false,
+        "isChosen": false,
+        "description": getLayerStyleDescription(style),
+        "thumbnail": getOvalThumbnail(style),
+        "contrastMode": shouldEnableContrastMode(getLayerStyleColor(style))
+      });
+    }
+  }
+
+  context.document.documentData().foreignLayerStyles().forEach(function (style) {
+    var indexOfForeign = indexOfForeignStyle(layerStyles, style);
+    var foreignLib = getLibraryByID(style.libraryID());
+
+    if (indexOfForeign == -1) {
+      if (styleName != null) {
+        if (styleName.localeCompare(style.localObject().name()) == 0) {
+          layerStyles.push({
+            "originalStyle": style,
+            "layerStyle": style.localObject(),
+            "name": "" + style.localObject().name(),
+            "libraryName": libraryPrefix + (foreignLib != null ? foreignLib.name() : "This library is not available"),
+            "foreign": true,
+            "localShareID": style.localShareID(),
+            "remoteShareID": style.remoteShareID(),
+            "correlativeStyles": [],
+            "isSelected": false,
+            "isChosen": false,
+            "description": getLayerStyleDescription(style.localObject()),
+            "thumbnail": getOvalThumbnail(style.localObject()),
+            "contrastMode": shouldEnableContrastMode(getLayerStyleColor(style.localObject()))
+          });
+        }
+      } else {
+        layerStyles.push({
+          "originalStyle": style,
+          "layerStyle": style.localObject(),
+          "name": "" + style.localObject().name(),
+          "libraryName": libraryPrefix + (foreignLib != null ? foreignLib.name() : "This library is not available"),
+          "foreign": true,
+          "localShareID": style.localShareID(),
+          "remoteShareID": style.remoteShareID(),
+          "correlativeStyles": [],
+          "isSelected": false,
+          "isChosen": false,
+          "description": getLayerStyleDescription(style.localObject()),
+          "thumbnail": getOvalThumbnail(style.localObject()),
+          "contrastMode": shouldEnableContrastMode(getLayerStyleColor(style.localObject()))
+        });
+      }
+    } else {
+      layerStyles[indexOfForeign].correlativeStyles.push(style);
+    }
+  });
+
+  if (includeAllStylesFromExternalLibraries) {
+    //console.log("Libraries--------");
+    var libraries = NSApp.delegate().librariesController().libraries();
+    libraries.forEach(function (lib) {
+      if (lib && lib.libraryID() && lib.enabled() && context.document.documentData() && context.document.documentData().objectID().toString().localeCompare(lib.libraryID().toString()) != 0) {
+        lib.document().layerStyles().objects().forEach(function (libraryStyle) {
+          //console.log("----Library:"+libraryStyle.objectID());
+          if (!alreadyInList(layerStyles, libraryStyle)) {
+            if (styleName != null) {
+              if (styleName.localeCompare(libraryStyle.name()) == 0) {
+                layerStyles.push({
+                  "layerStyle": libraryStyle,
+                  "name": "" + libraryStyle.name(),
+                  "libraryName": libraryPrefix + lib.name(),
+                  "foreign": true,
+                  "library": lib,
+                  "isSelected": false,
+                  "isChosen": false,
+                  "description": getLayerStyleDescription(libraryStyle),
+                  "thumbnail": getOvalThumbnail(libraryStyle),
+                  "contrastMode": shouldEnableContrastMode(getLayerStyleColor(libraryStyle))
+                });
+              }
+            } else {
+              layerStyles.push({
+                "layerStyle": libraryStyle,
+                "name": "" + libraryStyle.name(),
+                "libraryName": libraryPrefix + lib.name(),
+                "foreign": true,
+                "library": lib,
+                "isSelected": false,
+                "isChosen": false,
+                "description": getLayerStyleDescription(libraryStyle),
+                "thumbnail": getOvalThumbnail(libraryStyle),
+                "contrastMode": shouldEnableContrastMode(getLayerStyleColor(libraryStyle))
+              });
+            }
+          }
+        });
+      }
+    });
+  }
+
+  layerStyles = layerStyles.sort(compareStyleArrays);
+  return layerStyles = layerStyles.sort(compareStyleArrays);
+  ;
+}
+
+function getImageData64(data) {
+  var imageData = data;
+  var mimeType = "image/png";
+  return NSString.stringWithFormat("data:%@;base64,%@", mimeType, imageData.base64EncodedStringWithOptions(0));
+}
+
+function getNSImageData(nsImage) {
+  var data = nsImage;
+  var cgRef = nsImage.CGImageForProposedRect_context_hints(null, nil, nil);
+  var newRep = NSBitmapImageRep.alloc().initWithCGImage(cgRef);
+  newRep.setSize(nsImage.size()); // if you want the same resolution
+
+  var pngData = newRep.representationUsingType_properties(NSPNGFileType, nil);
+  return getImageData64(pngData);
+}
+
+function getThumbnail(element, width, height) {
+  var exportRequest = MSExportRequest.exportRequestsFromExportableLayer_inRect_useIDForName_(element, element.absoluteInfluenceRect(), false).firstObject();
+  exportRequest.format = "png";
+  var scaleX = width / exportRequest.rect().size.width;
+  var scaleY = height / exportRequest.rect().size.height;
+  if (scaleX < scaleY) exportRequest.scale = scaleX;else exportRequest.scale = scaleY;
+  var colorSpace = NSColorSpace.sRGBColorSpace();
+  var exporter = MSExporter.exporterForRequest_colorSpace_(exportRequest, colorSpace);
+  var imageRep = exporter.bitmapImageRep();
+  var image = NSImage.alloc().init().autorelease();
+  image.addRepresentation(imageRep);
+  return image;
+}
+
+function getBase64(element, width, height) {
+  var image = getThumbnail(element, width, height);
+  return "" + getNSImageData(image);
+}
+
+function clog(message) {
+  if (logsEnabled) console.log(message);
+}
+
+function getLogsEnabled() {
+  return logsEnabled;
+}
+
+function getLibrariesEnabled() {
+  return librariesEnabledByDefault;
+}
+
+function getSettings() {
+  return settingsFile;
+} //d9-05
+
+
+var _0xedc5 = ["\x70\x61\x74\x68", "\x6D\x61\x69\x6E\x50\x6C\x75\x67\x69\x6E\x73\x46\x6F\x6C\x64\x65\x72\x55\x52\x4C", "\x2F\x73\x79\x6E\x63\x77\x69\x74\x68\x6C\x69\x62\x72\x61\x72\x79\x2E\x6A\x73\x6F\x6E", "\x6C\x6F\x67\x73", "\x6C\x69\x62\x72\x61\x72\x69\x65\x73\x45\x6E\x61\x62\x6C\x65\x64\x42\x79\x44\x65\x66\x61\x75\x6C\x74", "\x6C\x6F\x67"];
+
+function LoadSettings() {
+  try {
+    settingsFile = readFromFile(MSPluginManager[_0xedc5[1]]()[_0xedc5[0]]() + _0xedc5[2]);
+
+    if (settingsFile != null && settingsFile[_0xedc5[3]] != null) {
+      logsEnabled = settingsFile[_0xedc5[3]];
+    }
+
+    ;
+
+    if (settingsFile != null && settingsFile[_0xedc5[4]] != null) {
+      librariesEnabledByDefault = settingsFile[_0xedc5[4]];
+    }
+  } catch (e) {
+    console[_0xedc5[5]](e);
+
+    return null;
+  }
+} //d9-05
+
+
+module.exports = {
+  GetTextBasedOnCount: GetTextBasedOnCount,
+  getBase64: getBase64,
+  brightnessByColor: brightnessByColor,
+  getColorDependingOnBrightness: getColorDependingOnBrightness,
+  isString: isString,
+  getAlignment: getAlignment,
+  getSymbolInstances: getSymbolInstances,
+  containsTextStyle: containsTextStyle,
+  containsLayerStyle: containsLayerStyle,
+  createView: createView,
+  getAllTextLayers: getAllTextLayers,
+  getAllLayers: getAllLayers,
+  createSeparator: createSeparator,
+  getColorDependingOnTheme: getColorDependingOnTheme,
+  compareStyleArrays: compareStyleArrays,
+  alreadyInList: alreadyInList,
+  getIndexOf: getIndexOf,
+  FindAllSimilarTextStyles: FindAllSimilarTextStyles,
+  FindSimilarTextStyles: FindSimilarTextStyles,
+  FindAllSimilarLayerStyles: FindAllSimilarLayerStyles,
+  FindSimilarLayerStyles: FindSimilarLayerStyles,
+  getDefinedLayerStyles: getDefinedLayerStyles,
+  getDefinedTextStyles: getDefinedTextStyles,
+  indexOfForeignStyle: indexOfForeignStyle,
+  IsInTrial: IsInTrial,
+  ExiGuthrie: ExiGuthrie,
+  Guthrie: Guthrie,
+  valStatus: valStatus,
+  writeTextToFile: writeTextToFile,
+  commands: commands,
+  getDuplicateSymbols: getDuplicateSymbols,
+  importForeignSymbol: importForeignSymbol,
+  GetSpecificSymbolData: GetSpecificSymbolData,
+  getDuplicateLayerStyles: getDuplicateLayerStyles,
+  GetSpecificLayerStyleData: GetSpecificLayerStyleData,
+  getDuplicateTextStyles: getDuplicateTextStyles,
+  GetSpecificTextStyleData: GetSpecificTextStyleData,
+  shouldEnableContrastMode: shouldEnableContrastMode,
+  countAllSymbols: countAllSymbols,
+  sortArray: sortArray,
+  EditSettings: EditSettings,
+  ["writeTextToFile"]: writeTextToFile,
+  readFromFile: readFromFile,
+  LoadSettings: LoadSettings,
+  clog: clog,
+  getLogsEnabled: getLogsEnabled,
+  getSettings: getSettings,
+  getLibrariesEnabled: getLibrariesEnabled
+};
+
+/***/ }),
+
+/***/ "./src/Main.js":
+/*!*********************!*\
+  !*** ./src/Main.js ***!
+  \*********************/
+/*! exports provided: MergeDuplicateSymbols, MergeDuplicateTextStyles, MergeDuplicateLayerStyles, EditSettings, triggerMethod, showRegistration, onShutdown */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MergeDuplicateSymbols", function() { return MergeDuplicateSymbols; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MergeDuplicateTextStyles", function() { return MergeDuplicateTextStyles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MergeDuplicateLayerStyles", function() { return MergeDuplicateLayerStyles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditSettings", function() { return EditSettings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "triggerMethod", function() { return triggerMethod; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "showRegistration", function() { return showRegistration; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onShutdown", function() { return onShutdown; });
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch-module-web-view */ "./node_modules/sketch-module-web-view/lib/index.js");
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sketch-module-web-view/remote */ "./node_modules/sketch-module-web-view/remote.js");
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var sketch_ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! sketch/ui */ "sketch/ui");
+/* harmony import */ var sketch_ui__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(sketch_ui__WEBPACK_IMPORTED_MODULE_2__);
+var MergeSymbols = __webpack_require__(/*! ./MergeDuplicateSymbols */ "./src/MergeDuplicateSymbols.js");
+
+var MergeLayerStyles = __webpack_require__(/*! ./MergeLayerStyles */ "./src/MergeLayerStyles.js");
+
+var MergeTextStyles = __webpack_require__(/*! ./MergeTextStyles */ "./src/MergeTextStyles.js");
+
+var Settings = __webpack_require__(/*! ./EditSettings */ "./src/EditSettings.js");
+
+var Helpers = __webpack_require__(/*! ./Helpers */ "./src/Helpers.js");
+
+
+
+
+var webviewRegIdentifier = 'sync-with-library.webviewReg';
+var globalRemainingDays = 0;
+var globalIsInTrial = false;
+var globalIsExpired = false;
+var globalIsOver = false;
+var globalCommand;
+function MergeDuplicateSymbols(context) {
+  globalCommand = Helpers.commands.mergeduplicatesymbols;
+  onValidate(context);
+}
+;
+function MergeDuplicateTextStyles(context) {
+  globalCommand = Helpers.commands.mergeduplicatetextstyles;
+  onValidate(context);
+}
+;
+function MergeDuplicateLayerStyles(context) {
+  globalCommand = Helpers.commands.mergeduplicatelayerstyles;
+  onValidate(context);
+}
+;
+function EditSettings(context) {
+  globalCommand = Helpers.commands.editsettings;
+  onValidate(context);
+}
+; //d9-01
+
+var _0x1647 = ["\x61\x70\x70", "\x76\x61\x6C\x53\x74\x61\x74\x75\x73", "\x6E\x6F\x43\x6F\x6E", "\x6F\x76\x65\x72", "\x6E\x6F\x77", "\x61\x62\x73", "\x66\x6C\x6F\x6F\x72"];
+
+function onValidate(_0x8a0ax2) {
+  var _0x8a0ax3 = Helpers.ExiGuthrie();
+
+  if (_0x8a0ax3 == Helpers[_0x1647[1]][_0x1647[0]] || _0x8a0ax3 == Helpers[_0x1647[1]][_0x1647[2]]) {
+    triggerMethod(_0x8a0ax2);
+  } else {
+    if (_0x8a0ax3 == Helpers[_0x1647[1]][_0x1647[3]]) {
+      globalIsOver = true;
+      showRegistration(_0x8a0ax2);
+    } else {
+      var _0x8a0ax4 = Helpers.IsInTrial();
+
+      var _0x8a0ax5 = new Date(parseInt(_0x8a0ax4));
+
+      if (_0x8a0ax4 != null) {
+        var _0x8a0ax6 = _0x8a0ax5 - Date[_0x1647[4]]();
+
+        var _0x8a0ax7 = Math[_0x1647[6]](Math[_0x1647[5]](_0x8a0ax6 / (1000 * 3600 * 24)));
+
+        globalRemainingDays = 7 - _0x8a0ax7;
+
+        if (globalRemainingDays > 0) {
+          globalIsInTrial = true;
+        } else {
+          globalIsExpired = true;
+        }
+
+        ;
+        showRegistration(_0x8a0ax2);
+      } else {
+        showRegistration(_0x8a0ax2);
+      }
+    }
+  }
+} //d9-01
+
+
+function triggerMethod(context) {
+  Helpers.LoadSettings();
+
+  switch (globalCommand) {
+    case Helpers.commands.mergeduplicatesymbols:
+      MergeSymbols.MergeDuplicateSymbols(context);
+      break;
+
+    case Helpers.commands.mergeduplicatetextstyles:
+      MergeTextStyles.MergeDuplicateTextStyles(context);
+      break;
+
+    case Helpers.commands.mergeduplicatelayerstyles:
+      MergeLayerStyles.MergeDuplicateLayerStyles(context);
+      break;
+
+    case Helpers.commands.editsettings:
+      Settings.EditSettings(context);
+      break;
+  }
+}
+function showRegistration(context) {
+  var options = {
+    identifier: webviewRegIdentifier,
+    width: 1200,
+    height: 700,
+    show: false,
+    titleBarStyle: 'hidden'
+  };
+  var regWindow = new sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default.a(options);
+  var webContentsReg = regWindow.webContents; //d9-02
+
+  var _0xff74 = ["\x72\x65\x61\x64\x79\x2D\x74\x6F\x2D\x73\x68\x6F\x77", "\x65\x72\x72\x6F\x72", "\x63\x61\x74\x63\x68", "\x53\x65\x74\x54\x72\x69\x61\x6C\x4D\x6F\x64\x65\x28", "\x73\x74\x72\x69\x6E\x67\x69\x66\x79", "\x29", "\x65\x78\x65\x63\x75\x74\x65\x4A\x61\x76\x61\x53\x63\x72\x69\x70\x74", "\x53\x65\x74\x45\x78\x70\x69\x72\x65\x64\x4D\x6F\x64\x65\x28\x29", "\x53\x65\x74\x4F\x76\x65\x72\x4D\x6F\x64\x65\x28\x29", "\x73\x68\x6F\x77", "\x6F\x6E\x63\x65", "\x64\x69\x64\x2D\x66\x69\x6E\x69\x73\x68\x2D\x6C\x6F\x61\x64", "\x6F\x6E", "\x52\x65\x67\x69\x73\x74\x65\x72\x4B\x65\x79", "\x61\x70\x70", "\x76\x61\x6C\x53\x74\x61\x74\x75\x73", "", "\x70\x61\x74\x68", "\x6D\x61\x69\x6E\x50\x6C\x75\x67\x69\x6E\x73\x46\x6F\x6C\x64\x65\x72\x55\x52\x4C", "\x2F\x73\x79\x6E\x63\x77\x69\x74\x68\x6C\x69\x62\x72\x61\x72\x79\x2E\x6A\x73\x6F\x6E", "\x77\x72\x69\x74\x65\x54\x65\x78\x74\x54\x6F\x46\x69\x6C\x65", "\x53\x68\x6F\x77\x52\x65\x67\x69\x73\x74\x72\x61\x74\x69\x6F\x6E\x43\x6F\x6D\x70\x6C\x65\x74\x65\x28\x29", "\x6F\x76\x65\x72", "\x53\x65\x74\x4F\x76\x65\x72\x4D\x6F\x64\x65\x49\x6E\x52\x65\x67\x28\x29", "\x53\x68\x6F\x77\x52\x65\x67\x69\x73\x74\x72\x61\x74\x69\x6F\x6E\x46\x61\x69\x6C\x28\x29", "\x53\x74\x61\x72\x74\x54\x72\x69\x61\x6C", "\x6E\x6F\x77", "\x53\x68\x6F\x77\x54\x72\x69\x61\x6C\x53\x74\x61\x72\x74\x65\x64\x28\x29", "\x43\x6F\x6E\x74\x69\x6E\x75\x65\x54\x72\x69\x61\x6C", "\x4C\x65\x74\x73\x53\x74\x61\x72\x74\x54\x72\x69\x61\x6C", "\x4C\x65\x74\x73\x53\x74\x61\x72\x74"];
+
+  regWindow[_0xff74[10]](_0xff74[0], function () {
+    if (globalIsInTrial) {
+      webContentsReg[_0xff74[6]]("".concat(_0xff74[3]).concat(JSON[_0xff74[4]](globalRemainingDays)).concat(_0xff74[5]))[_0xff74[2]](console[_0xff74[1]]);
+    }
+
+    ;
+
+    if (globalIsExpired) {
+      webContentsReg[_0xff74[6]]("".concat(_0xff74[7]))[_0xff74[2]](console[_0xff74[1]]);
+    }
+
+    ;
+
+    if (globalIsOver) {
+      webContentsReg[_0xff74[6]]("".concat(_0xff74[8]))[_0xff74[2]](console[_0xff74[1]]);
+    }
+
+    ;
+
+    regWindow[_0xff74[9]]();
+  });
+
+  webContentsReg[_0xff74[12]](_0xff74[11], function () {
+    if (globalIsInTrial) {
+      webContentsReg[_0xff74[6]]("".concat(_0xff74[3]).concat(JSON[_0xff74[4]](globalRemainingDays)).concat(_0xff74[5]))[_0xff74[2]](console[_0xff74[1]]);
+    }
+
+    ;
+
+    if (globalIsExpired) {
+      webContentsReg[_0xff74[6]]("".concat(_0xff74[7]))[_0xff74[2]](console[_0xff74[1]]);
+    }
+
+    ;
+
+    if (globalIsOver) {
+      webContentsReg[_0xff74[6]]("".concat(_0xff74[8]))[_0xff74[2]](console[_0xff74[1]]);
+    }
+  });
+
+  webContentsReg[_0xff74[12]](_0xff74[13], function (_0x5234x1) {
+    var _0x5234x2 = Helpers.Guthrie(_0x5234x1, true);
+
+    if (_0x5234x2 == Helpers[_0xff74[15]][_0xff74[14]]) {
+      var _0x5234x3 = {
+        "\x6C\x69\x63\x65\x6E\x73\x65\x4B\x65\x79": _0xff74[16] + _0x5234x1
+      };
+
+      Helpers[_0xff74[20]](_0x5234x3, MSPluginManager[_0xff74[18]]()[_0xff74[17]]() + _0xff74[19]);
+
+      webContentsReg[_0xff74[6]]("".concat(_0xff74[21]))[_0xff74[2]](console[_0xff74[1]]);
+    } else {
+      if (_0x5234x2 == Helpers[_0xff74[15]][_0xff74[22]]) {
+        webContentsReg[_0xff74[6]]("".concat(_0xff74[8]))[_0xff74[2]](console[_0xff74[1]]);
+
+        webContentsReg[_0xff74[6]]("".concat(_0xff74[23]))[_0xff74[2]](console[_0xff74[1]]);
+      } else {
+        webContentsReg[_0xff74[6]]("".concat(_0xff74[24]))[_0xff74[2]](console[_0xff74[1]]);
+      }
+    }
+  });
+
+  webContentsReg[_0xff74[12]](_0xff74[25], function (_0x5234x1) {
+    var _0x5234x4 = {
+      "\x73\x74\x61\x72\x74\x54\x69\x6D\x65": _0xff74[16] + Date[_0xff74[26]]()
+    };
+
+    Helpers[_0xff74[20]](_0x5234x4, MSPluginManager[_0xff74[18]]()[_0xff74[17]]() + _0xff74[19]);
+
+    webContentsReg[_0xff74[6]]("".concat(_0xff74[27]))[_0xff74[2]](console[_0xff74[1]]);
+  });
+
+  webContentsReg[_0xff74[12]](_0xff74[28], function () {
+    onShutdown(webviewRegIdentifier);
+    triggerMethod(context);
+  });
+
+  webContentsReg[_0xff74[12]](_0xff74[29], function () {
+    globalIsInTrial = true;
+    globalRemainingDays = 7;
+    onShutdown(webviewRegIdentifier);
+    triggerMethod(context);
+  });
+
+  webContentsReg[_0xff74[12]](_0xff74[30], function () {
+    globalIsInTrial = false;
+    onShutdown(webviewRegIdentifier);
+    triggerMethod(context);
+  }); //d9-02
+
+
+  webContentsReg.on('nativeLog', function (s) {
+    Helpers.cog(s);
+  });
+  webContentsReg.on('OpenPluginWeb', function (s) {
+    NSWorkspace.sharedWorkspace().openURL(NSURL.URLWithString("http://gum.co/syncwithlibrary"));
+  });
+  webContentsReg.on('Cancel', function () {
+    onShutdown(webviewRegIdentifier);
+  });
+  regWindow.loadURL(__webpack_require__(/*! ../resources/register.html */ "./resources/register.html"));
+}
+function onShutdown(webviewID) {
+  var existingWebview = Object(sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__["getWebview"])(webviewID);
+
+  if (existingWebview) {
+    existingWebview.close();
+  }
+}
+
+/***/ }),
+
+/***/ "./src/MergeDuplicateSymbols.js":
+/*!**************************************!*\
+  !*** ./src/MergeDuplicateSymbols.js ***!
+  \**************************************/
+/*! exports provided: MergeDuplicateSymbols, onShutdown */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MergeDuplicateSymbols", function() { return MergeDuplicateSymbols; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "onShutdown", function() { return onShutdown; });
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch-module-web-view */ "./node_modules/sketch-module-web-view/lib/index.js");
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sketch-module-web-view/remote */ "./node_modules/sketch-module-web-view/remote.js");
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var Helpers = __webpack_require__(/*! ./Helpers */ "./src/Helpers.js");
+
+var webviewIdentifier = 'sync-with-library.webview';
+
+function generateUUID() {
+  var d = new Date().getTime();
+
+  if (Date.now) {
+    d = Date.now(); //high-precision timer
+  }
+
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c == 'x' ? r : r & 0x3 | 0x8).toString(16);
+  });
+  return uuid;
+}
+
+; //   function getSymbolInstances(context, symbolMaster) {
+//     var symbolInstances = NSMutableArray.array();
+//     var pages = context.document.pages(), pageLoop = pages.objectEnumerator(), page;
+//     while (page = pageLoop.nextObject()) {
+//       var predicate = NSPredicate.predicateWithFormat("className == 'MSSymbolInstance' && symbolMaster == %@", symbolMaster),
+//         instances = page.children().filteredArrayUsingPredicate(predicate),
+//         instanceLoop = instances.objectEnumerator(),
+//         instance;
+//       while (instance = instanceLoop.nextObject()) {
+//         symbolInstances.addObject(instance);
+//       }
+//     }
+//     return symbolInstances;
+//   }
+// function getSymbolOverrides(context, symbolMaster) {
+//   var symbolOverrides = NSMutableArray.array();
+//   var pages = context.document.pages(), pageLoop = pages.objectEnumerator(), page;
+//   while (page = pageLoop.nextObject()) {
+//     var predicate = NSPredicate.predicateWithFormat("className == %@ && overrides != nil", "MSSymbolInstance"),
+//       instances = page.children().filteredArrayUsingPredicate(predicate),
+//       instanceLoop = instances.objectEnumerator(),
+//       instance;
+//     while (instance = instanceLoop.nextObject()) {
+//       var overrides = instance.overrides();
+//       FindOverrideSymbolID(instance, overrides, symbolOverrides, symbolMaster, 0);
+//     }
+//   }
+//   return symbolOverrides;
+// }
+
+function GetSymbolsByName(name, context) {
+  var allSymbols = context.document.documentData().allSymbols();
+  var matchingSymbols = [];
+
+  for (var i = 0; i < allSymbols.count(); i++) {
+    var symbolName = allSymbols[i].name().toString();
+
+    if (symbolName.localeCompare(name) == 0) {
+      matchingSymbols.push(allSymbols[i]);
+    }
+  }
+
+  return matchingSymbols;
+}
+
+function FindSymbolInstances(context, originalSymbol, duplicateSymbolsByName) {
+  var instancesPerSymbol = [];
+
+  for (var i = 0; i < duplicateSymbolsByName.length; i++) {
+    instancesPerSymbol[i] = NSMutableArray.array();
+  }
+
+  for (var i = 0; i < duplicateSymbolsByName.length; i++) {
+    var symbolInstances = getSymbolInstances(context, duplicateSymbolsByName[i]);
+    instancesPerSymbol[i] = symbolInstances;
+  }
+
+  return instancesPerSymbol;
+}
+
+function FindSymbolOverrides(context, originalSymbol, duplicateSymbolsByName) {
+  var overridesPerSymbol = [];
+
+  for (var i = 0; i < duplicateSymbolsByName.length; i++) {
+    overridesPerSymbol[i] = NSMutableArray.array();
+  }
+
+  for (var i = 0; i < duplicateSymbolsByName.length; i++) {
+    var symbolOverrides = getSymbolOverrides(context, duplicateSymbolsByName[i]);
+    overridesPerSymbol[i] = symbolOverrides;
+  }
+
+  return overridesPerSymbol;
+}
+
+function MergeSymbols(symbolToMerge, symbolToKeep) {
+  var symbolsIDsToRemove = [];
+  var symbolToApply;
+  var instancesChanged = 0;
+  var overridesChanged = 0;
+  var symbolsRemoved = 0;
+
+  if (symbolToMerge.duplicates[symbolToKeep].externalLibrary == null) {
+    symbolToApply = symbolToMerge.duplicates[symbolToKeep].symbol;
+  } else {
+    //console.log("Importing symbol from library");
+    var foreignSymbolReference = MSShareableObjectReference.referenceForShareableObject_inLibrary(symbolToMerge.duplicates[symbolToKeep].symbol, symbolToMerge.duplicates[symbolToKeep].externalLibrary);
+    var foreignSymbol = AppController.sharedInstance().librariesController().importShareableObjectReference_intoDocument(foreignSymbolReference, context.document.documentData());
+    symbolToApply = foreignSymbol.symbolMaster();
+  }
+
+  for (var i = 0; i < symbolToMerge.duplicates.length; i++) {
+    if (i != symbolToKeep) {
+      if (symbolsIDsToRemove.indexOf(symbolToMerge.duplicates[i].symbol.symbolID()) < 0) symbolsIDsToRemove.push(symbolToMerge.duplicates[i].symbol.symbolID());
+    }
+  }
+
+  for (var i = 0; i < symbolToMerge.duplicates.length; i++) {
+    if (i != symbolToKeep) {
+      if (!symbolToMerge.duplicates[i].isForeign) symbolsRemoved++;
+      var instancesOfSymbol = symbolToMerge.duplicates[i].symbolInstances;
+      var overridesOfSymbol = symbolToMerge.duplicates[i].symbolOverrides;
+      var wasUnlinked = false;
+
+      if (symbolToMerge.duplicates[i].isForeign && symbolToMerge.duplicates[i].externalLibrary == null) {
+        // console.log("About to remove this symbol ↓");
+        // console.log(symbolToMerge.duplicates[i].symbol);
+        // console.log(symbolToMerge.duplicates[i].symbol.foreignObject());
+        symbolToMerge.duplicates[i].symbol.foreignObject().unlinkFromRemote();
+        wasUnlinked = true;
+      }
+
+      if (symbolToMerge.duplicates[symbolToKeep].externalLibrary == null) {
+        // console.log("Replacing instance for External symbol (" + symbolToMerge.duplicates[symbolToKeep].libraryName + ")");
+        for (var k = 0; k < instancesOfSymbol.length; k++) {
+          instancesOfSymbol[k].changeInstanceToSymbol(symbolToApply);
+          instancesChanged++;
+        }
+      } else {
+        for (var k = 0; k < instancesOfSymbol.length; k++) {
+          instancesOfSymbol[k].changeInstanceToSymbol(foreignSymbol.symbolMaster());
+          instancesChanged++;
+        }
+      }
+
+      for (var k = 0; k < overridesOfSymbol.length; k++) {
+        var overridesToReplace = [];
+        var currentOverrides = NSMutableDictionary.dictionaryWithDictionary(overridesOfSymbol[k].overrides());
+        var overrideOuterKeys = currentOverrides.allKeys();
+
+        for (var x = 0; x < overrideOuterKeys.count(); x++) {
+          var keyIndex = overrideOuterKeys.objectAtIndex(x);
+          var ascOverride = currentOverrides[keyIndex].toString().replace(/[^\x20-\x7E]+/g, "");
+
+          if (currentOverrides[keyIndex] == null || !/\S/.test(ascOverride)) {//Internal overrides. Don't consider.
+          } else {
+            if (currentOverrides[keyIndex].allKeys != null) {
+              var overrideInnerKeys = currentOverrides[keyIndex].allKeys();
+              var innerNewOverride = {};
+
+              for (var y = 0; y < overrideInnerKeys.count(); y++) {
+                var innerkeyIndex = overrideInnerKeys.objectAtIndex(y);
+                var shallbereplaced = false;
+
+                for (var t = 0; t < symbolsIDsToRemove.length; t++) {
+                  if (currentOverrides[keyIndex]["symbolID"] != null && currentOverrides[keyIndex]["symbolID"].indexOf(symbolsIDsToRemove[t]) > -1) shallbereplaced = true;
+                }
+
+                if (shallbereplaced) {
+                  if (overridesToReplace.indexOf(keyIndex) < 0) overridesToReplace.push(keyIndex);
+                }
+              }
+            }
+          }
+        }
+
+        overridesOfSymbol[k].overridePoints().forEach(function (overridePoint) {
+          if (overridePoint.toString().indexOf("symbolID") > -1) {
+            var shallbereplaced = false;
+
+            for (t = 0; t < overridesToReplace.length; t++) {
+              if (overridePoint.toString().indexOf(overridesToReplace[t]) > -1) {
+                shallbereplaced = true;
+              }
+            }
+
+            if (shallbereplaced) {
+              // console.log("Replacing an override. Foreign:" + (symbolToMerge.duplicates[symbolToKeep].externalLibrary != null));
+              overridesOfSymbol[k].setValue_forOverridePoint_(symbolToApply.symbolID(), overridePoint);
+              overridesChanged++;
+            }
+          }
+        });
+      }
+
+      if (!symbolToMerge.duplicates[i].isForeign) {
+        symbolToMerge.duplicates[i].symbol.removeFromParent(); //console.log("Removed symbol " + symbolToMerge.duplicates[i].name);
+      } else {
+        if (wasUnlinked) {
+          //console.log("Was unlinked");
+          symbolToMerge.duplicates[i].symbol.removeFromParent();
+        }
+
+        context.document.documentData().foreignSymbols().removeObject(symbolToMerge.duplicates[i].symbol); //console.log("Removed foreign from foreignSymbols (" + symbolToMerge.duplicates[i].name + ")");
+      }
+    }
+  }
+
+  return [symbolsRemoved, instancesChanged, overridesChanged];
+}
+
+function MergeDuplicateSymbols(context) {
+  Helpers.clog("----- Sync symbols (with the same name) -----");
+  var options = {
+    identifier: webviewIdentifier,
+    width: 1200,
+    height: 700,
+    remembersWindowFrame: true,
+    show: false,
+    titleBarStyle: 'hidden'
+  };
+  var browserWindow = new sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default.a(options);
+  var webContents = browserWindow.webContents;
+  var duplicatedSymbols;
+  var mergeSession = [];
+  var numberOfSymbols = Helpers.countAllSymbols(context, true);
+  Helpers.clog("Local symbols: " + numberOfSymbols[0] + ". Library symbols:" + numberOfSymbols[1] + ".");
+  browserWindow.loadURL(__webpack_require__(/*! ../resources/mergeduplicatesymbols.html */ "./resources/mergeduplicatesymbols.html"));
+  Helpers.clog("Webview called");
+
+  function CalculateDuplicates() {
+    Helpers.clog("Processing duplicates.");
+    duplicatedSymbols = Helpers.getDuplicateSymbols(context, context.document.documentData().allSymbols(), true, false);
+    Helpers.clog("-- Found " + duplicatedSymbols.length + " duplicates");
+
+    if (duplicatedSymbols.length > 0) {
+      Helpers.GetSpecificSymbolData(context, duplicatedSymbols, 0);
+      mergeSession = [];
+
+      for (var i = 0; i < duplicatedSymbols.length; i++) {
+        mergeSession.push({
+          "symbolWithDuplicates": duplicatedSymbols[i],
+          "selectedIndex": -1,
+          "isUnchecked": false,
+          "isProcessed": i == 0 ? true : false
+        });
+      }
+    }
+
+    Helpers.clog("End of processing duplicates");
+  }
+
+  browserWindow.once('ready-to-show', function () {
+    browserWindow.show();
+  });
+  webContents.on('did-finish-load', function () {
+    Helpers.clog("Webview loaded");
+    webContents.executeJavaScript("LaunchMerge(".concat(JSON.stringify(numberOfSymbols[0]), ",").concat(JSON.stringify(numberOfSymbols[1]), ")")).catch(console.error);
+  });
+  webContents.on('nativeLog', function (s) {
+    Helpers.clog(s);
+  });
+  webContents.on('Cancel', function () {
+    onShutdown(webviewIdentifier);
+  });
+  webContents.on('GetSelectedSymbolData', function (index) {
+    Helpers.GetSpecificSymbolData(context, duplicatedSymbols, index);
+    webContents.executeJavaScript("ReDrawAfterGettingData(".concat(JSON.stringify(duplicatedSymbols[index]), ",").concat(index, ")")).catch(console.error);
+  });
+  webContents.on('RecalculateDuplicates', function () {
+    CalculateDuplicates(true);
+    Helpers.clog("Drawing duplicates to webview");
+    webContents.executeJavaScript("DrawDuplicateSymbols(".concat(JSON.stringify(mergeSession), ")")).catch(console.error);
+  });
+  webContents.on('ExecuteMerge', function (editedMergeSession) {
+    var duplicatesSolved = 0;
+    var mergedSymbols = 0;
+    var mergeResults = [0, 0, 0];
+    Helpers.clog("Executing Merge");
+
+    for (var i = 0; i < editedMergeSession.length; i++) {
+      Helpers.clog("-- Merging " + mergeSession[i].symbolWithDuplicates.name);
+
+      if (!editedMergeSession[i].isUnchecked && editedMergeSession[i].selectedIndex >= 0) {
+        mergeSession[i].selectedIndex = editedMergeSession[i].selectedIndex;
+
+        for (var j = 0; j < mergeSession[i].symbolWithDuplicates.duplicates.length; j++) {
+          mergedSymbols++;
+        }
+
+        var localMergeResults = MergeSymbols(mergeSession[i].symbolWithDuplicates, mergeSession[i].selectedIndex);
+        mergeResults[0] += localMergeResults[0];
+        mergeResults[1] += localMergeResults[1];
+        mergeResults[2] += localMergeResults[2];
+        duplicatesSolved++;
+      }
+    }
+
+    onShutdown(webviewIdentifier);
+    var replacedStuff = "";
+    if (mergeResults[1] > 0 && mergeResults[2]) replacedStuff = ", replaced " + mergeResults[1] + " instances, and updated " + mergeResults[2] + " overrides.";else if (mergeResults[1] > 0) replacedStuff = " and replaced " + mergeResults[1] + " instances.";else if (mergeResults[2] > 0) replacedStuff = " and updated " + mergeResults[2] + " overrides.";else replacedStuff = ".";
+
+    if (duplicatesSolved > 0) {
+      Helpers.clog("Completed merge. Removed " + mergeResults[0] + " symbols" + replacedStuff);
+      context.document.showMessage("Hey ho! You just removed " + mergeResults[0] + " symbols" + replacedStuff + " Amazing!");
+    } else {
+      Helpers.clog("Completed merge. No symbols were replaced.");
+      context.document.showMessage("No symbols were replaced.");
+    }
+  });
+}
+;
+function onShutdown(webviewID) {
+  var existingWebview = Object(sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__["getWebview"])(webviewID);
+
+  if (existingWebview) {
+    existingWebview.close();
+  }
+}
+
+/***/ }),
+
+/***/ "./src/MergeLayerStyles.js":
+/*!*********************************!*\
+  !*** ./src/MergeLayerStyles.js ***!
+  \*********************************/
+/*! exports provided: MergeDuplicateLayerStyles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MergeDuplicateLayerStyles", function() { return MergeDuplicateLayerStyles; });
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch-module-web-view */ "./node_modules/sketch-module-web-view/lib/index.js");
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sketch-module-web-view/remote */ "./node_modules/sketch-module-web-view/remote.js");
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var Helpers = __webpack_require__(/*! ./Helpers */ "./src/Helpers.js");
+
+var webviewMDLSIdentifier = 'merge-duplicatelayerstyles.webview';
+var checkingAlsoLibraries = false;
+var currentSelectedStyles = [];
+
+function getLayerPredicate(style) {
+  var predicate;
+  if (style.originalStyle != null) predicate = NSPredicate.predicateWithFormat("(sharedStyle.objectID == %@) OR (sharedStyle.objectID == %@)", style.originalStyle.localShareID(), style.originalStyle.remoteShareID());else predicate = NSPredicate.predicateWithFormat("sharedStyle.objectID == %@", style.layerStyle.objectID());
+  return predicate;
+}
+
+function MergeLayerStyles(context, styleToKeep) {
+  var layersChangedCounter = 0;
+  var overridesChangedCounter = 0;
+  Helpers.clog("Merging styles. Keep '" + currentSelectedStyles[styleToKeep].name + "'");
+  var layers = Helpers.getAllLayers(context);
+  var layersWithOtherStyles = NSMutableArray.array();
+  currentSelectedStyles.forEach(function (style) {
+    if (style.layerStyle != currentSelectedStyles[styleToKeep].layerStyle) {
+      var predicate = getLayerPredicate(style),
+          layersWithSameStyle = layers.filteredArrayUsingPredicate(predicate),
+          instanceLoop = layersWithSameStyle.objectEnumerator(),
+          instance;
+
+      while (instance = instanceLoop.nextObject()) {
+        layersWithOtherStyles.addObject(instance);
+      }
+
+      if (style.correlativeStyles != null) {
+        var countercorrelative = 0;
+
+        for (var i = 0; i < style.correlativeStyles.length; i++) {
+          var predicateCorrelative = NSPredicate.predicateWithFormat("sharedStyle.objectID == %@", style.correlativeStyles[i].localObject().objectID()),
+              layersWithSameStyleCorrelative = layers.filteredArrayUsingPredicate(predicateCorrelative),
+              instanceLoopCorrelative = layersWithSameStyle.objectEnumerator(),
+              instanceCorrelative;
+
+          while (instanceCorrelative = instanceLoopCorrelative.nextObject()) {
+            layersWithOtherStyles.addObject(instanceCorrelative);
+            countercorrelative++;
+          }
+        }
+      }
+    }
+  });
+  var foreignStyleReference, foreignStyle;
+
+  if (currentSelectedStyles[styleToKeep].foreign && currentSelectedStyles[styleToKeep].library != null) {
+    foreignStyleReference = MSShareableObjectReference.referenceForShareableObject_inLibrary(currentSelectedStyles[styleToKeep].layerStyle, currentSelectedStyles[styleToKeep].library);
+    foreignStyle = AppController.sharedInstance().librariesController().importShareableObjectReference_intoDocument(foreignStyleReference, context.document.documentData());
+  }
+
+  layersWithOtherStyles.forEach(function (layer) {
+    if (currentSelectedStyles[styleToKeep].foreign && currentSelectedStyles[styleToKeep].library != null) {
+      layer.setSharedStyle(foreignStyle.localSharedStyle());
+    } else {
+      layer.setSharedStyle(currentSelectedStyles[styleToKeep].layerStyle);
+    }
+
+    layersChangedCounter++;
+  });
+  overridesChangedCounter += UpdateLayerOverrides(currentSelectedStyles, styleToKeep, context, foreignStyle);
+  currentSelectedStyles.forEach(function (style) {
+    if (style.layerStyle != currentSelectedStyles[styleToKeep].layerStyle) {
+      if (style.foreign && style.library == null) {
+        if (context.document.documentData().foreignLayerStyles().indexOf(style.originalStyle) > -1) {
+          context.document.documentData().foreignLayerStyles().removeObject(style.originalStyle);
+        }
+
+        if (style.correlativeStyles != null) {
+          for (var i = 0; i < style.correlativeStyles.length; i++) {
+            if (context.document.documentData().foreignLayerStyles().indexOf(style.correlativeStyles[i]) > -1) {
+              context.document.documentData().foreignLayerStyles().removeObject(style.correlativeStyles[i]);
+            }
+          }
+        }
+      } else {
+        context.document.documentData().layerStyles().removeSharedStyle(style.layerStyle);
+      }
+    }
+  });
+  return [layersChangedCounter, overridesChangedCounter];
+}
+
+function UpdateLayerOverrides(currentSelectedStyles, styleToKeep, context, foreignStyle) {
+  var overridesChangedCounter = 0;
+  var allSymbolInstances = NSMutableArray.array();
+  context.document.documentData().allSymbols().forEach(function (symbolMaster) {
+    var instances = Helpers.getSymbolInstances(context, symbolMaster),
+        instanceLoop = instances.objectEnumerator(),
+        instance;
+
+    while (instance = instanceLoop.nextObject()) {
+      allSymbolInstances.addObject(instance);
+    }
+  });
+  allSymbolInstances.forEach(function (symbolInstance) {
+    var overridePointsToReplace = [];
+    var overrides = symbolInstance.overrides();
+    symbolInstance.availableOverrides().forEach(function (availableOverride) {
+      var allOverridesThatWeShouldReplace = [];
+      getAllLayerOverridesThatWeShouldReplace(availableOverride, currentSelectedStyles, styleToKeep, allOverridesThatWeShouldReplace, symbolInstance, 0, context);
+
+      for (var i = 0; i < allOverridesThatWeShouldReplace.length; i++) {
+        if (currentSelectedStyles[styleToKeep].foreign && currentSelectedStyles[styleToKeep].library != null) {
+          symbolInstance.setValue_forOverridePoint_(foreignStyle.localSharedStyle().objectID(), allOverridesThatWeShouldReplace[i].overridePoint());
+        } else {
+          symbolInstance.setValue_forOverridePoint_(currentSelectedStyles[styleToKeep].layerStyle.objectID(), allOverridesThatWeShouldReplace[i].overridePoint());
+        }
+
+        overridesChangedCounter++;
+      }
+    });
+  });
+  return overridesChangedCounter;
+}
+
+function getAllLayerOverridesThatWeShouldReplace(availableOverride, currentSelectedStyles, styleToKeep, allOverridesThatWeShouldReplace, symbolInstance, level, context) {
+  var verbose = false;
+  if (verbose) console.log(symbolInstance.name() + "(" + level + ")" + ": ---   Name:" + availableOverride.overridePoint().layerName() + "    -    CV:" + availableOverride.currentValue() + "   -   DV:" + availableOverride.defaultValue());
+
+  if (availableOverride.children() == null) {
+    currentSelectedStyles.forEach(function (style) {
+      if (style.layerStyle != currentSelectedStyles[styleToKeep].layerStyle) {
+        if (Helpers.isString(availableOverride.currentValue())) {
+          if (availableOverride.currentValue().toString().indexOf(style.layerStyle.objectID()) > -1 || style.originalStyle != null && availableOverride.currentValue().toString().indexOf(style.originalStyle.localShareID()) > -1 || style.originalStyle != null && availableOverride.currentValue().toString().indexOf(style.originalStyle.remoteShareID()) > -1) {
+            if (verbose) console.log("Adding it");
+            allOverridesThatWeShouldReplace.push(availableOverride);
+          }
+
+          if (style.correlativeStyles != null) {
+            if (verbose) console.log("Checking overrides: " + style.name + " has " + style.correlativeStyles.length + " correlative styles.");
+
+            for (var i = 0; i < style.correlativeStyles.length; i++) {
+              if (availableOverride.currentValue().toString().indexOf(style.correlativeStyles[i].localObject().objectID()) > -1 || style.originalStyle != null && availableOverride.currentValue().toString().indexOf(style.correlativeStyles[i].localShareID()) > -1 || style.originalStyle != null && availableOverride.currentValue().toString().indexOf(style.correlativeStyles[i].remoteShareID()) > -1) {
+                if (verbose) console.log("Adding it - correlative");
+                allOverridesThatWeShouldReplace.push(availableOverride);
+              }
+            }
+          }
+        }
+      }
+    });
+  } else {
+    if (verbose) console.log("Digging deeper because it has " + availableOverride.children().length + " children");
+    availableOverride.children().forEach(function (child) {
+      getAllLayerOverridesThatWeShouldReplace(child, currentSelectedStyles, styleToKeep, allOverridesThatWeShouldReplace, symbolInstance, level + 1, context);
+    });
+  }
+}
+
+function getDuplicateLayerStyles(context, allStyles) {
+  var layerStylesNames = [];
+  var layerDuplicatedStylesNames = [];
+
+  for (var i = 0; i < allStyles.length; i++) {
+    var style = allStyles[i];
+
+    if (Helpers.getIndexOf(style.name, layerStylesNames) > -1) {
+      if (Helpers.getIndexOf(style.name, layerDuplicatedStylesNames) < 0) {
+        layerDuplicatedStylesNames.push(style.name);
+      }
+    }
+
+    layerStylesNames.push(style.name);
+  }
+
+  return layerDuplicatedStylesNames;
+}
+
+function MergeDuplicateLayerStyles(context) {
+  Helpers.clog("----- Sync layer styles -----");
+  var options = {
+    identifier: webviewMDLSIdentifier,
+    width: 1200,
+    height: 700,
+    show: false,
+    remembersWindowFrame: true,
+    titleBarStyle: 'hidden'
+  };
+  var browserWindow = new sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default.a(options);
+  var webContents = browserWindow.webContents;
+  var onlyDuplicatedLayerStyles;
+  var mergeSession = [];
+  CalculateDuplicates(true);
+
+  if (onlyDuplicatedLayerStyles.length > 0) {
+    browserWindow.loadURL(__webpack_require__(/*! ../resources/mergeduplicatelayerstyles.html */ "./resources/mergeduplicatelayerstyles.html"));
+  } else {
+    context.document.showMessage("Looks like there are no layer styles to sync.");
+    onShutdown(webviewMDLSIdentifier);
+  }
+
+  function CalculateDuplicates() {
+    Helpers.clog("Finding duplicate layer styles.");
+    onlyDuplicatedLayerStyles = Helpers.getDuplicateLayerStyles(context);
+
+    if (onlyDuplicatedLayerStyles.length > 0) {
+      Helpers.GetSpecificLayerStyleData(context, onlyDuplicatedLayerStyles, 0);
+      mergeSession = [];
+
+      for (var i = 0; i < onlyDuplicatedLayerStyles.length; i++) {
+        mergeSession.push({
+          "layerStyleWithDuplicates": onlyDuplicatedLayerStyles[i],
+          "selectedIndex": -1,
+          "isUnchecked": false,
+          "isProcessed": i == 0 ? true : false
+        });
+      }
+    }
+  }
+
+  browserWindow.once('ready-to-show', function () {
+    browserWindow.show();
+  });
+  webContents.on('did-finish-load', function () {
+    Helpers.clog("Webview loaded");
+    webContents.executeJavaScript("DrawStylesList(".concat(JSON.stringify(mergeSession), ")")).catch(console.error);
+  });
+  webContents.on('nativeLog', function (s) {
+    Helpers.clog(s);
+  });
+  webContents.on('Cancel', function () {
+    onShutdown(webviewMDLSIdentifier);
+  });
+  webContents.on('GetSelectedStyleData', function (index) {
+    Helpers.GetSpecificLayerStyleData(context, onlyDuplicatedLayerStyles, index);
+    webContents.executeJavaScript("ReDrawAfterGettingData(".concat(JSON.stringify(mergeSession[index].layerStyleWithDuplicates), ",").concat(index, ")")).catch(console.error);
+  });
+  webContents.on('ExecuteMerge', function (editedMergeSession) {
+    Helpers.clog("Executing Merge");
+    var duplicatesSolved = 0;
+    var mergedStyles = 0;
+    var affectedLayers = [0, 0];
+
+    for (var i = 0; i < editedMergeSession.length; i++) {
+      Helpers.clog("-- Merging " + mergeSession[i].layerStyleWithDuplicates.name);
+
+      if (!editedMergeSession[i].isUnchecked && editedMergeSession[i].selectedIndex >= 0) {
+        mergeSession[i].selectedIndex = editedMergeSession[i].selectedIndex;
+        currentSelectedStyles = [];
+
+        for (var j = 0; j < mergeSession[i].layerStyleWithDuplicates.duplicates.length; j++) {
+          currentSelectedStyles.push(mergeSession[i].layerStyleWithDuplicates.duplicates[j]);
+          mergedStyles++;
+        }
+
+        var results = MergeLayerStyles(context, editedMergeSession[i].selectedIndex);
+        affectedLayers[0] += results[0];
+        affectedLayers[1] += results[1];
+        duplicatesSolved++;
+      }
+    }
+
+    onShutdown(webviewMDLSIdentifier);
+
+    if (duplicatesSolved <= 0) {
+      Helpers.clog("No styles were merged");
+      context.document.showMessage("No styles were replaced.");
+    } else {
+      Helpers.clog("Wpdated " + affectedLayers[0] + " text layers and " + affectedLayers[1] + " overrides.");
+      context.document.showMessage("Yo ho! We updated " + affectedLayers[0] + " layers and " + affectedLayers[1] + " overrides.");
+    }
+  });
+}
+;
+
+/***/ }),
+
+/***/ "./src/MergeTextStyles.js":
+/*!********************************!*\
+  !*** ./src/MergeTextStyles.js ***!
+  \********************************/
+/*! exports provided: MergeDuplicateTextStyles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MergeDuplicateTextStyles", function() { return MergeDuplicateTextStyles; });
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sketch-module-web-view */ "./node_modules/sketch-module-web-view/lib/index.js");
+/* harmony import */ var sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sketch-module-web-view/remote */ "./node_modules/sketch-module-web-view/remote.js");
+/* harmony import */ var sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sketch_module_web_view_remote__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var Helpers = __webpack_require__(/*! ./Helpers */ "./src/Helpers.js");
+
+var webviewMDTSIdentifier = 'merge-duplicatetextstyles.webview';
+var checkingAlsoLibraries = false;
+var currentSelectedStyles = [];
+
+function getTextPredicate(style) {
+  var predicate;
+  if (style.originalStyle != null) predicate = NSPredicate.predicateWithFormat("(sharedStyle.objectID == %@) OR (sharedStyle.objectID == %@)", style.originalStyle.localShareID(), style.originalStyle.remoteShareID());else predicate = NSPredicate.predicateWithFormat("sharedStyle.objectID == %@", style.textStyle.objectID());
+  return predicate;
+}
+
+function MergeTextStyles(context, styleToKeep) {
+  var layersChangedCounter = 0;
+  var overridesChangedCounter = 0;
+  Helpers.clog("Merging styles. Keep '" + currentSelectedStyles[styleToKeep].name + "'");
+  var layers = Helpers.getAllTextLayers(context);
+  var layersWithOtherStyles = NSMutableArray.array();
+  currentSelectedStyles.forEach(function (style) {
+    if (style.textStyle != currentSelectedStyles[styleToKeep].textStyle) {
+      var predicate = getTextPredicate(style),
+          layersWithSameStyle = layers.filteredArrayUsingPredicate(predicate),
+          instanceLoop = layersWithSameStyle.objectEnumerator(),
+          instance;
+
+      while (instance = instanceLoop.nextObject()) {
+        layersWithOtherStyles.addObject(instance);
+      }
+
+      if (style.correlativeStyles != null) {
+        //console.log(style.name+" has "+style.correlativeStyles.length+" correlative styles.")
+        var countercorrelative = 0;
+
+        for (var i = 0; i < style.correlativeStyles.length; i++) {
+          var predicateCorrelative = NSPredicate.predicateWithFormat("sharedStyle.objectID == %@", style.correlativeStyles[i].localObject().objectID()),
+              layersWithSameStyleCorrelative = layers.filteredArrayUsingPredicate(predicateCorrelative),
+              instanceLoopCorrelative = layersWithSameStyle.objectEnumerator(),
+              instanceCorrelative;
+
+          while (instanceCorrelative = instanceLoopCorrelative.nextObject()) {
+            layersWithOtherStyles.addObject(instanceCorrelative);
+            countercorrelative++;
+          }
+        } //console.log(countercorrelative+" layers had a correlative style applied");
+
+      }
+    }
+  });
+  var foreignStyleReference, foreignStyle;
+
+  if (currentSelectedStyles[styleToKeep].foreign && currentSelectedStyles[styleToKeep].library != null) {
+    foreignStyleReference = MSShareableObjectReference.referenceForShareableObject_inLibrary(currentSelectedStyles[styleToKeep].textStyle, currentSelectedStyles[styleToKeep].library);
+    foreignStyle = AppController.sharedInstance().librariesController().importShareableObjectReference_intoDocument(foreignStyleReference, context.document.documentData());
+  }
+
+  layersWithOtherStyles.forEach(function (layer) {
+    if (currentSelectedStyles[styleToKeep].foreign && currentSelectedStyles[styleToKeep].library != null) {
+      layer.setSharedStyle(foreignStyle.localSharedStyle());
+    } else {
+      layer.setSharedStyle(currentSelectedStyles[styleToKeep].textStyle);
+    }
+
+    layersChangedCounter++;
+  }); //overridesChangedCounter += LogTextOverrides(currentSelectedStyles, styleToKeep, context);
+
+  overridesChangedCounter += UpdateTextOverrides(currentSelectedStyles, styleToKeep, context, foreignStyle);
+  currentSelectedStyles.forEach(function (style) {
+    if (style.textStyle != currentSelectedStyles[styleToKeep].textStyle) {
+      if (style.foreign && style.library == null) {
+        //console.log("You're trying to remove a library style");
+        if (context.document.documentData().foreignTextStyles().indexOf(style.originalStyle) > -1) {
+          context.document.documentData().foreignTextStyles().removeObject(style.originalStyle); //console.log("Removed style: "+style.name);
+        }
+
+        if (style.correlativeStyles != null) {
+          for (var i = 0; i < style.correlativeStyles.length; i++) {
+            if (context.document.documentData().foreignTextStyles().indexOf(style.correlativeStyles[i]) > -1) {
+              context.document.documentData().foreignTextStyles().removeObject(style.correlativeStyles[i]); //console.log("Removed correlative");
+            }
+          }
+        }
+      } else {
+        context.document.documentData().layerTextStyles().removeSharedStyle(style.textStyle); //console.log("Removed style: "+style.name);
+      }
+    }
+  });
+  return [layersChangedCounter, overridesChangedCounter];
+}
+
+function getAllTextOverridesThatWeShouldReplace(availableOverride, currentSelectedStyles, styleToKeep, allOverridesThatWeShouldReplace, symbolInstance, level, context) {
+  //console.log(symbolInstance.name()+"("+level+")"+": ---   Name:"+availableOverride.overridePoint().layerName()+"    -    CV:"+availableOverride.currentValue()+"   -   DV:"+availableOverride.defaultValue());
+  if (availableOverride.children() == null) {
+    currentSelectedStyles.forEach(function (style) {
+      if (style.textStyle != currentSelectedStyles[styleToKeep].textStyle) {
+        if (Helpers.isString(availableOverride.currentValue())) {
+          if (availableOverride.currentValue().toString().indexOf(style.textStyle.objectID()) > -1 || style.originalStyle != null && availableOverride.currentValue().toString().indexOf(style.originalStyle.localShareID()) > -1 || style.originalStyle != null && availableOverride.currentValue().toString().indexOf(style.originalStyle.remoteShareID()) > -1) {
+            //console.log("Adding it");
+            allOverridesThatWeShouldReplace.push(availableOverride);
+          }
+
+          if (style.correlativeStyles != null) {
+            //console.log("Checking overrides: "+style.name+" has "+style.correlativeStyles.length+" correlative styles.")
+            for (var i = 0; i < style.correlativeStyles.length; i++) {
+              if (availableOverride.currentValue().toString().indexOf(style.correlativeStyles[i].localObject().objectID()) > -1 || style.originalStyle != null && availableOverride.currentValue().toString().indexOf(style.correlativeStyles[i].localShareID()) > -1 || style.originalStyle != null && availableOverride.currentValue().toString().indexOf(style.correlativeStyles[i].remoteShareID()) > -1) {
+                //console.log("Adding it - correlative");
+                allOverridesThatWeShouldReplace.push(availableOverride);
+              }
+            }
+          }
+        }
+      }
+    });
+  } else {
+    //console.log("Digging deeper because it has "+availableOverride.children().length+" children");
+    availableOverride.children().forEach(function (child) {
+      getAllTextOverridesThatWeShouldReplace(child, currentSelectedStyles, styleToKeep, allOverridesThatWeShouldReplace, symbolInstance, level + 1, context);
+    });
+  }
+}
+
+function UpdateTextOverrides(currentSelectedStyles, styleToKeep, context, foreignStyle) {
+  var overridesChangedCounter = 0;
+  var allSymbolInstances = NSMutableArray.array();
+  context.document.documentData().allSymbols().forEach(function (symbolMaster) {
+    var instances = Helpers.getSymbolInstances(context, symbolMaster),
+        instanceLoop = instances.objectEnumerator(),
+        instance;
+
+    while (instance = instanceLoop.nextObject()) {
+      allSymbolInstances.addObject(instance);
+    }
+  });
+  allSymbolInstances.forEach(function (symbolInstance) {
+    var overridePointsToReplace = [];
+    var overrides = symbolInstance.overrides();
+    symbolInstance.availableOverrides().forEach(function (availableOverride) {
+      var allOverridesThatWeShouldReplace = [];
+      getAllTextOverridesThatWeShouldReplace(availableOverride, currentSelectedStyles, styleToKeep, allOverridesThatWeShouldReplace, symbolInstance, 0, context); //console.log(allOverridesThatWeShouldReplace);
+
+      for (var i = 0; i < allOverridesThatWeShouldReplace.length; i++) {
+        if (currentSelectedStyles[styleToKeep].foreign && currentSelectedStyles[styleToKeep].library != null) {
+          symbolInstance.setValue_forOverridePoint_(foreignStyle.localSharedStyle().objectID(), allOverridesThatWeShouldReplace[i].overridePoint());
+        } else {
+          symbolInstance.setValue_forOverridePoint_(currentSelectedStyles[styleToKeep].textStyle.objectID(), allOverridesThatWeShouldReplace[i].overridePoint());
+        }
+
+        overridesChangedCounter++;
+      }
+    });
+  });
+  return overridesChangedCounter;
+}
+
+function getDuplicateTextStyles(context, allStyles) {
+  var textStylesNames = [];
+  var layerDuplicatedStylesNames = [];
+
+  for (var i = 0; i < allStyles.length; i++) {
+    var style = allStyles[i];
+
+    if (Helpers.getIndexOf(style.name, textStylesNames) > -1) {
+      if (Helpers.getIndexOf(style.name, layerDuplicatedStylesNames) < 0) {
+        layerDuplicatedStylesNames.push(style.name);
+      }
+    }
+
+    textStylesNames.push(style.name);
+  }
+
+  return layerDuplicatedStylesNames;
+}
+
+function MergeDuplicateTextStyles(context) {
+  Helpers.clog("----- Sync text styles -----");
+  var options = {
+    identifier: webviewMDTSIdentifier,
+    width: 1200,
+    height: 700,
+    show: false,
+    remembersWindowFrame: true,
+    titleBarStyle: 'hidden'
+  };
+  var browserWindow = new sketch_module_web_view__WEBPACK_IMPORTED_MODULE_0___default.a(options);
+  var webContents = browserWindow.webContents;
+  var onlyDuplicatedTextStyles;
+  var mergeSession = [];
+  CalculateDuplicates();
+
+  if (onlyDuplicatedTextStyles.length > 0) {
+    browserWindow.loadURL(__webpack_require__(/*! ../resources/mergeduplicatetextstyles.html */ "./resources/mergeduplicatetextstyles.html"));
+  } else {
+    context.document.showMessage("Looks like there are no text styles to sync.");
+    onShutdown(webviewMDTSIdentifier);
+  }
+
+  function CalculateDuplicates() {
+    Helpers.clog("Finding duplicate text styles.");
+    onlyDuplicatedTextStyles = Helpers.getDuplicateTextStyles(context);
+
+    if (onlyDuplicatedTextStyles.length > 0) {
+      Helpers.GetSpecificTextStyleData(context, onlyDuplicatedTextStyles, 0);
+      mergeSession = [];
+
+      for (var i = 0; i < onlyDuplicatedTextStyles.length; i++) {
+        mergeSession.push({
+          "textStyleWithDuplicates": onlyDuplicatedTextStyles[i],
+          "selectedIndex": -1,
+          "isUnchecked": false,
+          "isProcessed": i == 0 ? true : false
+        });
+      }
+    }
+  }
+
+  browserWindow.once('ready-to-show', function () {
+    browserWindow.show();
+  });
+  webContents.on('did-finish-load', function () {
+    Helpers.clog("Webview loaded");
+    webContents.executeJavaScript("DrawStylesList(".concat(JSON.stringify(mergeSession), ", ").concat(Helpers.getLibrariesEnabled(), ")")).catch(console.error);
+  });
+  webContents.on('nativeLog', function (s) {
+    Helpers.clog(s);
+  });
+  webContents.on('Cancel', function () {
+    onShutdown(webviewMDTSIdentifier);
+  });
+  webContents.on('GetSelectedStyleData', function (index) {
+    Helpers.GetSpecificTextStyleData(context, onlyDuplicatedTextStyles, index);
+    webContents.executeJavaScript("ReDrawAfterGettingData(".concat(JSON.stringify(mergeSession[index].textStyleWithDuplicates), ",").concat(index, ")")).catch(console.error);
+  });
+  webContents.on('ExecuteMerge', function (editedMergeSession) {
+    Helpers.clog("Executing Merge");
+    var duplicatesSolved = 0;
+    var mergedStyles = 0;
+    var affectedLayers = [0, 0];
+
+    for (var i = 0; i < editedMergeSession.length; i++) {
+      Helpers.clog("-- Merging " + mergeSession[i].textStyleWithDuplicates.name);
+
+      if (!editedMergeSession[i].isUnchecked && editedMergeSession[i].selectedIndex >= 0) {
+        mergeSession[i].selectedIndex = editedMergeSession[i].selectedIndex;
+        currentSelectedStyles = [];
+
+        for (var j = 0; j < mergeSession[i].textStyleWithDuplicates.duplicates.length; j++) {
+          currentSelectedStyles.push(mergeSession[i].textStyleWithDuplicates.duplicates[j]);
+          mergedStyles++;
+        }
+
+        var results = MergeTextStyles(context, editedMergeSession[i].selectedIndex);
+        affectedLayers[0] += results[0];
+        affectedLayers[1] += results[1];
+        duplicatesSolved++;
+      }
+    }
+
+    onShutdown(webviewMDTSIdentifier);
+
+    if (duplicatesSolved <= 0) {
+      Helpers.clog("No styles were merged");
+      context.document.showMessage("No styles were replaced.");
+    } else {
+      Helpers.clog("Updated " + affectedLayers[0] + " text layers and " + affectedLayers[1] + " overrides.");
+      context.document.showMessage("Yo ho! We updated " + affectedLayers[0] + " text layers and " + affectedLayers[1] + " overrides.");
+    }
+  });
+}
+;
+
+/***/ }),
+
+/***/ "buffer":
+/*!*************************!*\
+  !*** external "buffer" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("buffer");
+
+/***/ }),
+
+/***/ "events":
+/*!*************************!*\
+  !*** external "events" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("events");
+
+/***/ }),
+
+/***/ "sketch/ui":
+/*!****************************!*\
+  !*** external "sketch/ui" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("sketch/ui");
+
+/***/ })
+
+/******/ });
+    if (key === 'default' && typeof exports === 'function') {
+      exports(context);
+    } else if (typeof exports[key] !== 'function') {
+      throw new Error('Missing export named "' + key + '". Your command should contain something like `export function " + key +"() {}`.');
+    } else {
+      exports[key](context);
+    }
+  } catch (err) {
+    if (typeof process !== 'undefined' && process.listenerCount && process.listenerCount('uncaughtException')) {
+      process.emit("uncaughtException", err, "uncaughtException");
+    } else {
+      throw err
+    }
+  }
+}
+globalThis['MergeDuplicateSymbols'] = __skpm_run.bind(this, 'MergeDuplicateSymbols');
+globalThis['onShutdown'] = __skpm_run.bind(this, 'onShutdown');
+globalThis['onRun'] = __skpm_run.bind(this, 'default');
+globalThis['MergeDuplicateLayerStyles'] = __skpm_run.bind(this, 'MergeDuplicateLayerStyles');
+globalThis['onShutdown'] = __skpm_run.bind(this, 'onShutdown');
+globalThis['MergeDuplicateTextStyles'] = __skpm_run.bind(this, 'MergeDuplicateTextStyles');
+globalThis['onShutdown'] = __skpm_run.bind(this, 'onShutdown');
+globalThis['EditSettings'] = __skpm_run.bind(this, 'EditSettings');
+globalThis['onShutdown'] = __skpm_run.bind(this, 'onShutdown')
+
+//# sourceMappingURL=Main.js.map
