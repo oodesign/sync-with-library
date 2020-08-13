@@ -1,6 +1,6 @@
 {
   "name": "sync-with-library",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "engines": {
     "sketch": ">=3.0"
   },
