@@ -76,7 +76,7 @@
   "author": "oodesign",
   "homepage": "http://gum.co/syncwithlibrary",
   "compatibleVersion": 50,
-  "version": "3.1.1",
+  "version": "3.1.2",
   "disableCocoaScriptPreprocessor": true,
   "appcast": "https://raw.githubusercontent.com/oodesign/sync-with-library/master/.appcast.xml"
 }
