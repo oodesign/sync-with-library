@@ -4,7 +4,7 @@
 
 <br/>⚠️⚠️⚠️ <b>Sync with Library is not maintained anymore, and is considered out of support since January 1st 2022.</b><br/>
 
-If you are maintaining a design system, or just need to clean up your files, we'd suggest checking <a href="http://www.mergeduplicates.com">Merge Duplicates</a>. For what it may help, we enabled <a href="https://oodesign.gumroad.com/l/mergeduplicatesymbols/iusesyncwithlibrary?_gl=1*my5e00*_ga*ODUyOTUzMTEuMTYzOTM4MDMzNQ..*_ga_6LJN6D94N6*MTY1MzAyNDU0MC45Mi4xLjE2NTMwMjU2NTYuMA..">30% discount</a> for all of you using Sync with Library (the link should already get to it, but you can also redeem it using the <b>iusesyncwithlibrary</b> code).
+If you are maintaining a design system, or just need to clean up your files, we'd suggest checking <a href="http://www.mergeduplicates.com">Merge Duplicates</a>. For what it may help, we enabled <a href="https://oodesign.gumroad.com/l/mergeduplicatesymbols/iusesyncwithlibrary?_gl=1*my5e00*_ga*ODUyOTUzMTEuMTYzOTM4MDMzNQ..*_ga_6LJN6D94N6*MTY1MzAyNDU0MC45Mi4xLjE2NTMwMjU2NTYuMA..">30% discount</a> for all of you using Sync with Library (the link should already get to it, but you can also redeem it using the <b><i>iusesyncwithlibrary</i></b> code).
 
 We apologize if the plugin is not working well anymore for you 🙈, but hope this helps a bit.
 <br/>
