@@ -33,7 +33,7 @@
     "resources/**/*.js"
   ],
   "dependencies": {
-    "d3-color": "^1.4.1",
+    "d3-color": "^3.1.0",
     "delta-e": "0.0.7",
     "sketch-module-web-view": "^3.1.4"
   },
